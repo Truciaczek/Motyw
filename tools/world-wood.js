@@ -1,6 +1,6 @@
 // Recolor native image resources, not their containing windows or children.
 function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition=filterDefinition) {
-    const cache=new Map();let stopped=false;
+    const cache=new Map();let stopped=false,titleRail=null;
     const imageUrl=value=>value?.match(/^url\(["']?(.*?)["']?\)$/)?.[1];
     function recolor(url,definition,preserveTitleFill=false){
         const key=url+definition+preserveTitleFill;
@@ -25,6 +25,13 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
                             for(let c=0;c<3;c++)d[i+c]=Math.round(255*(slopes[c]*y+offsets[c]));
                         }
                         context.putImageData(pixels,0,0);
+                        // The left cap ends at atlas x=89; its 28 rows define the
+                        // exact continuation across the title, including fill and alpha.
+                        if(canvas.width>=143 && canvas.height>=30){
+                            const rail=doc.createElement('canvas');rail.width=1;rail.height=28;
+                            rail.getContext('2d').drawImage(canvas,89,2,1,28,0,0,1,28);
+                            titleRail=rail.toDataURL('image/png');
+                        }
                     }
                     const png=canvas.toDataURL('image/png');
                     const svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+canvas.width+'" height="'+canvas.height+'" viewBox="0 0 '+canvas.width+' '+canvas.height+'"><defs>'+definition+'</defs><image width="100%" height="100%" href="'+png+'" '+(preserveTitleFill?'':'filter="url(#truciak-window-wood)"')+'/></svg>';
@@ -65,6 +72,11 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
                 if(stopped || !value)return;
                 const selectors=resource.selectors.split(',').map(selector=>'html[data-truciak-theme="ebony"] '+selector).join(',');
                 rules[index]=selectors+'{'+resource.property+':'+value+'!important;}';
+                if(resource.ornament && titleRail){
+                    const centers=['.interface-element-border-window-header-middle','.trade-window header .h_background .middle','.border-window:not(.transparent):not(.tip-window) .header-label-positioner .header-label'];
+                    rules[index]+=centers.map(selector=>'html[data-truciak-theme="ebony"] '+selector).join(',')+
+                        '{background-image:url("'+titleRail+'")!important;background-repeat:repeat-x!important;background-position:0 0!important;background-size:1px 28px!important;box-shadow:none!important;}';
+                }
                 style.textContent=rules.join('\n');
             });
         });
