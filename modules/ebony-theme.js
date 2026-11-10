@@ -22,17 +22,14 @@
   // Bottom HUD sprites include transparent cutouts around the orb and labels.
   // Keep their original images/masks; wood belongs to the strip behind them.
   rule(['.bottom-panel', '.bottom-panel-pointer-bg'], 'background-color:transparent!important;');
-  rule(['.border-window', '.loot-window .middle-graphics',
-    '.chat-configure-window .middle-graphic', '.matchmaking-summary .summary-content .wood-bar'],
-    'border-image-source:linear-gradient(#668298,#252b31 40%,#171b20 65%,#252b31)!important;');
+  // Native window frames use image alpha and border-image slices. Keep them
+  // intact: a gradient border-image cannot preserve their carved silhouette.
   rule(['.layer.interface-layer .main-column', '.new-chat-window',
     '.game-window-positioner .character_wrapper .stats-wrapper', '.border-window .content',
     '.dialogue-window .border-image', '.tip-wrapper .content', '.popup-menu',
     '.auction-window .main-column-auction', '.world-window__info', '.layer.interface-layer .extended-stats'],
     'background-color:#171b20!important;background-image:none!important;');
   rule(['.layer.interface-layer .main-column.right-column',
-    '.border-window .header-label-positioner .header-label',
-    '.border-window .header-label .left-decor', '.border-window .header-label .right-decor',
     '.loot-window .bottom-wrapper .bottom-graphic',
     '.matchmaking-summary .bottom-panel-graphics', '.world-window__info'],
     'background-color:#252b31!important;background-image:none!important;');
@@ -43,9 +40,7 @@
     'filter:url("#truciak-ebony-bar-tint")!important;');
   rule(['.layer.interface-layer .main-column.right-column .border'],
     'filter:url("#truciak-ebony-ornament-tint")!important;');
-  rule(['.border-window', '.dialogue-window .border-image', '.border-window.transparent .border-image'],
-    'box-shadow:0 0 0 1px #668298,0 6px 22px #0009!important;');
-  rule(['.border-window .header-label', '.layer.interface-layer .heroname',
+  rule(['.layer.interface-layer .heroname',
     '.layer.interface-layer .world-name', '.layer.interface-layer .location',
     '.layer.interface-layer .coords', '.layer.interface-layer .herogold', '.layer.interface-layer .herocredits'],
     'color:#edf3f7!important;text-shadow:0 1px 2px #000!important;');

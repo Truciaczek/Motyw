@@ -136,3 +136,13 @@ assert.ok(actionBlocks.some(b=>b.includes('::before')&&b.includes('background:no
 assert.ok(actionBlocks.every(b=>b.includes(':not([disabled])')&&b.includes(':not([aria-disabled="true"])')));
 assert.ok(actionBlocks.every(b=>!b.includes('::after')));
 console.log('PASS: ordinary action buttons share graphite hover/active/pressed/expanded states, disabled controls excluded and icon after-layers preserved');
+
+assert.ok(!mainCss.includes('border-image-source:linear-gradient'));
+for(const block of mainCss.split('}')){
+ const selectors=block.split('{')[0];
+ if(selectors.includes('.header-label-positioner .header-label')||selectors.includes('.header-label .left-decor')||selectors.includes('.header-label .right-decor')){
+  assert.ok(!block.includes('background-image:none'));assert.ok(!block.includes('background-color:'));
+ }
+ if(selectors.split(',\n').some(s=>s.trim()==='html[data-truciak-theme="ebony"] .border-window'))assert.ok(!block.includes('box-shadow:'));
+}
+console.log('PASS: native window border-image, title plaque/decor and shaped alpha preserved; no synthetic rectangular frame');

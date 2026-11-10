@@ -77,3 +77,8 @@ Dodano osobne reguły dla pseudoelementów ::before/::after aktywnych i najechan
 ## Pozostałe przyciski interfejsu (0.1.53)
 
 Rozszerzono grafitowe stany najechania i aktywacji na zwykłe `.button` oraz `.btn-min`, m.in. rozwijanie statystyk i obsługę logów walki. Domyślny wygląd i geometria tych przycisków pozostają bez zmian. Uwzględniono stany hover, active, pressed, window-is-open, aria-expanded i aria-pressed; pominięto przyciski wyłączone. Dodatkowa warstwa ::before nie wypełnia już przycisku starym turkusem, a warstwy ikon ::after są zachowane.
+
+
+## Oryginalne ramy okien (0.1.54)
+
+Usunięto gradient zastępujący border-image, płaskie tła tabliczki tytułowej i jej ozdób oraz dodatkowy prostokątny cień okien. Przywrócono natywne grafiki i ich przezroczyste wycięcia. Zmiana dotyczy wspólnych reguł ramek NI, w tym okna „Świat”. Nie wprowadzono nowych kolorów tabel ani wnętrza okien.
