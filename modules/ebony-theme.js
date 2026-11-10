@@ -114,6 +114,15 @@
     'color:#12C9BD!important;background:linear-gradient(#252b31,#171b20)!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
   rule(['.button'+actionState+'::before','.btn-min'+actionState+'::before'],
     'background:none!important;box-shadow:inset 0 0 0 1px #12C9BD!important;');
+  // Native dropdown entries are separate from the trigger's .button.
+  // Match their actual value/text structure, without touching addon comboboxes.
+  const choice='.option[value]:has(> .text)';
+  rule([choice],
+    'color:#12C9BD!important;background:linear-gradient(#25494b,#142d30)!important;border-color:#12C9BD!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
+  rule([choice+' > .text'], 'color:inherit!important;background:none!important;');
+  rule([choice+':not(.disabled):not([aria-disabled="true"]):is(:hover,:active,.selected,.active,.pressed,[aria-selected="true"])'],
+    'color:#12C9BD!important;background:linear-gradient(#252b31,#171b20)!important;border-color:#12C9BD!important;');
+  rule([choice+'::before'], 'background:none!important;');
   rule(['.bottom-panel .hp-indicator .blood'], 'filter:url("#truciak-blood-tint")!important;');
   // The game keeps every native sprite offset and dimension; only its atlas URL changes.
   rule(['[data-truciak-bottom-atlas-base="true"]', '[data-truciak-bottom-atlas-before="true"]::before', '[data-truciak-bottom-atlas-after="true"]::after'],
