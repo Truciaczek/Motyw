@@ -114,6 +114,13 @@
     'color:#12C9BD!important;background:linear-gradient(#252b31,#171b20)!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
   rule(['.button'+actionState+'::before','.btn-min'+actionState+'::before'],
     'background:none!important;box-shadow:inset 0 0 0 1px #12C9BD!important;');
+  // Native context menu actions share the ordinary button palette.
+  const contextItem='.popup-menu__list > .menu-item';
+  rule([contextItem],
+    'color:#12C9BD!important;background:linear-gradient(#25494b,#142d30)!important;border-color:#12C9BD!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
+  rule([contextItem+':not(.disabled):not(.cooldown-disabled):not([aria-disabled="true"]):is(:hover,:active,.active,.selected,.pressed)'],
+    'color:#12C9BD!important;background:linear-gradient(#252b31,#171b20)!important;border-color:#12C9BD!important;');
+  rule([contextItem+'::before'], 'background:none!important;');
   // Native dropdown entries are separate from the trigger's .button.
   // Match their actual value/text structure, without touching addon comboboxes.
   const choice='.option[value]:has(> .text)';
