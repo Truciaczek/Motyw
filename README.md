@@ -1,4 +1,4 @@
-# Dodatki Truciaka — Motyw
+# Motyw NI
 
 Publiczna wersja panelu z dodatkiem **Motyw - Stary ale jary** dla Nowego Interfejsu Margonem.
 

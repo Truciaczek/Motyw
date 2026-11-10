@@ -1,8 +1,8 @@
 // Panel adapted from Gogatki by KoniecDniaDziecka (Firuś), commit 079fbc3.
 // ==UserScript==
-// @name         Dodatki Truciaka — Motyw
+// @name         Motyw NI
 // @namespace    truciaczek.motyw
-// @version      0.1.56
+// @version      0.1.57
 // @description  Wspólny panel i przełączniki dodatków do Margonem.
 // @match        https://*.margonem.pl/*
 // @match        https://*.margonem.com/*
@@ -33,7 +33,7 @@
     const window = unsafeWindow;
 // Checks only a small version manifest; never evaluates downloaded code.
 (() => {
-    const current='0.1.56';
+    const current='0.1.57';
     const manifest='https://raw.githubusercontent.com/Truciaczek/Motyw/main/version.json';
     const install='https://github.com/Truciaczek/Motyw/raw/refs/heads/main/dist/motyw.user.js';
     const valid=v=>typeof v==='string' && /^\d{1,6}\.\d{1,6}\.\d{1,6}$/.test(v);
