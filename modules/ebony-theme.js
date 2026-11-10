@@ -103,6 +103,14 @@
     'inset:0!important;width:auto!important;height:auto!important;box-sizing:border-box!important;border:0!important;background:none!important;box-shadow:none!important;');
   rule(['.main-buttons-container .widget-button .widget-blink'],
     'inset:0!important;width:auto!important;height:auto!important;box-sizing:border-box!important;border:0!important;background:none!important;'+nativeFrame);
+  // Native green open-state paints ::before above the tile background. Override
+  // that state layer explicitly, not just the base tile below it.
+  const interacted='.main-buttons-container .widget-button:not(.disabled):is(:hover,.window-is-open,.pressed,.active)';
+  rule([interacted], 'color:#12C9BD!important;background:linear-gradient(#252b31,#171b20)!important;'+nativeFrame);
+  rule([interacted+'::before',interacted+'::after'],
+    'background:none!important;box-shadow:none!important;border:0!important;');
+  rule([interacted+' .widget-blink'],
+    'background:none!important;'+nativeFrame);
   rule(['.bottom-panel .hp-indicator .blood'], 'filter:url("#truciak-blood-tint")!important;');
   // The game keeps every native sprite offset and dimension; only its atlas URL changes.
   rule(['[data-truciak-bottom-atlas-base="true"]', '[data-truciak-bottom-atlas-before="true"]::before', '[data-truciak-bottom-atlas-after="true"]::after'],

@@ -124,3 +124,8 @@ const states=nativeBlocks.find(b=>b.includes('.window-is-open')&&b.includes('.pr
 assert.ok(states.includes('background:linear-gradient(#252b31,#171b20)!important'));
 assert.ok(states.includes('inset 0 0 0 4px #12C9BD'));
 console.log('PASS: native tile idle is dark turquoise; hover/open/pressed/active are graphite with the same double frame');
+
+const activeOverlay=mainCss.split('}').find(b=>b.includes(':is(:hover,.window-is-open,.pressed,.active)::before'));
+assert.ok(activeOverlay.includes('background:none!important;box-shadow:none!important;border:0!important;'));
+assert.ok(activeOverlay.includes(':not(.disabled)'));
+console.log('PASS: interacted pseudo-element overlay cleared with state-specific selectors, leaving graphite base visible');

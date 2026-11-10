@@ -67,3 +67,8 @@ W `assets/hpStateSprite.png` zmieniono czerwień RGB (206,0,0) na #12C9BD. Wszys
 ## Stany kafelków NI (0.1.51)
 
 Zwykły stan natywnych ikon pasków ma ciemnoturkusowe tło jak przycisk „Rozwiń”. Po najechaniu lub otwarciu powiązanego okna tło zmienia się na grafitowe, odpowiadające dawnemu stanowi nieaktywnemu. Podwójne turkusowe ramki zachowują swoje wymiary. Zmiana nie obejmuje ikon paneli Truciaka, Firusia ani Maddonza.
+
+
+## Aktywna warstwa ikon (0.1.52)
+
+Dodano osobne reguły dla pseudoelementów ::before/::after aktywnych i najechanych kafelków. Usuwają ich stare pełne podświetlenie, aby grafitowe tło aktywnego przycisku było widoczne. Zwykły turkusowy stan pozostaje bez zmian.
