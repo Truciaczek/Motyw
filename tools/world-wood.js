@@ -36,7 +36,7 @@ function bindTruciakWorldWood(doc, view, filterDefinition) {
         for(const world of doc.querySelectorAll('.world-window')){
             const frame=world.closest('.border-window') || world;
             apply(frame,'border-image-source');
-            for(const node of frame.querySelectorAll('.bottom-bar,.world-window__bg')){
+            for(const node of frame.querySelectorAll('.bottom-bar,.world-window__bg,.interface-element-bottom-bar-background-stretch')){
                 apply(node,'border-image-source');apply(node,'background-image');
             }
         }
