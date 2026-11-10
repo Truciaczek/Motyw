@@ -2,8 +2,8 @@
 function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition=filterDefinition) {
     const cache=new Map();let stopped=false;
     const imageUrl=value=>value?.match(/^url\(["']?(.*?)["']?\)$/)?.[1];
-    function recolor(url,definition){
-        const key=url+definition;
+    function recolor(url,definition,preserveTitleFill=false){
+        const key=url+definition+preserveTitleFill;
         if(cache.has(key))return cache.get(key);
         const result=new Promise(resolve=>{
             const image=new view.Image();
@@ -12,8 +12,22 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
                 try{
                     const canvas=doc.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;
                     const context=canvas.getContext('2d');context.drawImage(image,0,0);
+                    if(preserveTitleFill){
+                        const pixels=context.getImageData(0,0,canvas.width,canvas.height);
+                        const d=pixels.data;
+                        for(let i=0;i<d.length;i+=4){
+                            const r=d[i],g=d[i+1],b=d[i+2];
+                            if(!d[i+3] || (r===46 && g===50 && b===50))continue;
+                            const y=(.2126*r+.7152*g+.0722*b)/255;
+                            const warm=r-b>=10;
+                            const slopes=warm?[.55,.57,.60]:[.349020,.435294,.498039];
+                            const offsets=warm?[.025,.028,.032]:[.145098,.168627,.192157];
+                            for(let c=0;c<3;c++)d[i+c]=Math.round(255*(slopes[c]*y+offsets[c]));
+                        }
+                        context.putImageData(pixels,0,0);
+                    }
                     const png=canvas.toDataURL('image/png');
-                    const svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+canvas.width+'" height="'+canvas.height+'" viewBox="0 0 '+canvas.width+' '+canvas.height+'"><defs>'+definition+'</defs><image width="100%" height="100%" href="'+png+'" filter="url(#truciak-window-wood)"/></svg>';
+                    const svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+canvas.width+'" height="'+canvas.height+'" viewBox="0 0 '+canvas.width+' '+canvas.height+'"><defs>'+definition+'</defs><image width="100%" height="100%" href="'+png+'" '+(preserveTitleFill?'':'filter="url(#truciak-window-wood)"')+'/></svg>';
                     resolve('url("data:image/svg+xml,'+encodeURIComponent(svg)+'")');
                 }catch(error){console.warn('[Truciak] Wspólne drewno NI:',error);resolve(null);}
             };
@@ -25,7 +39,7 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
     }
     // These are all consumers of the shared resources in the native NI stylesheet.
     const resources=[
-        {path:'/img/gui/dialogue/dialogi.png',ornament:true,property:'background-image',selectors:'.border-window .left-decor,.border-window .right-decor'},
+        {path:'/img/gui/dialogue/dialogi.png',ornament:true,property:'background-image',selectors:'.border-window:not(.transparent):not(.tip-window) .header-label .left-decor,.border-window:not(.transparent):not(.tip-window) .header-label .right-decor'},
         {path:'/img/gui/window-frame.png',property:'border-image-source',selectors:'.interface-element-border-window-frame,.additional-skill-panel .graphics .additional-skill-panel-border,.battle-controller .graphics .battle-border,.border-window'},
         {path:'/img/gui/middle_graphics.png',property:'background-image',selectors:'.interface-element-vertical-wood'},
         {path:'/img/gui/middle_graphics.png',property:'border-image-source',selectors:'.interface-element-middle-1-background,.interface-element-middle-1-background-stretch,.interface-element-middle-2-background,.interface-element-middle-2-background-stretch,.interface-element-middle-3-background,.interface-element-middle-3-background-stretch,.interface-element-middle-4-background'},
@@ -47,7 +61,7 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
         const rules=new Array(resources.length).fill('');
         resources.forEach((resource,index)=>{
             const url=sources.get(resource.path) || new URL(resource.path,view.location.href).href;
-            recolor(url,(resource.ornament || resource.path==='/img/gui/window-frame.png')?frameFilterDefinition:filterDefinition).then(value=>{
+            recolor(url,(resource.ornament || resource.path==='/img/gui/window-frame.png')?frameFilterDefinition:filterDefinition,!!resource.ornament).then(value=>{
                 if(stopped || !value)return;
                 const selectors=resource.selectors.split(',').map(selector=>'html[data-truciak-theme="ebony"] '+selector).join(',');
                 rules[index]=selectors+'{'+resource.property+':'+value+'!important;}';

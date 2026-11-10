@@ -114,10 +114,11 @@
     'color:#12C9BD!important;background:linear-gradient(#252b31,#171b20)!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
   rule(['.button'+actionState+'::before','.btn-min'+actionState+'::before'],
     'background:none!important;box-shadow:inset 0 0 0 1px #12C9BD!important;');
-  // Match the title plaque border to the tinted side ornaments.
-  // Its center fill and label color are left unchanged.
-  rule(['.border-window .header-label'],
-    'border-top-color:#668298!important;border-bottom-color:#668298!important;');
+  // Native title rails are inset shadows, not CSS borders. Keep their widths
+  // and center fill, and map each rail through the shared ornament palette.
+  rule(['.interface-element-border-window-header-middle', '.trade-window header .h_background .middle',
+    '.border-window:not(.transparent):not(.tip-window) .header-label-positioner .header-label'],
+    'box-shadow:inset 0 1px #2e3232,inset 0 2px #5d7080,inset 0 3px #4c5b68,inset 0 4px #17181a,inset 0 -2px #282f35,inset 0 -3px #3e4a54,inset 0 -4px #60646a!important;');
   // Native dropdown entries are separate from the trigger's .button.
   // Match their actual value/text structure, without touching addon comboboxes.
   const choice='.option[value]:has(> .text)';
