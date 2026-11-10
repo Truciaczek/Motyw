@@ -23,8 +23,9 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
         });
         cache.set(key,result);return result;
     }
-    // These are all consumers of the three resources in the native NI stylesheet.
+    // These are all consumers of the shared resources in the native NI stylesheet.
     const resources=[
+        {path:'/img/gui/dialogue/dialogi.png',ornament:true,property:'background-image',selectors:'.border-window .left-decor,.border-window .right-decor'},
         {path:'/img/gui/window-frame.png',property:'border-image-source',selectors:'.interface-element-border-window-frame,.additional-skill-panel .graphics .additional-skill-panel-border,.battle-controller .graphics .battle-border,.border-window'},
         {path:'/img/gui/middle_graphics.png',property:'background-image',selectors:'.interface-element-vertical-wood'},
         {path:'/img/gui/middle_graphics.png',property:'border-image-source',selectors:'.interface-element-middle-1-background,.interface-element-middle-1-background-stretch,.interface-element-middle-2-background,.interface-element-middle-2-background-stretch,.interface-element-middle-3-background,.interface-element-middle-3-background-stretch,.interface-element-middle-4-background'},
@@ -46,7 +47,7 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
         const rules=new Array(resources.length).fill('');
         resources.forEach((resource,index)=>{
             const url=sources.get(resource.path) || new URL(resource.path,view.location.href).href;
-            recolor(url,resource.path==='/img/gui/window-frame.png'?frameFilterDefinition:filterDefinition).then(value=>{
+            recolor(url,(resource.ornament || resource.path==='/img/gui/window-frame.png')?frameFilterDefinition:filterDefinition).then(value=>{
                 if(stopped || !value)return;
                 const selectors=resource.selectors.split(',').map(selector=>'html[data-truciak-theme="ebony"] '+selector).join(',');
                 rules[index]=selectors+'{'+resource.property+':'+value+'!important;}';
