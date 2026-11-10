@@ -10,7 +10,7 @@ capture='__TRUCIAK_COEXISTENCE__'
 # Local bundle uses no remote catalogue, dock or addon downloads.
 s=re.sub(r'// @name .*', '// @name         Dodatki Truciaka — Motyw',s)
 s=re.sub(r'// @namespace .*', '// @namespace    truciaczek.motyw',s)
-s=re.sub(r'// @version .*', '// @version      0.1.45',s)
+s=re.sub(r'// @version .*', '// @version      0.1.46',s)
 s=re.sub(r'// @run-at .*', '// @run-at       document-start',s)
 s=re.sub(r'^// @(downloadURL|updateURL|connect|grant        GM_xmlhttpRequest).*\n','',s,flags=re.M)
 s=s.replace("    const window = unsafeWindow;", "    const window = unsafeWindow;\n"+capture,1)
@@ -56,6 +56,12 @@ s=re.sub(r"const launcherTileStyle = .*?;\n",lambda m:'const launcherTileStyle =
 s=s.replace('    const loading = new Set();','    const loading = new Set();\n'+(root/'tools/theme-shortcut.js').read_text())
 s=s.replace('    function render() {','    function render() {\n        syncThemeShortcut();')
 s=s.replace('__TRUCIAK_COEXISTENCE__',(root/'tools/launcher-coexistence.js').read_text())
+# Version check runs independently of whether the optional theme is enabled.
+s=s.replace('// @run-at', '// @grant        GM_xmlhttpRequest\n// @connect      raw.githubusercontent.com\n// @run-at',1)
+version=re.search(r'// @version\s+(\S+)',s).group(1)
+notice=(root/'tools/update-notice.js').read_text().replace('__TRUCIAK_CURRENT_VERSION__',version)
+s=s.replace('    const window = unsafeWindow;', '    const window = unsafeWindow;\n'+notice,1)
+(root/'version.json').write_text(json.dumps({'version':version},indent=2)+'\n')
 # Insert module bytes last: the red launcher must not recolor the turquoise game theme.
 s=s.replace('__TRUCIAK_EMBEDDED_MODULES__',json.dumps(module_sources,ensure_ascii=False))
 (root/'dist/motyw.user.js').write_text('// Panel adapted from Gogatki by KoniecDniaDziecka (Firuś), commit 079fbc3.\n'+s)
