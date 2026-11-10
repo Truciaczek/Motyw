@@ -57,3 +57,8 @@ Skorygowano jasne fragmenty dolnej metalowej obręczy, które poprzednio objęł
 ## Czubek obręczy (0.1.49)
 
 Uzupełniono pominięty wiersz 872 arkusza buttony.png na czubku obręczy kuli. Wypełnienie, kanał alfa i warstwa szkła pozostają bez zmian.
+
+
+## Turkusowe stany HP (0.1.50)
+
+W `assets/hpStateSprite.png` zmieniono czerwień RGB (206,0,0) na #12C9BD. Wszystkie klatki, wymiary 611×72 i kanał alfa pozostały identyczne. Motyw podmienia wyłącznie obraz `.blood-frame`: gra nadal steruje miganiem, pozycją klatki i przezroczystością ostrzeżeń niskiego HP/śmierci.

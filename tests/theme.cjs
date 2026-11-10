@@ -83,7 +83,7 @@ assert.ok(!topHudBlock.includes('background-image'));
 const bundle=fs.readFileSync(__dirname+'/../dist/motyw.user.js','utf8');
 const embedded=JSON.parse(bundle.match(/const source = (\{"ebony-theme":.*\})\[mod.id\];/)[1]);
 const pngUrl='data:image/png;base64,'+fs.readFileSync(__dirname+'/../assets/buttony.png').toString('base64');
-assert.equal(embedded['ebony-theme'],source.replaceAll('__TRUCIAK_HUD_SPRITE__',pngUrl));
+assert.equal(embedded['ebony-theme'],source.replaceAll('__TRUCIAK_HUD_SPRITE__',pngUrl).replace('__TRUCIAK_HP_STATE_SPRITE__','data:image/png;base64,'+fs.readFileSync(__dirname+'/../assets/hpStateSprite.png').toString('base64')));
 const catalogue=JSON.parse(bundle.match(/const fallbackCatalogue = (.*);/)[1]);
 assert.deepEqual(catalogue.modules.map(m=>m.id),['ebony-theme']);
 assert.equal(bundle.includes("preferences['ebony-theme'] = true"),false);
@@ -111,3 +111,8 @@ assert.ok(!source.includes('truciak-hud-gray'));
 assert.ok(!source.includes('truciak-hud-background'));
 
 assert.ok(m.testing.filterMarkup.includes('result="lighterTrim"'));
+
+const hpStateBlock=mainCss.split('}').find(b=>b.split('{')[0].endsWith(' .hp-indicator .blood-frame'));
+assert.ok(hpStateBlock.includes('background-image:url('));
+for(const property of ['opacity:','animation:','background-position:','width:','height:'])assert.ok(!hpStateBlock.includes(property));
+console.log('PASS: HP warning sprite replacement changes only image source, preserving native state/animation/opacity and frame coordinates');
