@@ -72,3 +72,8 @@ Zwykły stan natywnych ikon pasków ma ciemnoturkusowe tło jak przycisk „Rozw
 ## Aktywna warstwa ikon (0.1.52)
 
 Dodano osobne reguły dla pseudoelementów ::before/::after aktywnych i najechanych kafelków. Usuwają ich stare pełne podświetlenie, aby grafitowe tło aktywnego przycisku było widoczne. Zwykły turkusowy stan pozostaje bez zmian.
+
+
+## Pozostałe przyciski interfejsu (0.1.53)
+
+Rozszerzono grafitowe stany najechania i aktywacji na zwykłe `.button` oraz `.btn-min`, m.in. rozwijanie statystyk i obsługę logów walki. Domyślny wygląd i geometria tych przycisków pozostają bez zmian. Uwzględniono stany hover, active, pressed, window-is-open, aria-expanded i aria-pressed; pominięto przyciski wyłączone. Dodatkowa warstwa ::before nie wypełnia już przycisku starym turkusem, a warstwy ikon ::after są zachowane.

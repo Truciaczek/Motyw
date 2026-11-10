@@ -111,6 +111,13 @@
     'background:none!important;box-shadow:none!important;border:0!important;');
   rule([interacted+' .widget-blink'],
     'background:none!important;'+nativeFrame);
+  // Ordinary NI action buttons (stats, battle logs, etc.) use the same
+  // interaction palette. Keep their default size, frame, and icon layers.
+  const actionState=':not(.disabled):not([disabled]):not([aria-disabled="true"]):is(:hover,:active,.pressed,.active,.window-is-open,[aria-expanded="true"],[aria-pressed="true"])';
+  rule(['.button'+actionState,'.btn-min'+actionState],
+    'color:#12C9BD!important;background:linear-gradient(#252b31,#171b20)!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
+  rule(['.button'+actionState+'::before','.btn-min'+actionState+'::before'],
+    'background:none!important;box-shadow:inset 0 0 0 1px #12C9BD!important;');
   rule(['.bottom-panel .hp-indicator .blood'], 'filter:url("#truciak-blood-tint")!important;');
   // The game keeps every native sprite offset and dimension; only its atlas URL changes.
   rule(['[data-truciak-bottom-atlas-base="true"]', '[data-truciak-bottom-atlas-before="true"]::before', '[data-truciak-bottom-atlas-after="true"]::after'],

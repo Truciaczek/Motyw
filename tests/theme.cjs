@@ -129,3 +129,10 @@ const activeOverlay=mainCss.split('}').find(b=>b.includes(':is(:hover,.window-is
 assert.ok(activeOverlay.includes('background:none!important;box-shadow:none!important;border:0!important;'));
 assert.ok(activeOverlay.includes(':not(.disabled)'));
 console.log('PASS: interacted pseudo-element overlay cleared with state-specific selectors, leaving graphite base visible');
+
+const actionBlocks=mainCss.split('}').filter(b=>b.includes('[aria-expanded="true"]')&&b.includes('.btn-min'));
+assert.ok(actionBlocks.some(b=>b.includes('background:linear-gradient(#252b31,#171b20)!important')));
+assert.ok(actionBlocks.some(b=>b.includes('::before')&&b.includes('background:none!important')));
+assert.ok(actionBlocks.every(b=>b.includes(':not([disabled])')&&b.includes(':not([aria-disabled="true"])')));
+assert.ok(actionBlocks.every(b=>!b.includes('::after')));
+console.log('PASS: ordinary action buttons share graphite hover/active/pressed/expanded states, disabled controls excluded and icon after-layers preserved');
