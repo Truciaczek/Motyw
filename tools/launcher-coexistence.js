@@ -1,7 +1,7 @@
 // Both independent launchers share one NI widget manager. Registration must
 // include its complete persisted layout and must not finish a user drag session.
 function installTruciakLauncherCoexistence(window) {
-    const keys = new Set(['truciak_addonsManager', 'gogatki_addonsManager']);
+    const keys = new Set(['truciak_addonsManager', 'truciak_private_addonsManager', 'gogatki_addonsManager']);
     const patched = new WeakSet();
     const valid = p => Array.isArray(p) && Number.isInteger(p[0]) && p[0] >= 0 && typeof p[1] === 'string' && !!p[1].trim();
     function attach() {

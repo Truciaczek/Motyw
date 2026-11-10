@@ -13,7 +13,9 @@ Publiczna wersja panelu z dodatkiem **Motyw - Stary ale jary** dla Nowego Interf
 
 Do pobrania nie potrzeba konta GitHub. Skrypt zawiera panel, dock, motyw i grafiki w jednym pliku — podczas gry nie pobiera dodatkowego kodu. Aktualizację instaluje się ponownie z tego samego linku.
 
-Nie włączaj jednocześnie dwóch wersji panelu Truciaka; używają tego samego kafelka NI. Panel Firusia i Maddonz mogą działać obok.
+Wersja 0.1.45 może działać obok aktualnej prywatnej wersji panelu Truciaka (0.1.45 lub nowszej). Panele mają osobne kafelki, okna i paski skrótów. Starsze prywatne wersje należy najpierw zaktualizować. Panel Firusia i Maddonz również mogą działać obok.
+
+Dalszy rozwój motywu odbywa się wyłącznie w tym publicznym repozytorium.
 
 ## Zawartość
 
