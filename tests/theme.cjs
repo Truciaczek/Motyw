@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict'),fs=require('fs'),vm=require('vm');
-const source=fs.readFileSync(__dirname+'/../modules/ebony-theme.js','utf8').replace('__TRUCIAK_BOTTOM_ATLAS_HELPER__',fs.readFileSync(__dirname+'/../tools/bottom-atlas.js','utf8'));
+const source=fs.readFileSync(__dirname+'/../modules/ebony-theme.js','utf8').replace('__TRUCIAK_BOTTOM_ATLAS_HELPER__',fs.readFileSync(__dirname+'/../tools/bottom-atlas.js','utf8')).replace('__TRUCIAK_WORLD_WOOD_HELPER__',fs.readFileSync(__dirname+'/../tools/world-wood.js','utf8'));
 function fixture(engine={hero:{},map:{}}){
   const attrs=new Map(),nodes=[];
   const html={getAttribute:k=>attrs.get(k)??null,setAttribute:(k,v)=>attrs.set(k,v),removeAttribute:k=>attrs.delete(k)};
@@ -105,8 +105,8 @@ const actualPeak=m.testing.bloodPeak(new Uint8ClampedArray([246,86,43,255,255,17
 const actualGain=2.1811388795275737;
 assert.ok(Math.abs(actualPeak*actualGain-1)<1e-12);
 assert.ok(m.testing.filterMarkup.includes('slope="'+actualGain+'"'));
-assert.ok(!source.includes('new view.Image'));
-console.log('PASS: exact original PNG peak calibrates to target; transparent edge noise ignored; no runtime image download');
+assert.ok(!fs.readFileSync(__dirname+'/../modules/ebony-theme.js','utf8').includes('new view.Image'));
+console.log('PASS: exact original PNG peak calibrates to target; transparent edge noise ignored; no blood image download');
 assert.ok(!source.includes('truciak-hud-gray'));
 assert.ok(!source.includes('truciak-hud-background'));
 
@@ -146,3 +146,7 @@ for(const block of mainCss.split('}')){
  if(selectors.split(',\n').some(s=>s.trim()==='html[data-truciak-theme="ebony"] .border-window'))assert.ok(!block.includes('box-shadow:'));
 }
 console.log('PASS: native window border-image, title plaque/decor and shaped alpha preserved; no synthetic rectangular frame');
+
+assert.ok(m.testing.windowWoodFilter.includes('.55 0 0 0 .025 0 .57 0 0 .028 0 0 .60 0 .032'));
+assert.ok(m.testing.windowWoodFilter.includes('in="SourceGraphic" type="matrix" values="1 0 0 0 0'));
+console.log('PASS: world wood uses final strip grain mapping while neutral ornament colors remain original');

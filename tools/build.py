@@ -7,12 +7,13 @@ module_sources={name:(root/('modules/'+name+'.js')).read_text() for name in ['eb
 module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_HUD_SPRITE__','data:image/png;base64,'+base64.b64encode((root/'assets/buttony.png').read_bytes()).decode('ascii'))
 module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_BOTTOM_ATLAS_HELPER__',(root/'tools/bottom-atlas.js').read_text())
 module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_HP_STATE_SPRITE__','data:image/png;base64,'+base64.b64encode((root/'assets/hpStateSprite.png').read_bytes()).decode('ascii'))
+module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_WORLD_WOOD_HELPER__',(root/'tools/world-wood.js').read_text())
 capture='__TRUCIAK_COEXISTENCE__'
 # The distributed module works independently of the red launcher as well.
 # Local bundle uses no remote catalogue, dock or addon downloads.
 s=re.sub(r'// @name .*', '// @name         Dodatki Truciaka — Motyw',s)
 s=re.sub(r'// @namespace .*', '// @namespace    truciaczek.motyw',s)
-s=re.sub(r'// @version .*', '// @version      0.1.54',s)
+s=re.sub(r'// @version .*', '// @version      0.1.55',s)
 s=re.sub(r'// @run-at .*', '// @run-at       document-start',s)
 s=re.sub(r'^// @(downloadURL|updateURL|connect|grant        GM_xmlhttpRequest).*\n','',s,flags=re.M)
 s=s.replace("    const window = unsafeWindow;", "    const window = unsafeWindow;\n"+capture,1)

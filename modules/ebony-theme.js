@@ -8,6 +8,7 @@
   const grain = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="96" viewBox="0 0 512 96"><defs><linearGradient id="ebony" x2="0" y2="1"><stop stop-color="#24292d"/><stop offset=".42" stop-color="#111416"/><stop offset="1" stop-color="#1b2024"/></linearGradient></defs><path fill="url(#ebony)" d="M0 0h512v96H0z"/><g fill="none" stroke="#70777d" stroke-opacity=".18"><path d="M-20 7C80 15 210-5 340 8s110 0 190-2M-20 14c120 12 210-10 350 2s125 0 200-1M-20 27c100-8 175 11 260 0s180-12 290 0M-20 33c120-8 185 12 270 0s160-13 280-1M-20 50c150 14 210-13 350 0s120 1 200-5M-20 58c150 13 210-12 350 0s120 1 200-5M-20 74c120-9 185 14 280 0s160-10 270 0M-20 83c120-9 185 10 280-1s160-9 270 0"/><path d="M-20 19c180 2 160 16 310 0s150 3 240 0M-20 41c180 2 160-15 310 0s150-3 240 0M-20 66c180 2 160 16 310 0s150 3 240 0M-20 91c180 2 160-15 310 0s150-3 240 0" stroke-opacity=".06"/></g></svg>`;
   const wood = `url("data:image/svg+xml,${encodeURIComponent(grain)}")`;
   __TRUCIAK_BOTTOM_ATLAS_HELPER__
+  __TRUCIAK_WORLD_WOOD_HELPER__
   const hpStateSprite='__TRUCIAK_HP_STATE_SPRITE__';
   const hudSprite='__TRUCIAK_HUD_SPRITE__';
   const scope = 'html[data-truciak-theme="ebony"]';
@@ -142,6 +143,12 @@
     '.065 0 0 0 .008 0 .070 0 0 .010 0 0 .075 0 .012',
     '.55 0 0 0 .025 0 .57 0 0 .028 0 0 .60 0 .032'
   ).replace('k4="0"/>','k4="0" result="tintedOriginal"/>');
+  // Reuse the final strip wood mapping, but keep non-wood ornaments original.
+  const windowWoodPrimitives=barPrimitives.replace(
+    '<feColorMatrix in="luminance" type="matrix" values=".349020 0 0 0 .145098 0 .435294 0 0 .168627 0 0 .498039 0 .192157 0 0 0 1 0" result="lighterTrim"/>',
+    '<feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0" result="lighterTrim"/>'
+  );
+  const windowWoodFilter='<filter id="truciak-window-wood" color-interpolation-filters="sRGB">'+windowWoodPrimitives+'</filter>';
   // Fill only the very dark, neutral, opaque seam. No pixel coordinates or new outlines.
   const seamPrimitives=`
     <feColorMatrix in="luminance" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 -8 0 0 0 1" result="darkNeutralSoft"/>
@@ -175,15 +182,16 @@
   GogatkiRuntime.register({
     id:'ebony-theme', name:'Motyw - Stary ale jary',
     description:'Hebanowe drewno, grafitowe panele i turkusowe akcenty Firusia. Włączanie i wyłączanie bez F5.',
-    testing:{css,filterMarkup,bloodPeak},
+    testing:{css,filterMarkup,bloodPeak,windowWoodFilter},
     start() {
       const w=unsafeWindow;
       if (!w.Engine?.hero || !w.Engine?.map) throw new Error('Motyw wymaga Nowego Interfejsu Margonem.');
       if (w.__truciakEbonyTheme) { w.__truciakEbonyTheme.enable(); return; }
       const attribute='data-truciak-theme', styleId='truciak-ebony-theme-style';
-      let style=null, filterNode=null, previous=null, enabled=false,bottomBinding=null;
+      let style=null, filterNode=null, previous=null, enabled=false,bottomBinding=null,worldWood=null;
       function disable() {
         if (!enabled) return;
+        worldWood?.cleanup();worldWood=null;
         bottomBinding?.cleanup();bottomBinding=null;
         style?.remove();style=null;filterNode?.remove();filterNode=null;
         if (document.documentElement.getAttribute(attribute)==='ebony') {
@@ -205,6 +213,7 @@
         document.documentElement.setAttribute(attribute,'ebony');
         enabled=true;
         bottomBinding=bindTruciakBottomAtlas(document,w);
+        worldWood=bindTruciakWorldWood(document,w,windowWoodFilter);
       }
       w.__truciakEbonyTheme={enable,disable,get enabled(){return enabled;},get bottomAtlasTargets(){return bottomBinding?.count() || 0;}};
       w.addEventListener('pagehide',disable,{once:true});
