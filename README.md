@@ -47,3 +47,8 @@ Panel i dock zaadaptowano z [Gogatki Firusia / KoniecDniaDziecka](https://github
 ## Dolne ornamenty (0.1.47)
 
 Edytowany `assets/buttony.png` zawiera przekolorowane ornamenty kuli i ramki paska EXP. Podmiana obejmuje wyłącznie elementy dolnego HUD, które w oryginale korzystają z `buttony.png`, również w pseudoelementach. Nie zmienia rozmiarów ani pozycji tła i nie obejmuje innych grafik wskaźników. Po wyłączeniu motywu znaczniki podmiany są usuwane. Geometria i kanał alfa arkusza są zachowane.
+
+
+## Obręcz kuli (0.1.48)
+
+Skorygowano jasne fragmenty dolnej metalowej obręczy, które poprzednio objęła maska chroniąca wnętrze kuli. Zmieniono wyłącznie jasne neutralne piksele w wąskich bocznych pasach; środek kuli i jej animacja pozostają bez zmian.
