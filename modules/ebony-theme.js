@@ -92,7 +92,13 @@
   // not paint another border on top of it (the source of the thicker top edge).
   const nativeFrame='box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20,inset 0 0 0 4px #12C9BD!important;';
   rule(['.main-buttons-container .widget-button'],
-    'border:0!important;background-image:linear-gradient(#252b31,#171b20)!important;'+nativeFrame);
+    'border:0!important;color:#12C9BD!important;background:linear-gradient(#25494b,#142d30)!important;'+nativeFrame);
+  // Requested inverted interaction: turquoise idle, graphite on hover/open.
+  rule(['.main-buttons-container .widget-button:not(.disabled):hover',
+    '.main-buttons-container .widget-button.window-is-open',
+    '.main-buttons-container .widget-button.pressed',
+    '.main-buttons-container .widget-button.active'],
+    'color:#12C9BD!important;background:linear-gradient(#252b31,#171b20)!important;'+nativeFrame);
   rule(['.main-buttons-container .widget-button::before', '.main-buttons-container .widget-button::after'],
     'inset:0!important;width:auto!important;height:auto!important;box-sizing:border-box!important;border:0!important;background:none!important;box-shadow:none!important;');
   rule(['.main-buttons-container .widget-button .widget-blink'],

@@ -62,3 +62,8 @@ Uzupełniono pominięty wiersz 872 arkusza buttony.png na czubku obręczy kuli. 
 ## Turkusowe stany HP (0.1.50)
 
 W `assets/hpStateSprite.png` zmieniono czerwień RGB (206,0,0) na #12C9BD. Wszystkie klatki, wymiary 611×72 i kanał alfa pozostały identyczne. Motyw podmienia wyłącznie obraz `.blood-frame`: gra nadal steruje miganiem, pozycją klatki i przezroczystością ostrzeżeń niskiego HP/śmierci.
+
+
+## Stany kafelków NI (0.1.51)
+
+Zwykły stan natywnych ikon pasków ma ciemnoturkusowe tło jak przycisk „Rozwiń”. Po najechaniu lub otwarciu powiązanego okna tło zmienia się na grafitowe, odpowiadające dawnemu stanowi nieaktywnemu. Podwójne turkusowe ramki zachowują swoje wymiary. Zmiana nie obejmuje ikon paneli Truciaka, Firusia ani Maddonza.

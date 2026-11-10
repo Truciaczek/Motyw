@@ -116,3 +116,11 @@ const hpStateBlock=mainCss.split('}').find(b=>b.split('{')[0].endsWith(' .hp-ind
 assert.ok(hpStateBlock.includes('background-image:url('));
 for(const property of ['opacity:','animation:','background-position:','width:','height:'])assert.ok(!hpStateBlock.includes(property));
 console.log('PASS: HP warning sprite replacement changes only image source, preserving native state/animation/opacity and frame coordinates');
+
+const nativeBlocks=mainCss.split('}').filter(b=>b.includes('.main-buttons-container .widget-button'));
+const idle=nativeBlocks.find(b=>b.split('{')[0].endsWith(".widget-button"+':not(.widget-truciak_addonsManager):not(.widget-gogatki_addonsManager):not(.widget-maddonz_addonsManager):not([data-truciak-native-launcher]):not([data-gogatki-native-launcher]):not(:has(.icon.truciak_addonsManager,.icon.gogatki_addonsManager,.icon.maddonz_addonsManager))'));
+assert.ok(idle.includes('background:linear-gradient(#25494b,#142d30)!important'));
+const states=nativeBlocks.find(b=>b.includes('.window-is-open')&&b.includes('.pressed')&&b.includes('.active')&&b.includes(':hover'));
+assert.ok(states.includes('background:linear-gradient(#252b31,#171b20)!important'));
+assert.ok(states.includes('inset 0 0 0 4px #12C9BD'));
+console.log('PASS: native tile idle is dark turquoise; hover/open/pressed/active are graphite with the same double frame');
