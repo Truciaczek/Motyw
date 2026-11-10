@@ -42,3 +42,8 @@ Plik `dist/motyw.user.js` jest gotowym instalatorem. Źródła motywu znajdują 
 ## Autorzy
 
 Panel i dock zaadaptowano z [Gogatki Firusia / KoniecDniaDziecka](https://github.com/KoniecDniaDziecka/Gogatki). Własne zmiany panelu i motyw: Truciak. Oryginalne grafiki interfejsu pochodzą z Margonem/Garmory.
+
+
+## Dolne ornamenty (0.1.47)
+
+Edytowany `assets/buttony.png` zawiera przekolorowane ornamenty kuli i ramki paska EXP. Podmiana obejmuje wyłącznie elementy dolnego HUD, które w oryginale korzystają z `buttony.png`, również w pseudoelementach. Nie zmienia rozmiarów ani pozycji tła i nie obejmuje innych grafik wskaźników. Po wyłączeniu motywu znaczniki podmiany są usuwane. Geometria i kanał alfa arkusza są zachowane.

@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict'),fs=require('fs'),vm=require('vm');
-const source=fs.readFileSync(__dirname+'/../modules/ebony-theme.js','utf8');
+const source=fs.readFileSync(__dirname+'/../modules/ebony-theme.js','utf8').replace('__TRUCIAK_BOTTOM_ATLAS_HELPER__',fs.readFileSync(__dirname+'/../tools/bottom-atlas.js','utf8'));
 function fixture(engine={hero:{},map:{}}){
   const attrs=new Map(),nodes=[];
   const html={getAttribute:k=>attrs.get(k)??null,setAttribute:(k,v)=>attrs.set(k,v),removeAttribute:k=>attrs.delete(k)};
