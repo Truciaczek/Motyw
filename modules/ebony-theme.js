@@ -158,6 +158,7 @@
     '<feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0" result="lighterTrim"/>'
   );
   const windowWoodFilter='<filter id="truciak-window-wood" color-interpolation-filters="sRGB">'+windowWoodPrimitives+'</filter>';
+  const windowFrameFilter='<filter id="truciak-window-wood" color-interpolation-filters="sRGB">'+barPrimitives+'</filter>';
   // Fill only the very dark, neutral, opaque seam. No pixel coordinates or new outlines.
   const seamPrimitives=`
     <feColorMatrix in="luminance" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 -8 0 0 0 1" result="darkNeutralSoft"/>
@@ -222,7 +223,7 @@
         document.documentElement.setAttribute(attribute,'ebony');
         enabled=true;
         bottomBinding=bindTruciakBottomAtlas(document,w);
-        worldWood=bindTruciakWorldWood(document,w,windowWoodFilter);
+        worldWood=bindTruciakWorldWood(document,w,windowWoodFilter,windowFrameFilter);
       }
       w.__truciakEbonyTheme={enable,disable,get enabled(){return enabled;},get bottomAtlasTargets(){return bottomBinding?.count() || 0;}};
       w.addEventListener('pagehide',disable,{once:true});

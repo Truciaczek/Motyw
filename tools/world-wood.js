@@ -1,9 +1,10 @@
 // Recolor native image resources, not their containing windows or children.
-function bindTruciakWorldWood(doc, view, filterDefinition) {
+function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition=filterDefinition) {
     const cache=new Map();let stopped=false;
     const imageUrl=value=>value?.match(/^url\(["']?(.*?)["']?\)$/)?.[1];
-    function recolor(url){
-        if(cache.has(url))return cache.get(url);
+    function recolor(url,definition){
+        const key=url+definition;
+        if(cache.has(key))return cache.get(key);
         const result=new Promise(resolve=>{
             const image=new view.Image();
             image.onload=()=>{
@@ -12,7 +13,7 @@ function bindTruciakWorldWood(doc, view, filterDefinition) {
                     const canvas=doc.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;
                     const context=canvas.getContext('2d');context.drawImage(image,0,0);
                     const png=canvas.toDataURL('image/png');
-                    const svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+canvas.width+'" height="'+canvas.height+'" viewBox="0 0 '+canvas.width+' '+canvas.height+'"><defs>'+filterDefinition+'</defs><image width="100%" height="100%" href="'+png+'" filter="url(#truciak-window-wood)"/></svg>';
+                    const svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+canvas.width+'" height="'+canvas.height+'" viewBox="0 0 '+canvas.width+' '+canvas.height+'"><defs>'+definition+'</defs><image width="100%" height="100%" href="'+png+'" filter="url(#truciak-window-wood)"/></svg>';
                     resolve('url("data:image/svg+xml,'+encodeURIComponent(svg)+'")');
                 }catch(error){console.warn('[Truciak] Wspólne drewno NI:',error);resolve(null);}
             };
@@ -20,7 +21,7 @@ function bindTruciakWorldWood(doc, view, filterDefinition) {
             try{if(new URL(url,view.location.href).origin!==view.location.origin)image.crossOrigin='anonymous';}catch{}
             image.src=url;
         });
-        cache.set(url,result);return result;
+        cache.set(key,result);return result;
     }
     // These are all consumers of the three resources in the native NI stylesheet.
     const resources=[
@@ -45,7 +46,7 @@ function bindTruciakWorldWood(doc, view, filterDefinition) {
         const rules=new Array(resources.length).fill('');
         resources.forEach((resource,index)=>{
             const url=sources.get(resource.path) || new URL(resource.path,view.location.href).href;
-            recolor(url).then(value=>{
+            recolor(url,resource.path==='/img/gui/window-frame.png'?frameFilterDefinition:filterDefinition).then(value=>{
                 if(stopped || !value)return;
                 const selectors=resource.selectors.split(',').map(selector=>'html[data-truciak-theme="ebony"] '+selector).join(',');
                 rules[index]=selectors+'{'+resource.property+':'+value+'!important;}';
