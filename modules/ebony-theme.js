@@ -114,6 +114,10 @@
     'color:#12C9BD!important;background:linear-gradient(#252b31,#171b20)!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
   rule(['.button'+actionState+'::before','.btn-min'+actionState+'::before'],
     'background:none!important;box-shadow:inset 0 0 0 1px #12C9BD!important;');
+  // Match the title plaque border to the tinted side ornaments.
+  // Its center fill and label color are left unchanged.
+  rule(['.border-window .header-label'],
+    'border-top-color:#668298!important;border-bottom-color:#668298!important;');
   // Native dropdown entries are separate from the trigger's .button.
   // Match their actual value/text structure, without touching addon comboboxes.
   const choice='.option[value]:has(> .text)';
