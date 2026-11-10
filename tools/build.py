@@ -11,7 +11,7 @@ capture='__TRUCIAK_COEXISTENCE__'
 # Local bundle uses no remote catalogue, dock or addon downloads.
 s=re.sub(r'// @name .*', '// @name         Dodatki Truciaka — Motyw',s)
 s=re.sub(r'// @namespace .*', '// @namespace    truciaczek.motyw',s)
-s=re.sub(r'// @version .*', '// @version      0.1.48',s)
+s=re.sub(r'// @version .*', '// @version      0.1.49',s)
 s=re.sub(r'// @run-at .*', '// @run-at       document-start',s)
 s=re.sub(r'^// @(downloadURL|updateURL|connect|grant        GM_xmlhttpRequest).*\n','',s,flags=re.M)
 s=s.replace("    const window = unsafeWindow;", "    const window = unsafeWindow;\n"+capture,1)

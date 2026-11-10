@@ -52,3 +52,8 @@ Edytowany `assets/buttony.png` zawiera przekolorowane ornamenty kuli i ramki pas
 ## Obręcz kuli (0.1.48)
 
 Skorygowano jasne fragmenty dolnej metalowej obręczy, które poprzednio objęła maska chroniąca wnętrze kuli. Zmieniono wyłącznie jasne neutralne piksele w wąskich bocznych pasach; środek kuli i jej animacja pozostają bez zmian.
+
+
+## Czubek obręczy (0.1.49)
+
+Uzupełniono pominięty wiersz 872 arkusza buttony.png na czubku obręczy kuli. Wypełnienie, kanał alfa i warstwa szkła pozostają bez zmian.
