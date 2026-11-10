@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+  <defs>
+    <linearGradient id="top" x1="3.5" y1="3.5" x2="40.5" y2="3.5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ef5350"/><stop offset=".25" stop-color="#8b3032"/><stop offset=".5" stop-color="#391416"/><stop offset=".75" stop-color="#b73f3d"/><stop offset="1" stop-color="#ef5350"/>
+    </linearGradient>
+    <linearGradient id="right" x1="40.5" y1="3.5" x2="40.5" y2="40.5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ef5350"/><stop offset=".25" stop-color="#6e2528"/><stop offset=".5" stop-color="#9a3535"/><stop offset=".75" stop-color="#612126"/><stop offset="1" stop-color="#ef5350"/>
+    </linearGradient>
+    <linearGradient id="bottom" x1="3.5" y1="40.5" x2="40.5" y2="40.5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b63e3e"/><stop offset=".25" stop-color="#73262b"/><stop offset=".5" stop-color="#c54443"/><stop offset=".75" stop-color="#ad3b3b"/><stop offset="1" stop-color="#ef5350"/>
+    </linearGradient>
+    <linearGradient id="left" x1="3.5" y1="3.5" x2="3.5" y2="40.5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ef5350"/><stop offset=".25" stop-color="#481820"/><stop offset=".5" stop-color="#7d2b2f"/><stop offset=".75" stop-color="#5a1e24"/><stop offset="1" stop-color="#b63e3e"/>
+    </linearGradient>
+  </defs>
+  <!-- Outer edge is supplied by the existing CSS frame. This inner 1px edge
+       begins at inset 3px, leaving the same 2px dark gap used by NI buttons. -->
+  <g fill="none" stroke-width="1">
+    <path d="M3.5 5.5Q3.5 3.5 5.5 3.5H38.5Q40.5 3.5 40.5 5.5" stroke="url(#top)"/>
+    <path d="M40.5 5.5V38.5Q40.5 40.5 38.5 40.5" stroke="url(#right)"/>
+    <path d="M38.5 40.5H5.5Q3.5 40.5 3.5 38.5" stroke="url(#bottom)"/>
+    <path d="M3.5 38.5V5.5" stroke="url(#left)"/>
+  </g>
+</svg>

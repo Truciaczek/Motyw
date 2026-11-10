@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "modules": [
+    {
+      "id": "ebony-theme",
+      "name": "Motyw - Stary ale jary",
+      "description": "Hebanowe drewno, grafitowe panele i turkusowe akcenty Firusia. Włączanie i wyłączanie bez F5.",
+      "url": "https://raw.githubusercontent.com/Truciaczek/Motyw/main/modules/ebony-theme.js"
+    }
+  ]
+}
