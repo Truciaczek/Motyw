@@ -65,6 +65,9 @@ version=re.search(r'// @version\s+(\S+)',s).group(1)
 notice=(root/'tools/update-notice.js').read_text().replace('__TRUCIAK_CURRENT_VERSION__',version)
 s=s.replace('    const window = unsafeWindow;', '    const window = unsafeWindow;\n'+notice,1)
 (root/'version.json').write_text(json.dumps({'version':version},indent=2)+'\n')
+# Keep only the README title in sync with the released userscript.
+readme=root/'README.md'
+readme.write_text(re.sub(r'(?m)^# Motyw NI(?: — v[^\n]+)?$', '# Motyw NI — v'+version, readme.read_text(), count=1))
 # Insert module bytes last: the red launcher must not recolor the turquoise game theme.
 s=s.replace('__TRUCIAK_EMBEDDED_MODULES__',json.dumps(module_sources,ensure_ascii=False))
 (root/'dist/motyw.user.js').write_text('// Panel adapted from Gogatki by KoniecDniaDziecka (Firuś), commit 079fbc3.\n'+s)
