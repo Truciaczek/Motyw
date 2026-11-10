@@ -1,16 +1,18 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
 const context={URL,console};vm.createContext(context);vm.runInContext(fs.readFileSync(__dirname+'/../tools/world-wood.js','utf8'),context);
-function node(native){const values=new Map();return {native,values,style:{getPropertyValue:p=>values.get(p)?.[0]||'',getPropertyPriority:p=>values.get(p)?.[1]||'',setProperty:(p,v,k)=>values.set(p,[v,k]),removeProperty:p=>values.delete(p)}};}
 (async()=>{
-const url='url("https://game.example/frame.png")',frame=node({'border-image-source':url}),bottom=node({'background-image':url}),images=[];
-frame.querySelectorAll=selector=>{assert.ok(selector.includes('.interface-element-bottom-bar-background-stretch'),'native quest_bar layer included');return [bottom];};const world={closest:()=>frame};
-const doc={querySelectorAll:()=>[world],createElement:()=>({getContext:()=>({drawImage(){}}),toDataURL:()=> 'data:image/png;base64,AAA='})};
-const view={location:{href:'https://game.example/',origin:'https://game.example'},getComputedStyle:e=>({getPropertyValue:p=>e.native[p]||'none'}),Image:class{constructor(){images.push(this);this.naturalWidth=128;this.naturalHeight=64;}}};
-const binding=context.bindTruciakWorldWood(doc,view,'<filter id="truciak-window-wood"/>');
-assert.equal(images.length,1,'same resource cached across decorative layers');images[0].onload();await Promise.resolve();await Promise.resolve();
-assert.equal(frame.values.size,1);assert.equal(bottom.values.size,1);
-const svg=decodeURIComponent(frame.values.get('border-image-source')[0]);assert.ok(svg.includes('viewBox="0 0 128 64"'));assert.ok(svg.includes('data:image/png;base64,AAA='));assert.ok(svg.includes('filter="url(#truciak-window-wood)"'));
-assert.ok(!frame.values.has('filter'),'no filtering window contents');assert.ok(!frame.values.has('border-image-slice'),'native geometry preserved');binding.cleanup();assert.equal(frame.values.size,0);assert.equal(bottom.values.size,0);
-const late=context.bindTruciakWorldWood(doc,view,'');late.cleanup();images[1].onload();await Promise.resolve();assert.equal(frame.values.size,0,'late load cannot restore disabled theme');
-console.log('PASS: decorative images only, shared resource cache, exact source dimensions, untouched geometry, cleanup and late-load guard');
+ const images=[],styles=[];
+ const doc={head:{appendChild:s=>styles.push(s)},querySelector:()=>null,createElement:tag=>tag==='style'?{textContent:'',remove(){this.removed=true;}}:{getContext:()=>({drawImage(){}}),toDataURL:()=> 'data:image/png;base64,AAA='}};
+ const view={location:{href:'https://game.example/',origin:'https://game.example'},Image:class{constructor(){images.push(this);this.naturalWidth=128;this.naturalHeight=64;}}};
+ const binding=context.bindTruciakWorldWood(doc,view,'<filter id="truciak-window-wood"/>');
+ assert.equal(images.length,3,'one load per shared file, even with no windows open');
+ for(const i of images)i.onload();await Promise.resolve();await Promise.resolve();
+ const css=styles[0].textContent;
+ for(const selector of ['.border-window','.additional-skill-panel .graphics .additional-skill-panel-border','.battle-controller .graphics .battle-border','.interface-element-vertical-wood','.interface-element-middle-4-background','.interface-element-bottom-bar-background','.interface-element-bottom-bar-background-stretch'])assert.ok(css.includes('html[data-truciak-theme="ebony"] '+selector),selector);
+ assert.ok(!css.includes('.world-window'),'not restricted to World');
+ assert.ok(!css.includes('border-image-slice'),'original slicing preserved');
+ const decoded=decodeURIComponent(css);assert.ok(decoded.includes('viewBox="0 0 128 64"'));assert.ok(decoded.includes('data:image/png;base64,AAA='));
+ binding.cleanup();assert.ok(styles[0].removed);
+ const late=context.bindTruciakWorldWood(doc,view,'');late.cleanup();for(const i of images.slice(3))i.onload();await Promise.resolve();assert.equal(styles[1].textContent,'');
+ console.log('PASS: shared NI resource replacement, three cached files, all native consumers, closed/future windows, native geometry, cleanup and late-load guard');
 })();
