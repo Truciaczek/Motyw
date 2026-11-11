@@ -17,7 +17,10 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
                         const d=pixels.data;
                         for(let i=0;i<d.length;i+=4){
                             const r=d[i],g=d[i+1],b=d[i+2];
-                            if(!d[i+3] || (r===46 && g===50 && b===50))continue;
+                            if(!d[i+3])continue;
+                            if(r===46 && g===50 && b===50){
+                                d[i]=23;d[i+1]=27;d[i+2]=32;continue;
+                            }
                             const y=(.2126*r+.7152*g+.0722*b)/255;
                             const warm=r-b>=10;
                             const slopes=warm?[.55,.57,.60]:[.349020,.435294,.498039];
@@ -75,7 +78,7 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
                 if(resource.ornament && titleRail){
                     const centers=['.interface-element-border-window-header-middle','.trade-window header .h_background .middle','.border-window:not(.transparent):not(.tip-window) .header-label-positioner .header-label'];
                     rules[index]+=centers.map(selector=>'html[data-truciak-theme="ebony"] '+selector).join(',')+
-                        '{background-image:url("'+titleRail+'")!important;background-repeat:repeat-x!important;background-position:0 0!important;background-size:1px 28px!important;box-shadow:none!important;}';
+                        '{background-color:#171B20!important;background-image:url("'+titleRail+'")!important;background-repeat:repeat-x!important;background-position:0 0!important;background-size:1px 28px!important;box-shadow:none!important;}';
                 }
                 style.textContent=rules.join('\n');
             });

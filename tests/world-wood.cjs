@@ -12,7 +12,7 @@ const context={URL,console};vm.createContext(context);vm.runInContext(fs.readFil
  assert.ok(!css.includes('.world-window'),'not restricted to World');
  assert.ok(!css.includes('border-image-slice'),'original slicing preserved');
  const decoded=decodeURIComponent(css);assert.ok(decoded.includes('viewBox="0 0 160 64"'));assert.ok(decoded.includes('data:image/png;base64,AAA='));assert.equal((decoded.match(/data-test="frame"/g)||[]).length,2,'ornament palette applied to window frame and title decorations');
- assert.deepEqual(written[0].slice(0,4),[46,50,50,255],'native plaque fill unchanged');assert.notDeepEqual(written[0].slice(4,7),[151,161,165],'silver trim recolored');assert.equal(written[0][7],255);assert.equal(written[0][11],0,'transparency preserved');assert.ok(css.includes('background-size:1px 28px'));assert.ok(css.includes('box-shadow:none'));binding.cleanup();assert.ok(styles[0].removed);
+ assert.deepEqual(written[0].slice(0,4),[23,27,32,255],'title fill maps exactly to #171B20');assert.notDeepEqual(written[0].slice(4,7),[151,161,165],'silver trim recolored');assert.equal(written[0][7],255);assert.equal(written[0][11],0,'transparency preserved');assert.ok(css.includes('background-color:#171B20!important'));assert.ok(css.includes('background-size:1px 28px'));assert.ok(css.includes('box-shadow:none'));binding.cleanup();assert.ok(styles[0].removed);
  const late=context.bindTruciakWorldWood(doc,view,'');late.cleanup();for(const i of images.slice(4))i.onload();await Promise.resolve();assert.equal(styles[1].textContent,'');
  console.log('PASS: shared NI resource replacement, four cached files, all native consumers, closed/future windows, native geometry, cleanup and late-load guard');
 })();
