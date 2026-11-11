@@ -26,6 +26,8 @@
   rule(['.layer.interface-layer .positioner.top .hud-container'], 'background-image:url("'+hudSprite+'")!important;');
   // Map-color beads have their own atlas background; keep native state offsets.
   rule(['.layer.interface-layer .positioner.top .hud-container .map_ball'], 'background-image:url("'+hudSprite+'")!important;');
+  // Shared information glyph uses the edited atlas while native offsets stay intact.
+  rule(['.info-icon'], 'background-image:url("'+hudSprite+'")!important;');
   // Bottom HUD sprites include transparent cutouts around the orb and labels.
   // Keep their original images/masks; wood belongs to the strip behind them.
   rule(['.bottom-panel', '.bottom-panel-pointer-bg'], 'background-color:transparent!important;');
