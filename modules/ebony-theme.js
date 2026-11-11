@@ -9,6 +9,8 @@
   const wood = `url("data:image/svg+xml,${encodeURIComponent(grain)}")`;
   __TRUCIAK_BOTTOM_ATLAS_HELPER__
   __TRUCIAK_WORLD_WOOD_HELPER__
+  __TRUCIAK_SEARCH_HELPER__
+  const searchSprite='__TRUCIAK_SEARCH_IMAGE__';
   const hpStateSprite='__TRUCIAK_HP_STATE_SPRITE__';
   const hudSprite='__TRUCIAK_HUD_SPRITE__';
   const scope = 'html[data-truciak-theme="ebony"]';
@@ -220,9 +222,10 @@
       if (!w.Engine?.hero || !w.Engine?.map) throw new Error('Motyw wymaga Nowego Interfejsu Margonem.');
       if (w.__truciakEbonyTheme) { w.__truciakEbonyTheme.enable(); return; }
       const attribute='data-truciak-theme', styleId='truciak-ebony-theme-style';
-      let style=null, filterNode=null, previous=null, enabled=false,bottomBinding=null,worldWood=null;
+      let style=null, filterNode=null, previous=null, enabled=false,bottomBinding=null,worldWood=null,searchBinding=null;
       function disable() {
         if (!enabled) return;
+        searchBinding?.cleanup();searchBinding=null;
         worldWood?.cleanup();worldWood=null;
         bottomBinding?.cleanup();bottomBinding=null;
         style?.remove();style=null;filterNode?.remove();filterNode=null;
@@ -246,6 +249,7 @@
         enabled=true;
         bottomBinding=bindTruciakBottomAtlas(document,w);
         worldWood=bindTruciakWorldWood(document,w,windowWoodFilter,windowFrameFilter);
+        searchBinding=bindTruciakSearchBackground(document,w,searchSprite);
       }
       w.__truciakEbonyTheme={enable,disable,get enabled(){return enabled;},get bottomAtlasTargets(){return bottomBinding?.count() || 0;}};
       w.addEventListener('pagehide',disable,{once:true});
