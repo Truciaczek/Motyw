@@ -35,7 +35,7 @@
   // Native window frames use image alpha and border-image slices. Keep them
   // intact: a gradient border-image cannot preserve their carved silhouette.
   rule(['.layer.interface-layer .main-column', '.new-chat-window',
-    '.game-window-positioner .character_wrapper .stats-wrapper', '.border-window .content',
+    '.game-window-positioner .character_wrapper .stats-wrapper', '.border-window:not(.transparent) .content',
     '.dialogue-window .border-image', '.tip-wrapper .content', '.popup-menu',
     '.auction-window .main-column-auction', '.world-window__info', '.layer.interface-layer .extended-stats'],
     'background-color:#171b20!important;background-image:none!important;');
@@ -260,9 +260,10 @@
       if (!w.Engine?.hero || !w.Engine?.map) throw new Error('Motyw wymaga Nowego Interfejsu Margonem.');
       if (w.__truciakEbonyTheme) { w.__truciakEbonyTheme.enable(); return; }
       const attribute='data-truciak-theme', styleId='truciak-ebony-theme-style';
-      let style=null, filterNode=null, previous=null, enabled=false,bottomBinding=null,worldWood=null,searchBinding=null,tabFrame=null,menuText=null;
+      let style=null, filterNode=null, previous=null, enabled=false,bottomBinding=null,worldWood=null,searchBinding=null,tabFrame=null,menuText=null,transparentWindows=null;
       function disable() {
         if (!enabled) return;
+        transparentWindows?.cleanup();transparentWindows=null;
         menuText?.cleanup();menuText=null;
         searchBinding?.cleanup();searchBinding=null;
         tabFrame?.cleanup();tabFrame=null;
@@ -292,6 +293,7 @@
         searchBinding=bindTruciakSearchBackground(document,w,searchSprite);
         tabFrame=bindTruciakTabFrame(document,w);
         menuText=bindTruciakMenuText(document,w);
+        transparentWindows=bindTruciakTransparentWindows(document,w);
       }
       w.__truciakEbonyTheme={enable,disable,get enabled(){return enabled;},get bottomAtlasTargets(){return bottomBinding?.count() || 0;}};
       w.addEventListener('pagehide',disable,{once:true});

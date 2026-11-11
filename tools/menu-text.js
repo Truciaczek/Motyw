@@ -56,3 +56,43 @@ function bindTruciakMenuText(doc,view){
         for(const [el,old] of marked){if(old===null)el.removeAttribute(attribute);else el.setAttribute(attribute,old);}marked.clear();
     }};
 }
+
+// Tint only the native translucent window backdrop; game opacity remains untouched.
+function bindTruciakTransparentWindows(doc,view){
+    if(typeof doc.querySelectorAll!=='function' || typeof view.getComputedStyle!=='function')return {cleanup(){}};
+    const selector='.border-window.transparent .border-image',attribute='data-truciak-window-backdrop';
+    const marked=new Map(),style=doc.createElement('style');style.id='truciak-transparent-backdrops';
+    (doc.head || doc.documentElement).appendChild(style);
+    let stopped=false,frame=null;
+    function scan(){
+        frame=null;if(stopped)return;
+        if(style.sheet)style.sheet.disabled=true;
+        const wanted=new Set(),rules=[];
+        for(const el of doc.querySelectorAll(selector)){
+            const match=view.getComputedStyle(el).backgroundColor?.match(/^rgba?\(([^)]+)\)$/);
+            if(!match)continue;
+            const parts=match[1].split(/[,\s/]+/).filter(Boolean).map(Number),alpha=parts[3]??1;
+            if(!Number.isFinite(alpha))continue;
+            wanted.add(el);const id='backdrop-'+rules.length;
+            if(!marked.has(el))marked.set(el,el.getAttribute(attribute));
+            if(el.getAttribute(attribute)!==id)el.setAttribute(attribute,id);
+            rules.push('html[data-truciak-theme="ebony"] ['+attribute+'="'+id+'"]{background-color:rgba(23,27,32,'+alpha+')!important;}');
+        }
+        for(const [el,old] of marked)if(!wanted.has(el)){
+            if(old===null)el.removeAttribute(attribute);else el.setAttribute(attribute,old);marked.delete(el);
+        }
+        const css=rules.join('\n');if(style.textContent!==css)style.textContent=css;
+        if(style.sheet)style.sheet.disabled=false;
+    }
+    function schedule(){if(!stopped && frame===null)frame=view.requestAnimationFrame(scan);}
+    scan();
+    const observer=typeof view.MutationObserver==='function'?new view.MutationObserver(records=>{
+        if(records.some(r=>r.target!==style && !style.contains(r.target)))schedule();
+    }):null;
+    if(doc.body)observer?.observe(doc.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class','style']});
+    doc.addEventListener('click',schedule);
+    return {cleanup(){stopped=true;observer?.disconnect();if(frame!==null)view.cancelAnimationFrame(frame);
+        doc.removeEventListener('click',schedule);style.remove();
+        for(const [el,old] of marked){if(old===null)el.removeAttribute(attribute);else el.setAttribute(attribute,old);}marked.clear();
+    }};
+}
