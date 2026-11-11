@@ -46,6 +46,12 @@
   rule(['.world-window .filter-label', '.world-window .legend'], 'color:#0B756E!important;');
   rule(['.world-window .start-lvl input::placeholder', '.world-window .stop-lvl input::placeholder'],
     'color:#085E58!important;opacity:1!important;');
+  // Typed values and caret belong to the shared native input, not its placeholder.
+  rule(['.world-window .ni-input input.default', '.border-window .ni-input input.default'],
+    'color:#0D978E!important;caret-color:#0D978E!important;');
+  // Native clear glyph is a separate image layer; preserve its shape and offsets.
+  rule(['.world-window .ni-input .clear-cross', '.border-window .ni-input .clear-cross'],
+    'filter:url("#truciak-menu-arrow-tint")!important;');
   // Tint only the native arrow image, retaining its sprite offsets and rotation.
   rule(['.world-window .menu-arrow', '.border-window .menu-arrow'],
     'filter:url("#truciak-menu-arrow-tint")!important;');
