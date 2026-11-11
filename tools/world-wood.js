@@ -25,7 +25,10 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
                             const warm=r-b>=10;
                             const slopes=warm?[.55,.57,.60]:[.349020,.435294,.498039];
                             const offsets=warm?[.025,.028,.032]:[.145098,.168627,.192157];
-                            for(let c=0;c<3;c++)d[i+c]=Math.round(255*(slopes[c]*y+offsets[c]));
+                            // Do not lift native black shadows into a pale halo.
+                            // Fade the ornament tint to black in the low luminance range.
+                            const shadowGain=Math.min(1,y/.32);
+                            for(let c=0;c<3;c++)d[i+c]=Math.round(255*(slopes[c]*y+offsets[c])*shadowGain);
                         }
                         context.putImageData(pixels,0,0);
                         // The left cap ends at atlas x=89; its 28 rows define the

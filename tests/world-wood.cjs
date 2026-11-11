@@ -2,7 +2,7 @@ const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
 const context={URL,console};vm.createContext(context);vm.runInContext(fs.readFileSync(__dirname+'/../tools/world-wood.js','utf8'),context);
 (async()=>{
  const images=[],styles=[],written=[];
- const doc={head:{appendChild:s=>styles.push(s)},querySelector:()=>null,createElement:tag=>tag==='style'?{textContent:'',remove(){this.removed=true;}}:{getContext:()=>({drawImage(){},getImageData:()=>({data:new Uint8ClampedArray([46,50,50,255,151,161,165,255,255,255,255,0])}),putImageData:p=>written.push([...p.data])}),toDataURL:()=> 'data:image/png;base64,AAA='}};
+ const doc={head:{appendChild:s=>styles.push(s)},querySelector:()=>null,createElement:tag=>tag==='style'?{textContent:'',remove(){this.removed=true;}}:{getContext:()=>({drawImage(){},getImageData:()=>({data:new Uint8ClampedArray([46,50,50,255,151,161,165,255,255,255,255,0,0,0,0,255,20,20,20,255])}),putImageData:p=>written.push([...p.data])}),toDataURL:()=> 'data:image/png;base64,AAA='}};
  const view={location:{href:'https://game.example/',origin:'https://game.example'},Image:class{constructor(){images.push(this);this.naturalWidth=160;this.naturalHeight=64;}}};
  const binding=context.bindTruciakWorldWood(doc,view,'<filter id="truciak-window-wood" data-test="wood"/>','<filter id="truciak-window-wood" data-test="frame"/>');
  assert.equal(images.length,4,'one load per shared file, even with no windows open');
@@ -12,7 +12,7 @@ const context={URL,console};vm.createContext(context);vm.runInContext(fs.readFil
  assert.ok(!css.includes('.world-window'),'not restricted to World');
  assert.ok(!css.includes('border-image-slice'),'original slicing preserved');
  const decoded=decodeURIComponent(css);assert.ok(decoded.includes('viewBox="0 0 160 64"'));assert.ok(decoded.includes('data:image/png;base64,AAA='));assert.equal((decoded.match(/data-test="frame"/g)||[]).length,2,'ornament palette applied to window frame and title decorations');
- assert.deepEqual(written[0].slice(0,4),[23,27,32,255],'title fill maps exactly to #171B20');assert.notDeepEqual(written[0].slice(4,7),[151,161,165],'silver trim recolored');assert.equal(written[0][7],255);assert.equal(written[0][11],0,'transparency preserved');assert.ok(css.includes('background-color:#171B20!important'));assert.ok(css.includes('background-size:1px 28px'));assert.ok(css.includes('box-shadow:none'));binding.cleanup();assert.ok(styles[0].removed);
+ assert.deepEqual(written[0].slice(0,4),[23,27,32,255],'title fill maps exactly to #171B20');assert.notDeepEqual(written[0].slice(4,7),[151,161,165],'silver trim recolored');assert.equal(written[0][7],255);assert.equal(written[0][11],0,'transparency preserved');assert.ok(css.includes('background-color:#171B20!important'));assert.ok(css.includes('background-size:1px 28px'));assert.ok(css.includes('box-shadow:none'));assert.deepEqual(written[0].slice(12,16),[0,0,0,255],'black shadow stays black');assert.ok(Math.max(...written[0].slice(16,19))<25,'dark shadow cannot become a light outline');binding.cleanup();assert.ok(styles[0].removed);
  const late=context.bindTruciakWorldWood(doc,view,'');late.cleanup();for(const i of images.slice(4))i.onload();await Promise.resolve();assert.equal(styles[1].textContent,'');
  console.log('PASS: shared NI resource replacement, four cached files, all native consumers, closed/future windows, native geometry, cleanup and late-load guard');
 })();
