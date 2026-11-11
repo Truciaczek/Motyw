@@ -2,8 +2,8 @@
 function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition=filterDefinition) {
     const cache=new Map();let stopped=false,titleRail=null;
     const imageUrl=value=>value?.match(/^url\(["']?(.*?)["']?\)$/)?.[1];
-    function recolor(url,definition,preserveTitleFill=false){
-        const key=url+definition+preserveTitleFill;
+    function recolor(url,definition,preserveTitleFill=false,preserveFrameShadows=false){
+        const key=url+definition+preserveTitleFill+preserveFrameShadows;
         if(cache.has(key))return cache.get(key);
         const result=new Promise(resolve=>{
             const image=new view.Image();
@@ -12,7 +12,7 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
                 try{
                     const canvas=doc.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;
                     const context=canvas.getContext('2d');context.drawImage(image,0,0);
-                    if(preserveTitleFill){
+                    if(preserveTitleFill || preserveFrameShadows){
                         const pixels=context.getImageData(0,0,canvas.width,canvas.height);
                         const d=pixels.data;
                         for(let i=0;i<d.length;i+=4){
@@ -20,7 +20,7 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
                             if(!d[i+3])continue;
                             // The original fill includes small antialiasing variations at
                             // its edge. Keep those in the fill, rather than tinting a halo.
-                            if(Math.abs(r-46)<=12 && Math.abs(g-50)<=12 && Math.abs(b-50)<=12 && Math.abs((g-r)-4)<=2 && Math.abs(b-g)<=2){
+                            if(preserveTitleFill && Math.abs(r-46)<=12 && Math.abs(g-50)<=12 && Math.abs(b-50)<=12 && Math.abs((g-r)-4)<=2 && Math.abs(b-g)<=2){
                                 d[i]=23;d[i+1]=27;d[i+2]=32;continue;
                             }
                             const y=(.2126*r+.7152*g+.0722*b)/255;
@@ -29,20 +29,20 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
                             const offsets=warm?[.025,.028,.032]:[.145098,.168627,.192157];
                             // Do not lift native black shadows into a pale halo.
                             // Fade the ornament tint to black in the low luminance range.
-                            const shadowGain=Math.min(1,y/.32);
+                            const shadowGain=preserveFrameShadows && warm?1:Math.min(1,y/.32);
                             for(let c=0;c<3;c++)d[i+c]=Math.round(255*(slopes[c]*y+offsets[c])*shadowGain);
                         }
                         context.putImageData(pixels,0,0);
                         // The left cap ends at atlas x=89; its 28 rows define the
                         // exact continuation across the title, including fill and alpha.
-                        if(canvas.width>=143 && canvas.height>=30){
+                        if(preserveTitleFill && canvas.width>=143 && canvas.height>=30){
                             const rail=doc.createElement('canvas');rail.width=1;rail.height=28;
                             rail.getContext('2d').drawImage(canvas,89,2,1,28,0,0,1,28);
                             titleRail=rail.toDataURL('image/png');
                         }
                     }
                     const png=canvas.toDataURL('image/png');
-                    const svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+canvas.width+'" height="'+canvas.height+'" viewBox="0 0 '+canvas.width+' '+canvas.height+'"><defs>'+definition+'</defs><image width="100%" height="100%" href="'+png+'" '+(preserveTitleFill?'':'filter="url(#truciak-window-wood)"')+'/></svg>';
+                    const svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+canvas.width+'" height="'+canvas.height+'" viewBox="0 0 '+canvas.width+' '+canvas.height+'"><defs>'+definition+'</defs><image width="100%" height="100%" href="'+png+'" '+((preserveTitleFill || preserveFrameShadows)?'':'filter="url(#truciak-window-wood)"')+'/></svg>';
                     resolve('url("data:image/svg+xml,'+encodeURIComponent(svg)+'")');
                 }catch(error){console.warn('[Truciak] Wspólne drewno NI:',error);resolve(null);}
             };
@@ -76,7 +76,7 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
         const rules=new Array(resources.length).fill('');
         resources.forEach((resource,index)=>{
             const url=sources.get(resource.path) || new URL(resource.path,view.location.href).href;
-            recolor(url,(resource.ornament || resource.path==='/img/gui/window-frame.png')?frameFilterDefinition:filterDefinition,!!resource.ornament).then(value=>{
+            recolor(url,(resource.ornament || resource.path==='/img/gui/window-frame.png')?frameFilterDefinition:filterDefinition,!!resource.ornament,resource.path==='/img/gui/window-frame.png').then(value=>{
                 if(stopped || !value)return;
                 const selectors=resource.selectors.split(',').map(selector=>'html[data-truciak-theme="ebony"] '+selector).join(',');
                 rules[index]=selectors+'{'+resource.property+':'+value+'!important;}';
