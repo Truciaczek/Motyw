@@ -91,6 +91,7 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
         {path:'/img/gui/window-frame.png',property:'border-image-source',selectors:'.interface-element-border-window-frame,.additional-skill-panel .graphics .additional-skill-panel-border,.battle-controller .graphics .battle-border,.border-window'},
         {path:'/img/gui/middle_graphics.png',property:'background-image',selectors:'.interface-element-vertical-wood'},
         {path:'/img/gui/middle_graphics.png',property:'border-image-source',selectors:'.interface-element-middle-1-background,.interface-element-middle-1-background-stretch,.interface-element-middle-2-background,.interface-element-middle-2-background-stretch,.interface-element-middle-3-background,.interface-element-middle-3-background-stretch,.interface-element-middle-4-background'},
+        {path:'/img/gui/table_header.png',property:'border-image-source',selectors:'.interface-element-header-1-background-stretch'},
         {path:'/img/gui/quests/quest_bar.png',property:'border-image-source',selectors:'.interface-element-bottom-bar-background,.interface-element-bottom-bar-background-stretch'}
     ];
     let style=null;
