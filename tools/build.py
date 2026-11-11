@@ -7,6 +7,7 @@ if not re.fullmatch(r'\d+\.\d+\.\d+',version):
 upstream=root/'vendor/firus-panel.user.js'
 s=upstream.read_text()
 module_sources={name:(root/('modules/'+name+'.js')).read_text() for name in ['ebony-theme']}
+module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_MENU_TEXT_HELPER__',(root/'tools/menu-text.js').read_text())
 module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_TAB_FRAME_HELPER__',(root/'tools/tab-frame.js').read_text())
 module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_SEARCH_IMAGE__','data:image/svg+xml;base64,'+base64.b64encode((root/'assets/search.svg').read_bytes()).decode('ascii'))
 module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_SEARCH_HELPER__',(root/'tools/search-background.js').read_text())
