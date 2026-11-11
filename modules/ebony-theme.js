@@ -124,6 +124,14 @@
   rule([contextItem+':not(.disabled):not(.cooldown-disabled):not([aria-disabled="true"]):is(:hover,:active,.active,.selected,.pressed)'],
     'color:#12C9BD!important;background:linear-gradient(#252b31,#171b20)!important;border-color:#12C9BD!important;');
   rule([contextItem+'::before'], 'background:none!important;');
+  // Native tab fills only: preserve shadows, glow, geometry and pseudo-elements.
+  const niTabCard='.tabs-nav > .card';
+  rule([niTabCard],
+    'background-color:#171B20!important;background-image:linear-gradient(#171B20,#171B20)!important;');
+  rule([niTabCard+':is(.active,.selected,.current,.checked,[aria-selected="true"],[data-active="true"])',
+        '.tabs-nav > .card:has(> .active)',
+        '.tabs-nav > .card:has(> .selected)'],
+    'background-color:#252B31!important;background-image:linear-gradient(#252B31,#252B31)!important;');
   // Native dropdown entries are separate from the trigger's .button.
   // Match their actual value/text structure, without touching addon comboboxes.
   const choice='.option[value]:has(> .text)';

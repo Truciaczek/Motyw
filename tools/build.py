@@ -1,6 +1,9 @@
 from pathlib import Path
-import json,re,base64
+import json,re,base64,subprocess
 root=Path(__file__).resolve().parents[1]
+version=json.loads((root/'version.json').read_text())['version']
+if not re.fullmatch(r'\d+\.\d+\.\d+',version):
+    raise ValueError('Invalid release version')
 upstream=root/'vendor/firus-panel.user.js'
 s=upstream.read_text()
 module_sources={name:(root/('modules/'+name+'.js')).read_text() for name in ['ebony-theme']}
@@ -13,7 +16,7 @@ capture='__TRUCIAK_COEXISTENCE__'
 # Local bundle uses no remote catalogue, dock or addon downloads.
 s=re.sub(r'// @name .*', '// @name         Motyw NI',s)
 s=re.sub(r'// @namespace .*', '// @namespace    truciaczek.motyw',s)
-s=re.sub(r'// @version .*', '// @version      0.1.76',s)
+s=re.sub(r'// @version .*', '// @version      '+version,s)
 s=re.sub(r'// @run-at .*', '// @run-at       document-start',s)
 s=re.sub(r'^// @(downloadURL|updateURL|connect|grant        GM_xmlhttpRequest).*\n','',s,flags=re.M)
 s=s.replace("    const window = unsafeWindow;", "    const window = unsafeWindow;\n"+capture,1)
@@ -28,7 +31,10 @@ dock=dock.replace("const icons = {", "const icons = {map:'<path d=\"m3 6 6-3 6 3
 s=s.replace('const source = await fetchSource(url.href);', 'const source = '+json.dumps(dock,ensure_ascii=False)+';')
 # Visual themes can stop immediately; other upstream modules retain their reload behavior.
 s=s.replace("if (preferences[mod.id] === true) start(mod);\n                render();", "if (preferences[mod.id] === true) start(mod);\n                else if(mod.id==='ebony-theme'){window.__truciakEbonyTheme?.disable();active.delete(mod.id);loaded.delete(mod.id);errors.delete(mod.id);}\n                render();")
-s=s.replace('#12c9bd','#ef5350').replace('#21bd69','#ef5350').replace('#21BD69','#ef5350')
+# Panel controls share the NI accent; ruby artwork is inserted separately below.
+s=s.replace('#21bd69','#12c9bd').replace('#21BD69','#12c9bd')
+palette=(root/'tools/panel-palette.css').read_text()
+s=s.replace('    </style><button class="launcher"',palette+'\n    </style><button class="launcher"',1)
 # Independent DOM IDs, preferences and widget identity avoid collisions with Firuś.
 s=s.replace('gogatki','truciak').replace('gogatek','truciak').replace('Gogatki','Truciak')
 # Keep the exact upstream module registration contract, including in embedded source.
@@ -66,14 +72,18 @@ version=re.search(r'// @version\s+(\S+)',s).group(1)
 # Keep only the README title in sync with the released userscript.
 readme=root/'README.md'
 readme.write_text(re.sub(r'(?m)^# Motyw NI(?: — v[^\n]+)?$', '# Motyw NI — v'+version, readme.read_text(), count=1))
-# Insert module bytes last: the red launcher must not recolor the turquoise game theme.
+# Insert module bytes last so panel transforms never alter the game theme.
 s=s.replace('__TRUCIAK_EMBEDDED_MODULES__',json.dumps(module_sources,ensure_ascii=False))
 runtime='// Panel adapted from Gogatki by KoniecDniaDziecka (Firuś), commit 079fbc3.\n'+s
-(root/'dist/motyw.runtime.js').write_text(runtime)
 header=s[:s.index('// ==/UserScript==')+len('// ==/UserScript==')]
 header=header.replace('// ==/UserScript==','// @downloadURL  https://raw.githubusercontent.com/Truciaczek/Motyw/main/dist/motyw.user.js\n// @updateURL    https://raw.githubusercontent.com/Truciaczek/Motyw/main/dist/motyw.user.js\n// ==/UserScript==')
 loader=(root/'tools/runtime-loader.js').read_text().replace('__TRUCIAK_FALLBACK_RUNTIME__',json.dumps({'schema':1,'version':version,'source':runtime},ensure_ascii=False))
-(root/'dist/motyw.user.js').write_text(header+'\n\n'+loader)
+installer=header+'\n\n'+loader
+# Reject invalid generated JavaScript before replacing either release artifact.
+for javascript in (runtime,installer):
+    subprocess.run(['node','--check'],input=javascript,text=True,check=True,capture_output=True)
+(root/'dist/motyw.runtime.js').write_text(runtime)
+(root/'dist/motyw.user.js').write_text(installer)
 
 
 (root/'catalogue.json').write_text(json.dumps(catalogue,ensure_ascii=False,indent=2)+'\n')

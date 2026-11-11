@@ -1,0 +1,36 @@
+/* Panel-only palette. Ruby launcher artwork and semantic errors stay distinct. */
+section{
+    --truciak-accent:#12C9BD;
+    --truciak-bg:#171B20;
+    --truciak-surface:#252B31;
+    --truciak-border:#668298;
+    --truciak-text:#C7D0D9;
+    --truciak-muted:#B1C0CB;
+    --truciak-tint-top:#25494B;
+    --truciak-tint-bottom:#142D30;
+    background:var(--truciak-bg)!important;
+    border-color:var(--truciak-border);
+}
+header,.row{background:var(--truciak-surface)}
+strong,header button{color:var(--truciak-accent)}
+footer{color:var(--truciak-muted)}
+.native-status,small{color:var(--truciak-muted)}
+p{color:var(--truciak-text)}
+.error{color:#FFBD89}
+.retry,.apply,.refresh-list{
+    color:var(--truciak-accent);
+    border-color:var(--truciak-accent);
+    background:linear-gradient(var(--truciak-tint-top),var(--truciak-tint-bottom));
+}
+.retry:enabled:hover,.apply:enabled:hover,.refresh-list:enabled:hover,
+.retry:enabled:active,.apply:enabled:active,.refresh-list:enabled:active{
+    background:linear-gradient(var(--truciak-surface),var(--truciak-bg));
+}
+section button:disabled{opacity:.45;cursor:not-allowed}
+section :focus-visible{outline-color:var(--truciak-accent)}
+input[type="checkbox"]:checked{border-color:var(--truciak-accent)!important}
+input[type="checkbox"]:checked::after{
+    color:var(--truciak-accent)!important;
+    -webkit-text-fill-color:var(--truciak-accent)!important;
+}
+section::-webkit-scrollbar-thumb:hover{background:var(--truciak-accent)}
