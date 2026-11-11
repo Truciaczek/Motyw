@@ -1,4 +1,4 @@
-# Motyw NI — v1.2.04
+# Motyw NI — v1.2.05
 
 Publiczna wersja panelu z dodatkiem **Motyw - Stary ale jary** dla Nowego Interfejsu Margonem.
 
