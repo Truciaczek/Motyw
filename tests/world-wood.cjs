@@ -16,3 +16,15 @@ const context={URL,console};vm.createContext(context);vm.runInContext(fs.readFil
  const late=context.bindTruciakWorldWood(doc,view,'');late.cleanup();for(const i of images.slice(4))i.onload();await Promise.resolve();assert.equal(styles[1].textContent,'');
  console.log('PASS: shared NI resource replacement, four cached files, all native consumers, closed/future windows, native geometry, cleanup and late-load guard');
 })();
+
+{
+ const width=64,height=80,pixels={data:new Uint8ClampedArray(width*height*4)};
+ const set=(x,y,color)=>pixels.data.set(color,(y*width+x)*4);
+ set(30,27,[90,55,30,255]);set(30,28,[0,0,0,255]);set(30,29,[0,0,0,255]);set(30,30,[0,0,0,255]);
+ set(31,27,[90,55,30,255]);set(31,28,[180,190,200,255]);set(10,27,[90,55,30,255]);
+ context.extendTruciakFrameWood(pixels,width,height);
+ const at=(x,y)=>[...pixels.data.slice((y*width+x)*4,(y*width+x)*4+4)];
+ assert.deepEqual(at(30,28),[90,55,30,255]);assert.deepEqual(at(30,29),[90,55,30,255]);assert.deepEqual(at(30,30),[0,0,0,255]);
+ assert.deepEqual(at(31,28),[180,190,200,255]);assert.deepEqual(at(10,28),[0,0,0,0]);
+ console.log('PASS: top wood extends exactly 2 pixels into dark seam; metal, corners and remaining rows unchanged');
+}

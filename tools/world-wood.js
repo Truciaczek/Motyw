@@ -1,3 +1,23 @@
+// Extend the top wood slice by two source pixels, without resizing its border.
+function extendTruciakFrameWood(pixels,width,height){
+    if(width<=40 || height<32)return;
+    const d=pixels.data;
+    for(let x=20;x<width-20;x++){
+        let last=-1;
+        for(let y=0;y<32;y++){
+            const i=(y*width+x)*4;
+            if(d[i+3]===255 && d[i]-d[i+2]>=10)last=y;
+        }
+        if(last<0 || last>29)continue;
+        const from=(last*width+x)*4;
+        for(let y=last+1;y<=last+2;y++){
+            const to=(y*width+x)*4;
+            // Keep bright metal edges; fill only the dark seam or empty pixels.
+            if(d[to+3] && Math.max(d[to],d[to+1],d[to+2])>60)continue;
+            for(let c=0;c<4;c++)d[to+c]=d[from+c];
+        }
+    }
+}
 // Recolor native image resources, not their containing windows or children.
 function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition=filterDefinition) {
     const cache=new Map();let stopped=false,titleRail=null;
@@ -15,6 +35,7 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
                     if(preserveTitleFill || preserveFrameShadows){
                         const pixels=context.getImageData(0,0,canvas.width,canvas.height);
                         const d=pixels.data;
+                        if(preserveFrameShadows)extendTruciakFrameWood(pixels,canvas.width,canvas.height);
                         for(let i=0;i<d.length;i+=4){
                             const r=d[i],g=d[i+1],b=d[i+2];
                             if(!d[i+3])continue;
