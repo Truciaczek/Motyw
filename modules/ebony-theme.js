@@ -116,8 +116,8 @@
   // The native scroll track is transparent; tint only the movable handle.
   rule(['.scroll-wrapper .scrollbar-wrapper .track'], 'background:transparent!important;');
   rule(['.scroll-wrapper .scrollbar-wrapper .track .handle'],
-    'background:#668298!important;border-color:#252b31!important;');
-  rule(['.scroll-wrapper .scrollbar-wrapper .track .handle:hover'], 'background:#12C9BD!important;');
+    'background:rgba(102,130,152,.52)!important;border-color:#252b31!important;');
+  rule(['.scroll-wrapper .scrollbar-wrapper .track .handle:hover'], 'background:rgba(18,201,189,.52)!important;');
   rule(['.border-window input[type="checkbox"]', '.border-window input[type="radio"]'],
     'accent-color:#12C9BD!important;');
   // One shared frame for every native bar tile. Notification overlays must
