@@ -39,6 +39,8 @@
     '.loot-window .bottom-wrapper .bottom-graphic',
     '.matchmaking-summary .bottom-panel-graphics', '.world-window__info'],
     'background-color:#252b31!important;background-image:none!important;');
+  // World data strip: match the scrollbar handle without changing border geometry.
+  rule(['.world-window__info'], 'border-color:#668298!important;');
   // Keep the game's original image, sprite offsets, alpha mask and carved edge.
   // Only empty decorative background nodes get the filter, never their parent panels.
   rule(['.layer.interface-layer .positioner.top .bg',
