@@ -81,14 +81,9 @@
     'background:#171b20!important;color:#dce6ee!important;border-color:#668298!important;');
   rule(['.chat-channel-card-wrapper', '.new-chat-window .chat-message-wrapper'],
     'border-color:#668298!important;');
-  // Confirmed native inventory layers; item icons and rarity overlays stay untouched.
+  // Original inventory/slot sprite coordinates and transparent masks stay intact.
   rule(['.game-window-positioner .inventory_wrapper .inventory-grid-bg'],
-    'background-color:#171B20!important;border-color:#252B31!important;outline-color:#101419!important;');
-  // Equipment slot texture is separate from the .eq-cl placeholder symbol.
-  rule(['.equipment-wrapper .eq-slot.interface-element-one-item-slot-background-to-repeat'],
-    'background-color:#171B20!important;background-image:radial-gradient(ellipse at center,transparent 20%,rgba(0,0,0,.65) 100%)!important;box-shadow:inset 0 0 0 1px #252B31,inset 0 0 0 2px #101419!important;');
-  rule(['.bags-navigation-bg.interface-element-grid-border'],
-    'background-color:#171B20!important;box-shadow:0 0 0 1px #252B31,0 0 0 2px #101419,0 0 0 3px #252B31!important;');
+    'background-color:#252b31!important;background-blend-mode:luminosity!important;');
   rule(['.button:not(.green):not(.red):not(.violet):not(.purple):not(.blink-violet)',
     '.widget-button:not(.green):not(.red):not(.violet):not(.purple):not(.blink-violet)', '.btn-min'],
     'background-image:linear-gradient(#252b31,#171b20)!important;box-shadow:inset 0 0 0 1px #668298,inset 0 0 0 3px #171b20!important;');
