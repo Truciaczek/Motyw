@@ -41,6 +41,11 @@
     'background-color:#252b31!important;background-image:none!important;');
   // World data strip: match the scrollbar handle without changing border geometry.
   rule(['.world-window__info'], 'border-color:#668298!important;');
+  // Online-player grid shares its cell style; retain native widths and hover states.
+  rule(['.players-online__item'], 'border-color:#668298!important;');
+  // Reuse the native background class across panels, without replacing its carved border image.
+  rule(['.world-window__bg', '.interface-element-middle-1-background'],
+    'background-color:#171B20!important;');
   // Keep the game's original image, sprite offsets, alpha mask and carved edge.
   // Only empty decorative background nodes get the filter, never their parent panels.
   rule(['.layer.interface-layer .positioner.top .bg',
