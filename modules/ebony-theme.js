@@ -42,6 +42,13 @@
     'background-color:#252b31!important;background-image:none!important;');
   // World data strip: match the scrollbar handle without changing border geometry.
   rule(['.world-window__info'], 'border-color:#668298!important;');
+  // Explicit muted labels and placeholders; neutral text scaling does not cover these.
+  rule(['.world-window .filter-label', '.world-window .legend'], 'color:#0FA79D!important;');
+  rule(['.world-window .start-lvl input::placeholder', '.world-window .stop-lvl input::placeholder'],
+    'color:#0C867E!important;opacity:1!important;');
+  // Tint only the native arrow image, retaining its sprite offsets and rotation.
+  rule(['.world-window .menu-arrow', '.border-window .menu-arrow'],
+    'filter:url("#truciak-menu-arrow-tint")!important;');
   // Online-player grid shares its cell style; retain native widths and hover states.
   rule(['.players-online__item'], 'border-color:#668298!important;');
   // Reuse the native background class across panels, without replacing its carved border image.
@@ -209,6 +216,10 @@
   // Calibrated from original krew-klatki.png (411x110): visible peak RGB 246,86,43.
   // Alpha-weighted measurement ignores invisible RGB noise at antialiased edges.
   const filterMarkup=`<defs>
+    <filter id="truciak-menu-arrow-tint" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values=".2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 0 0 0 1 0"/>
+      <feColorMatrix type="matrix" values=".070588235294 0 0 0 0 0 .788235294118 0 0 0 0 0 .741176470588 0 0 0 0 0 1 0"/>
+    </filter>
     <filter id="truciak-blood-tint" color-interpolation-filters="sRGB">
       <feColorMatrix type="matrix" values=".2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 0 0 0 1 0"/>
       <feComponentTransfer><feFuncR type="linear" slope="2.1811388795275737"/><feFuncG type="linear" slope="2.1811388795275737"/><feFuncB type="linear" slope="2.1811388795275737"/></feComponentTransfer>
