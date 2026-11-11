@@ -15,6 +15,7 @@
   const searchSprite='__TRUCIAK_SEARCH_IMAGE__';
   const hpStateSprite='__TRUCIAK_HP_STATE_SPRITE__';
   const hudSprite='__TRUCIAK_HUD_SPRITE__';
+  const equipmentSlotSprite='__TRUCIAK_EQUIPMENT_SLOT_SPRITE__';
   const scope = 'html[data-truciak-theme="ebony"]';
   const rules = [];
   function rule(selectors, declarations) {
@@ -81,6 +82,9 @@
     'background:#171b20!important;color:#dce6ee!important;border-color:#668298!important;');
   rule(['.chat-channel-card-wrapper', '.new-chat-window .chat-message-wrapper'],
     'border-color:#668298!important;');
+  // Approved pixel-for-pixel recolor; retain native tiling, dimensions and icons.
+  rule(['.equipment-wrapper .eq-slot.interface-element-one-item-slot-background-to-repeat'],
+    'background-image:url("'+equipmentSlotSprite+'")!important;');
   // Original inventory/slot sprite coordinates and transparent masks stay intact.
   rule(['.game-window-positioner .inventory_wrapper .inventory-grid-bg'],
     'background-color:#252b31!important;background-blend-mode:luminosity!important;');

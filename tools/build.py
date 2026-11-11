@@ -11,6 +11,7 @@ module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_M
 module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_TAB_FRAME_HELPER__',(root/'tools/tab-frame.js').read_text())
 module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_SEARCH_IMAGE__','data:image/svg+xml;base64,'+base64.b64encode((root/'assets/search.svg').read_bytes()).decode('ascii'))
 module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_SEARCH_HELPER__',(root/'tools/search-background.js').read_text())
+module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_EQUIPMENT_SLOT_SPRITE__','data:image/png;base64,'+base64.b64encode((root/'assets/oneItemSlotToRepeat.png').read_bytes()).decode('ascii'))
 module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_HUD_SPRITE__','data:image/png;base64,'+base64.b64encode((root/'assets/buttony.png').read_bytes()).decode('ascii'))
 module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_BOTTOM_ATLAS_HELPER__',(root/'tools/bottom-atlas.js').read_text())
 module_sources['ebony-theme']=module_sources['ebony-theme'].replace('__TRUCIAK_HP_STATE_SPRITE__','data:image/png;base64,'+base64.b64encode((root/'assets/hpStateSprite.png').read_bytes()).decode('ascii'))

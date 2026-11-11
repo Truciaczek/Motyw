@@ -83,7 +83,7 @@ assert.ok(!topHudBlock.includes('background-image'));
 const bundle=fs.readFileSync(__dirname+'/../dist/motyw.runtime.js','utf8');
 const embedded=JSON.parse(bundle.match(/const source = (\{"ebony-theme":.*\})\[mod.id\];/)[1]);
 const pngUrl='data:image/png;base64,'+fs.readFileSync(__dirname+'/../assets/buttony.png').toString('base64');
-assert.equal(embedded['ebony-theme'],source.replaceAll('__TRUCIAK_HUD_SPRITE__',pngUrl).replace('__TRUCIAK_HP_STATE_SPRITE__','data:image/png;base64,'+fs.readFileSync(__dirname+'/../assets/hpStateSprite.png').toString('base64')));
+assert.equal(embedded['ebony-theme'],source.replace('__TRUCIAK_EQUIPMENT_SLOT_SPRITE__','data:image/png;base64,'+fs.readFileSync(__dirname+'/../assets/oneItemSlotToRepeat.png').toString('base64')).replaceAll('__TRUCIAK_HUD_SPRITE__',pngUrl).replace('__TRUCIAK_HP_STATE_SPRITE__','data:image/png;base64,'+fs.readFileSync(__dirname+'/../assets/hpStateSprite.png').toString('base64')));
 const catalogue=JSON.parse(bundle.match(/const fallbackCatalogue = (.*);/)[1]);
 assert.deepEqual(catalogue.modules.map(m=>m.id),['ebony-theme']);
 assert.equal(bundle.includes("preferences['ebony-theme'] = true"),false);
