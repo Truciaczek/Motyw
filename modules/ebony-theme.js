@@ -29,6 +29,18 @@
   rule(['.layer.interface-layer .positioner.top .hud-container .map_ball'], 'background-image:url("'+hudSprite+'")!important;');
   // Shared information glyph uses the edited atlas while native offsets stay intact.
   rule(['.info-icon'], 'background-image:url("'+hudSprite+'")!important;');
+  // Who-is-here controls: map every original pixel's luminance to #12C9BD.
+  // Keep original atlas/SVG, offsets, alpha and any native parent hover effects.
+  rule(['.whoishere-window .increase-opacity',
+    '.whoishere-window .manage-configuration-button.settings-button',
+    '.whoishere-window .search-wrapper::before'],
+    'filter:url("#truciak-menu-arrow-tint")!important;');
+  // Tint the close SVG before its black shadow. Native hover first brightens
+  // the original gray to white, then maps white to turquoise (never vice versa).
+  rule(['.whoishere-window .ie-icon-close'],
+    'filter:url("#truciak-menu-arrow-tint") drop-shadow(1px 1px 1px rgb(0,0,0))!important;');
+  rule(['.whoishere-window .ie-icon-close:hover'],
+    'filter:brightness(1.5) url("#truciak-menu-arrow-tint") drop-shadow(1px 1px 1px rgb(0,0,0))!important;');
   // Bottom HUD sprites include transparent cutouts around the orb and labels.
   // Keep their original images/masks; wood belongs to the strip behind them.
   rule(['.bottom-panel', '.bottom-panel-pointer-bg'], 'background-color:transparent!important;');
