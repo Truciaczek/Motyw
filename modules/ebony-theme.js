@@ -45,7 +45,7 @@
   // Explicit muted labels and placeholders; neutral text scaling does not cover these.
   rule(['.world-window .filter-label', '.world-window .legend'], 'color:#0B756E!important;');
   rule(['.world-window .start-lvl input::placeholder', '.world-window .stop-lvl input::placeholder'],
-    'color:#0C867E!important;opacity:1!important;');
+    'color:#085E58!important;opacity:1!important;');
   // Tint only the native arrow image, retaining its sprite offsets and rotation.
   rule(['.world-window .menu-arrow', '.border-window .menu-arrow'],
     'filter:url("#truciak-menu-arrow-tint")!important;');
