@@ -704,3 +704,12 @@ Użytkownik wybrał opcję 1: „Zatwierdzam raport”. Potwierdzono status uko�
 Duża siatka torby i ramka wyboru toreb pozostają sprzed cofniętej próby 1.2.06; nie uznawać ich za przekolorowane. Odrzucone i zastąpione próby pozostają poza obowiązującym stanem: turkusowy panel własnych dodatków, pierwsza poprawka górnego panelu, nieudane przyciemnienie litery i, szeroka próba ekwipunku/toreb 1.2.06 oraz czarne symbole ubioru zastąpione wariantem 1.2.12. Akceptacja raportu ich nie przywraca.
 
 Brak aktywnych zadań w trakcie. Aktualny zaakceptowany punkt odniesienia: Motyw NI 1.2.17. Obowiązująca instrukcja: Truciaczek/Motyw/main/INSTRUKCJA_V2.md. Nie zmieniano kodu ani numeru wydania przy zatwierdzeniu raportu.
+
+
+## Kontury, linia i uchwyt małych okien — 1.2.18, 2026-11-11
+
+Odczyt użytkownika potwierdził CSS: .border-window.transparent .border-image ma box-shadow RGB(1,1,1) 1px, #CCCCCC 2px, RGB(12,13,13) 3px oraz RGBA(12,13,13,.4) cień 2px 2px 3px 3px. Pozioma linia to border-top .search-wrapper, biel alfa .3; ukośne kreski to .window-resize-handle--corner i gradient 135deg, #CCCCCC alfa .8, granice 45/55/70/80%. Obwódka należy do warstwy regulowanego tła; linia i uchwyt są osobne i pozostają widoczne przy pełnej przezroczystości okna.
+
+Na polecenie zamiany #CCCCCC na kolor suwaka #668298 przeskalowano odcienie luminancją względem 204: RGBwynik=round([102,130,152]×Y/204). #CCCCCC -> #668298; biel -> [128,163,190] (#80A3BE); RGB(12,13,13) -> [6,8,10]; RGB(1,1,1) pozostaje [1,1,1]. Zachowano wszystkie alfy .3/.4/.8, stopnie gradientu, geometrię i natywne opacity tła z guzika. Zakres trzech reguł ograniczony do .border-window.transparent, nie do wszystkich ramek aplikacji. Nie dodawano kolorów hover. buttony.png i pozostałe grafiki bez zmian.
+
+Opublikowano 1.2.18 na main Truciaczek/Motyw, paczki przebudowane. 9/9 istniejących zestawów testów kodu i git diff --check zaliczone. Status: wdrożone, oczekuje oceny po F5 w małych oknach, przy 0% i 100% przezroczystości. Ostatnia zaakceptowana baza 1.2.17. Instrukcja aktualizowana w repo motywu zgodnie z obowiązującą procedurą.

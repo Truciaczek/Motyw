@@ -113,6 +113,13 @@
   rule(['.game-window-positioner .character_wrapper .stats-wrapper .stats-list li .value'],
     'color:#12C9BD!important;');
   rule(['.dialogue-window .content .answers li'], 'border-bottom-color:#668298!important;');
+  // Native small-window trim: #CCC -> scrollbar #668298, preserve alpha and geometry.
+  rule(['.border-window.transparent .border-image'],
+    'box-shadow:rgb(1,1,1) 0 0 0 1px,#668298 0 0 0 2px,rgb(6,8,10) 0 0 0 3px,rgba(6,8,10,.4) 2px 2px 3px 3px!important;');
+  rule(['.border-window.transparent .search-wrapper'],
+    'border-top-color:rgba(128,163,190,.3)!important;');
+  rule(['.border-window.transparent .window-resize-handle--corner'],
+    'background-image:linear-gradient(135deg,transparent 45%,rgba(102,130,152,.8) 45%,rgba(102,130,152,.8) 55%,transparent 55%,transparent 70%,rgba(102,130,152,.8) 70%,rgba(102,130,152,.8) 80%,transparent 80%)!important;');
   // The native scroll track is transparent; tint only the movable handle.
   rule(['.scroll-wrapper .scrollbar-wrapper .track'], 'background:transparent!important;');
   rule(['.scroll-wrapper .scrollbar-wrapper .track .handle'],
