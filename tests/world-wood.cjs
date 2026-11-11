@@ -28,3 +28,13 @@ const context={URL,console};vm.createContext(context);vm.runInContext(fs.readFil
  assert.deepEqual(at(31,28),[180,190,200,255]);assert.deepEqual(at(10,28),[0,0,0,0]);
  console.log('PASS: top wood extends exactly 2 pixels into dark seam; metal, corners and remaining rows unchanged');
 }
+
+{
+ const width=64,height=80,pixels={data:new Uint8ClampedArray(width*height*4)};
+ const set=(y,color)=>pixels.data.set(color,(y*width+30)*4);
+ set(24,[60,35,20,255]);set(25,[70,40,23,255]);set(26,[80,48,27,255]);set(27,[90,55,30,255]);
+ context.extendTruciakFrameWood(pixels,width,height);
+ const red=y=>pixels.data[(y*width+30)*4];
+ assert.deepEqual([red(24),red(25),red(26),red(27),red(28),red(29)],[60,66,72,78,84,90]);
+ console.log('PASS: continuous grain interpolation across old edge and 2px extension, no flat duplicated seam');
+}

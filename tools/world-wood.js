@@ -9,12 +9,24 @@ function extendTruciakFrameWood(pixels,width,height){
             if(d[i+3]===255 && d[i]-d[i+2]>=10)last=y;
         }
         if(last<0 || last>29)continue;
-        const from=(last*width+x)*4;
-        for(let y=last+1;y<=last+2;y++){
+        let start=last;
+        while(start>Math.max(0,last-3)){
+            const i=((start-1)*width+x)*4;
+            if(d[i+3]!==255 || d[i]-d[i+2]<10)break;
+            start--;
+        }
+        const samples=[];
+        for(let y=start;y<=last;y++){
+            const i=(y*width+x)*4;samples.push(Array.from(d.slice(i,i+4)));
+        }
+        // Resample the existing grain over the enlarged strip instead of
+        // repeating a flat last row that creates a visible horizontal seam.
+        for(let y=start;y<=last+2;y++){
             const to=(y*width+x)*4;
-            // Keep bright metal edges; fill only the dark seam or empty pixels.
-            if(d[to+3] && Math.max(d[to],d[to+1],d[to+2])>60)continue;
-            for(let c=0;c<4;c++)d[to+c]=d[from+c];
+            if(y>last && d[to+3] && Math.max(d[to],d[to+1],d[to+2])>60)continue;
+            const t=(y-start)*(samples.length-1)/(last+2-start);
+            const lo=Math.floor(t),hi=Math.min(samples.length-1,lo+1),weight=t-lo;
+            for(let c=0;c<4;c++)d[to+c]=Math.round(samples[lo][c]*(1-weight)+samples[hi][c]*weight);
         }
     }
 }
