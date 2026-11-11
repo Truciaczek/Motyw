@@ -24,6 +24,26 @@ app.cleanup();assert.equal(gray.attrs.size,0);assert.ok(style.removed);assert.eq
 console.log('PASS: white/gray luminance and alpha mapping, semantic color preservation, state refresh and cleanup');
 
 {
+ const input=node('rgb(255, 255, 255)','');input.matches=()=>true;
+ input.placeholderColor='rgba(128, 128, 128, 0.6)';
+ const sheet={sheet:{disabled:false},textContent:'',contains:()=>false,remove(){}};
+ const events={};let pending;
+ const search={childNodes:[],querySelectorAll:()=>[input],closest:()=>null};
+ const doc={head:{appendChild(){}},body:{},createElement:()=>sheet,querySelectorAll:()=>[search],addEventListener:(k,f)=>events[k]=f,removeEventListener:k=>delete events[k]};
+ const win={getComputedStyle:(el,pseudo)=>{
+   if(el===input){assert.equal(pseudo,'::placeholder');assert.equal(sheet.sheet.disabled,true);}
+   return {color:el.placeholderColor||'rgb(255, 255, 255)'};
+ },requestAnimationFrame:f=>(pending=f,1),cancelAnimationFrame(){}};
+ const binding=context.bindTruciakMenuText(doc,win);
+ assert.ok(sheet.textContent.includes('::placeholder{color:rgba(9,101,95,0.6)!important;}'));
+ assert.ok(!sheet.textContent.includes('opacity:'));
+ input.placeholderColor='rgb(255, 255, 255)';events.pointerover();pending();
+ assert.ok(sheet.textContent.includes('::placeholder{color:rgba(18,201,189,1)!important;}'));
+ binding.cleanup();assert.equal(input.attrs.size,0);
+ console.log('PASS: search placeholder without text nodes, native color read without tint, alpha and opacity preserved, refresh and cleanup');
+}
+
+{
  const bg=node('');bg.background='rgb(0, 0, 0)';bg.opacity='1';
  const sheet={sheet:{disabled:false},textContent:'',contains:()=>false,remove(){this.removed=true;}};
  const events={};let pending;

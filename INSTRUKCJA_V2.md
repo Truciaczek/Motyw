@@ -724,3 +724,10 @@ Wykorzystano istniejący filtr pikselowy truciak-menu-arrow-tint w sRGB, wyłąc
 Status: wdrożenie do oceny po F5 przy włączonym motywie. Ostatnia zaakceptowana baza 1.2.17; 1.2.18 nadal oczekuje osobnej oceny. Nie przypisywać niniejszemu poleceniu akceptacji poprzedniego wydania.
 
 Weryfikacja wydania: 9/9 istniejących zestawów testów kodu zaliczone; składnia runtime i instalatora sprawdzona przez build, git diff origin/main --check poprawny. Próba renderu lokalną przeglądarką zablokowana przez ograniczenie socket() środowiska, więc nie deklarować wizualnego testu. Publikacja na main zgodnie ze stałą zgodą, efekt oczekuje oceny użytkownika.
+
+
+## Napis Szukaj w Graczach na mapie — 1.2.20, 2026-11-11
+
+Użytkownik zlecił tę samą skalę dla napisu Szukaj. Rozszerzono istniejący bindTruciakMenuText o .whoishere-window .search-wrapper (bezpośredni tekst) oraz input[placeholder] w tej wyszukiwarce. Dla placeholdera odczyt getComputedStyle(input, '::placeholder').color z chwilowo wyłączonym własnym arkuszem, bez zgadywania oryginalnego HEX. Wspólna reguła Y=0.2126R+0.7152G+0.0722B, RGB=round([18,201,189]*Y/255), zachowana alfa i natywna opacity placeholdera. Osobne reguły ::placeholder nie zmieniają wpisywanej wartości i kursora. Obsługa neutralnych i jasnobeżowych odcieni, odświeżanie i cleanup istniejącego mechanizmu; rzeczywisty typ napisu nie był potwierdzony odczytem DOM użytkownika, dlatego zakres obejmuje obie tekstowe postacie. Ikony 1.2.19 bez zmian.
+
+Weryfikacja: rozszerzono istniejący test o placeholder bez węzła tekstowego, poprawny odczyt pseudo-elementu, skalę biel/szarość, alfę i zachowanie opacity oraz odświeżanie/cleanup. Status: opublikowane do oceny po F5 przy włączonym motywie i pustej wyszukiwarce. Nie oznacza akceptacji 1.2.18 ani 1.2.19; zaakceptowana baza nadal 1.2.17.
