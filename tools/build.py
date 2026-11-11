@@ -31,8 +31,8 @@ dock=dock.replace("const icons = {", "const icons = {map:'<path d=\"m3 6 6-3 6 3
 s=s.replace('const source = await fetchSource(url.href);', 'const source = '+json.dumps(dock,ensure_ascii=False)+';')
 # Visual themes can stop immediately; other upstream modules retain their reload behavior.
 s=s.replace("if (preferences[mod.id] === true) start(mod);\n                render();", "if (preferences[mod.id] === true) start(mod);\n                else if(mod.id==='ebony-theme'){window.__truciakEbonyTheme?.disable();active.delete(mod.id);loaded.delete(mod.id);errors.delete(mod.id);}\n                render();")
-# Panel controls share the NI accent; ruby artwork is inserted separately below.
-s=s.replace('#21bd69','#12c9bd').replace('#21BD69','#12c9bd')
+# Truciak panel/dock stay red; the NI theme is inserted after this transform.
+s=s.replace('#12c9bd','#ef5350').replace('#21bd69','#ef5350').replace('#21BD69','#ef5350')
 palette=(root/'tools/panel-palette.css').read_text()
 s=s.replace('    </style><button class="launcher"',palette+'\n    </style><button class="launcher"',1)
 # Independent DOM IDs, preferences and widget identity avoid collisions with Firuś.

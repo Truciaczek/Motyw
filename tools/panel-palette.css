@@ -1,19 +1,19 @@
-/* Panel-only palette. Ruby launcher artwork and semantic errors stay distinct. */
+/* Truciak controls stay red. This palette never applies to the NI game theme. */
 section{
-    --truciak-accent:#12C9BD;
+    --truciak-accent:#EF5350;
     --truciak-bg:#171B20;
     --truciak-surface:#252B31;
     --truciak-border:#668298;
     --truciak-text:#C7D0D9;
     --truciak-muted:#B1C0CB;
-    --truciak-tint-top:#25494B;
-    --truciak-tint-bottom:#142D30;
+    --truciak-tint-top:#252B31;
+    --truciak-tint-bottom:#171B20;
     background:var(--truciak-bg)!important;
     border-color:var(--truciak-border);
 }
 header,.row{background:var(--truciak-surface)}
 strong,header button{color:var(--truciak-accent)}
-footer{color:var(--truciak-muted)}
+footer{color:var(--truciak-accent)}
 .native-status,small{color:var(--truciak-muted)}
 p{color:var(--truciak-text)}
 .error{color:#FFBD89}
