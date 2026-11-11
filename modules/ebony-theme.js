@@ -47,7 +47,7 @@
   rule(['.world-window__info'], 'border-color:#668298!important;');
   // Explicit muted labels and placeholders; neutral text scaling does not cover these.
   rule(['.world-window .filter-label', '.world-window .legend'], 'color:#0B756E!important;');
-  rule(['.world-window .start-lvl input::placeholder', '.world-window .stop-lvl input::placeholder'],
+  rule(['.world-window .start-lvl input::placeholder', '.world-window .stop-lvl input::placeholder', '.friend-enemy-list .bottom-friend-panel input::placeholder'],
     'color:#085E58!important;opacity:1!important;');
   // Typed values and caret belong to the shared native input, not its placeholder.
   rule(['.world-window .ni-input input.default', '.border-window .ni-input input.default'],
