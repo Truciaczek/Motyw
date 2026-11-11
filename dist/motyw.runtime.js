@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         Motyw NI
 // @namespace    truciaczek.motyw
-// @version      0.1.100
+// @version      1.2.00
 // @description  Wspólny panel i przełączniki dodatków do Margonem.
 // @match        https://*.margonem.pl/*
 // @match        https://*.margonem.com/*
