@@ -137,6 +137,10 @@
   // The game keeps every native sprite offset and dimension; only its atlas URL changes.
   rule(['[data-truciak-bottom-atlas-base="true"]', '[data-truciak-bottom-atlas-before="true"]::before', '[data-truciak-bottom-atlas-after="true"]::after'],
     'background-image:url("'+hudSprite+'")!important;');
+  // Shared native close button and its carved corner use the edited atlas.
+  rule(['.border-window:not(.transparent):not(.tip-window) .close-button-corner-decor',
+    '.border-window:not(.transparent):not(.tip-window) .close-button-corner-decor .close-button'],
+    'background-image:url("'+hudSprite+'")!important;');
   // Keep game-driven low-HP/death state animation and sprite coordinates intact.
   rule(['.bottom-panel .hp-indicator .blood-frame'], 'background-image:url("'+hpStateSprite+'")!important;');
   const launcherExclusion=':not(.widget-truciak_addonsManager):not(.widget-gogatki_addonsManager):not(.widget-maddonz_addonsManager):not([data-truciak-native-launcher]):not([data-gogatki-native-launcher]):not(:has(.icon.truciak_addonsManager,.icon.gogatki_addonsManager,.icon.maddonz_addonsManager))';
