@@ -3,7 +3,7 @@
 > **OBOWIĄZUJĄCA INSTRUKCJA: INSTRUKCJA_V2.md**
 > Źródło aktualne: repo Truciaczek/Motyw, gałąź main, plik INSTRUKCJA_V2.md.
 > Przed pracą pobierać aktualną wersję z GitHuba; lokalnie przechowywać kopię roboczą. Po każdej akceptacji użytkownika aktualizować ten plik w repo. W trakcie prac dokumentować zmiany i odrzucone próby, zachowując historię. INSTRUKCJA_PROJEKTU.md oraz wcześniejsze kopie w plikach ChatGPT są archiwalne. Dotychczasowe zapisy o zapisie instrukcji w plikach ChatGPT opisują stary sposób pracy.
-> Aktualny zaakceptowany stan Motywu NI: **1.2.17**.
+> Aktualny zaakceptowany stan Motywu NI: **1.2.20**.
 
 
 Data utworzenia: 2026-11-11
@@ -731,3 +731,14 @@ Weryfikacja wydania: 9/9 istniejących zestawów testów kodu zaliczone; składn
 Użytkownik zlecił tę samą skalę dla napisu Szukaj. Rozszerzono istniejący bindTruciakMenuText o .whoishere-window .search-wrapper (bezpośredni tekst) oraz input[placeholder] w tej wyszukiwarce. Dla placeholdera odczyt getComputedStyle(input, '::placeholder').color z chwilowo wyłączonym własnym arkuszem, bez zgadywania oryginalnego HEX. Wspólna reguła Y=0.2126R+0.7152G+0.0722B, RGB=round([18,201,189]*Y/255), zachowana alfa i natywna opacity placeholdera. Osobne reguły ::placeholder nie zmieniają wpisywanej wartości i kursora. Obsługa neutralnych i jasnobeżowych odcieni, odświeżanie i cleanup istniejącego mechanizmu; rzeczywisty typ napisu nie był potwierdzony odczytem DOM użytkownika, dlatego zakres obejmuje obie tekstowe postacie. Ikony 1.2.19 bez zmian.
 
 Weryfikacja: rozszerzono istniejący test o placeholder bez węzła tekstowego, poprawny odczyt pseudo-elementu, skalę biel/szarość, alfę i zachowanie opacity oraz odświeżanie/cleanup. Status: opublikowane do oceny po F5 przy włączonym motywie i pustej wyszukiwarce. Nie oznacza akceptacji 1.2.18 ani 1.2.19; zaakceptowana baza nadal 1.2.17.
+
+
+## Zbiorcza akceptacja 1.2.18–1.2.20 — 2026-11-11
+
+Użytkownik potwierdził: „akceptuję wszystkie zmiany”. Ostatnia wcześniejsza akceptacja dotyczyła 1.2.17. Wszystkie zadania z wydań **1.2.18, 1.2.19 i 1.2.20 są ukończone i zaakceptowane**.
+
+- 1.2.18: kontury małych okien, pozioma linia i ukośny uchwyt w skali koloru suwaka #668298, z zachowaniem alfa, geometrii i regulacji przezroczystości.
+- 1.2.19: cztery ikony Graczy na mapie (przezroczystość, zębatka, X i lupka) w skali luminancji biel -> #12C9BD; zachowane kształty, alfa i rozjaśnienie X przy hover.
+- 1.2.20: napis Szukaj w tym oknie w tej samej skali, z zachowaniem natywnej przezroczystości.
+
+Wcześniejsze wpisy o oczekiwaniu na ocenę tych wydań są historyczne i zastępuje je niniejsza akceptacja. Odrzucone próby pozostają odrzucone. **Aktualny zaakceptowany punkt odniesienia: Motyw NI 1.2.20. Brak otwartych zadań z tego pakietu.** Przy zapisie akceptacji nie zmieniano kodu ani numeru wydania.
