@@ -85,7 +85,7 @@
   // Approved pixel-for-pixel recolor; retain native tiling, dimensions and icons.
   rule(['.equipment-wrapper .eq-slot.interface-element-one-item-slot-background-to-repeat'],
     'background-image:url("'+equipmentSlotSprite+'")!important;');
-  // Test: black equipment placeholder glyphs from the edited atlas; native offsets retained.
+  // Test: original equipment placeholder glyphs darkened by 60%; native offsets retained.
   rule(['.equipment-wrapper .eq-cl'],
     'background-image:url("'+hudSprite+'")!important;');
   // Original inventory/slot sprite coordinates and transparent masks stay intact.
