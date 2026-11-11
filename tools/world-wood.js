@@ -18,7 +18,9 @@ function bindTruciakWorldWood(doc, view, filterDefinition, frameFilterDefinition
                         for(let i=0;i<d.length;i+=4){
                             const r=d[i],g=d[i+1],b=d[i+2];
                             if(!d[i+3])continue;
-                            if(r===46 && g===50 && b===50){
+                            // The original fill includes small antialiasing variations at
+                            // its edge. Keep those in the fill, rather than tinting a halo.
+                            if(Math.abs(r-46)<=12 && Math.abs(g-50)<=12 && Math.abs(b-50)<=12 && Math.abs((g-r)-4)<=2 && Math.abs(b-g)<=2){
                                 d[i]=23;d[i+1]=27;d[i+2]=32;continue;
                             }
                             const y=(.2126*r+.7152*g+.0722*b)/255;
