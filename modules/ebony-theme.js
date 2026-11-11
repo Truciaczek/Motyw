@@ -43,7 +43,7 @@
   // World data strip: match the scrollbar handle without changing border geometry.
   rule(['.world-window__info'], 'border-color:#668298!important;');
   // Explicit muted labels and placeholders; neutral text scaling does not cover these.
-  rule(['.world-window .filter-label', '.world-window .legend'], 'color:#0FA79D!important;');
+  rule(['.world-window .filter-label', '.world-window .legend'], 'color:#0B756E!important;');
   rule(['.world-window .start-lvl input::placeholder', '.world-window .stop-lvl input::placeholder'],
     'color:#0C867E!important;opacity:1!important;');
   // Tint only the native arrow image, retaining its sprite offsets and rotation.
