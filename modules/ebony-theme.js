@@ -83,7 +83,8 @@
   rule(['.game-window-positioner .character_wrapper .stats-wrapper .stats-list li .value'],
     'color:#12C9BD!important;');
   rule(['.dialogue-window .content .answers li'], 'border-bottom-color:#668298!important;');
-  rule(['.scroll-wrapper .scrollbar-wrapper .track'], 'background:#171b20!important;');
+  // The native scroll track is transparent; tint only the movable handle.
+  rule(['.scroll-wrapper .scrollbar-wrapper .track'], 'background:transparent!important;');
   rule(['.scroll-wrapper .scrollbar-wrapper .track .handle'],
     'background:#668298!important;border-color:#252b31!important;');
   rule(['.scroll-wrapper .scrollbar-wrapper .track .handle:hover'], 'background:#12C9BD!important;');
