@@ -24,6 +24,6 @@ f.timers[0]();respond(f,'0.2.0');assert.equal(f.nodes.length,1);
 const bundle=fs.readFileSync(__dirname+'/../dist/motyw.user.js','utf8');
 const manifest=JSON.parse(fs.readFileSync(__dirname+'/../version.json','utf8'));
 assert.equal(manifest.version,bundle.match(/@version\s+(\S+)/)[1]);
-assert.ok(bundle.includes("const current='"+manifest.version+"'"));
+assert.ok(!fs.readFileSync(__dirname+'/../dist/motyw.runtime.js','utf8').includes('const current='),'runtime no longer asks to reinstall');
 assert.ok(bundle.includes('// @grant        GM_xmlhttpRequest'));
 console.log('PASS: semantic version check, update URL, safe dialog text, 24h defer, newer release, HTTP/network/JSON errors, periodic check, cleanup and build/manifest version parity');

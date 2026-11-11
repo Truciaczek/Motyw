@@ -80,7 +80,7 @@ assert.ok(!bottomBackgroundBlocks[0].includes('background-size'));
 const topHudBlock=mainCss.split('}').find(b=>b.split('{')[0].endsWith(' .positioner.top .hud-container'));
 assert.ok(topHudBlock.endsWith('{background-color:transparent!important;'));
 assert.ok(!topHudBlock.includes('background-image'));
-const bundle=fs.readFileSync(__dirname+'/../dist/motyw.user.js','utf8');
+const bundle=fs.readFileSync(__dirname+'/../dist/motyw.runtime.js','utf8');
 const embedded=JSON.parse(bundle.match(/const source = (\{"ebony-theme":.*\})\[mod.id\];/)[1]);
 const pngUrl='data:image/png;base64,'+fs.readFileSync(__dirname+'/../assets/buttony.png').toString('base64');
 assert.equal(embedded['ebony-theme'],source.replaceAll('__TRUCIAK_HUD_SPRITE__',pngUrl).replace('__TRUCIAK_HP_STATE_SPRITE__','data:image/png;base64,'+fs.readFileSync(__dirname+'/../assets/hpStateSprite.png').toString('base64')));

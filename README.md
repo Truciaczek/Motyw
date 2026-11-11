@@ -1,4 +1,4 @@
-# Motyw NI — v0.1.72
+# Motyw NI — v0.1.73
 
 Publiczna wersja panelu z dodatkiem **Motyw - Stary ale jary** dla Nowego Interfejsu Margonem.
 
@@ -11,7 +11,7 @@ Publiczna wersja panelu z dodatkiem **Motyw - Stary ale jary** dla Nowego Interf
 3. Po instalacji lub aktualizacji dodatku odśwież grę klawiszem **F5**. Kliknij rubinową ikonę T i włącz „Motyw - Stary ale jary”.
 4. Motyw można też przełączać prawym przyciskiem myszy na skrócie z mapką.
 
-Do pobrania nie potrzeba konta GitHub. Skrypt zawiera panel, dock, motyw i grafiki w jednym pliku. Po wejściu do gry i co 30 minut sprawdza mały plik version.json. Jeśli istnieje nowsza wersja, pokazuje okienko „Aktualizuj / Później”. „Aktualizuj” otwiera instalator Tampermonkey; po potwierdzeniu odśwież grę. „Później” ukrywa informację o tej wersji na 24 godziny; kolejne wydanie może pojawić się wcześniej. Problemy z połączeniem nie przerywają gry. Nowy kod nie jest pobierany ani uruchamiany bez instalacji.
+Do pobrania nie potrzeba konta GitHub. Po jednorazowej instalacji tej wersji kolejne poprawki panelu, motywu i grafik pobierają się automatycznie po odświeżeniu gry klawiszem **F5**. Przy problemach z połączeniem dodatek korzysta z ostatniej poprawnie wczytanej wersji, a przy pierwszym uruchomieniu — z kopii dołączonej do instalatora. Ponowna instalacja będzie potrzebna tylko wtedy, gdy zmieni się sam mechanizm wczytywania lub wymagane uprawnienia.
 
 ## Zawartość
 

@@ -1,5 +1,5 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
-const root=path.resolve(__dirname,'..'),bundle=fs.readFileSync(path.join(root,'dist/motyw.user.js'),'utf8');
+const root=path.resolve(__dirname,'..'),bundle=fs.readFileSync(path.join(root,'dist/motyw.runtime.js'),'utf8');
 const embedded=JSON.parse(bundle.match(/const source = (\{"ebony-theme":.*\})\[mod.id\];/)[1]);
 assert.deepEqual(Object.keys(embedded),['ebony-theme']);
 const catalogue=JSON.parse(fs.readFileSync(path.join(root,'catalogue.json'),'utf8'));
