@@ -695,3 +695,12 @@ Brak otwartych zadań z zaakceptowanego pakietu. Nie zmieniano kodu ani numeru w
 ## Obowiązujące repo instrukcji: Truciaczek/Motyw — 2026-11-11
 
 Użytkownik skorygował lokalizację: instrukcja ma być w repo motywu. Na jego polecenie przeniesiono pełną INSTRUKCJA_V2.md do Truciaczek/Motyw, main. To jest jedyne obowiązujące źródło tej instrukcji i miejsce kolejnych aktualizacji po akceptacjach. Wcześniejszy wybór repo Dodatki-Truciaka jest historyczny i został zastąpiony tą decyzją. Kopia w Dodatki-Truciaka pozostaje archiwalna. Nie zmieniono kodu ani zaakceptowanego wydania 1.2.17.
+
+
+## Zatwierdzony raport dzienny — 2026-11-11, stan 1.2.17
+
+Użytkownik wybrał opcję 1: „Zatwierdzam raport”. Potwierdzono status ukończony dla wszystkich 18 pozycji raportu: kolorystyka i zakładki NI z czerwonymi własnymi dodatkami; wyszukiwarka; ramka zakładek; dokumentacja i wygląd slotów 1–8; dolne ornamenty i ping; górny panel według wzoru użytkownika; znaczniki mapy; suwak z przezroczystym torem i 48% przezroczystości uchwytu także przy hover; ramki i wspólne tło Świata; napisy i pola menu; ikona informacji według grafiki użytkownika; tekstura pól zakładanego ekwipunku; oryginalne symbole ubioru przyciemnione o 60%; wspólne drewno table_header.png; napisy Społeczności i placeholder nicku; małe okna z natywną regulacją krycia; dokumentacja V2 w repo motywu; przegląd dostępnej historii i repozytoriów. Przeniesiona naprawa górnej części przycisku pozostaje ukończona.
+
+Duża siatka torby i ramka wyboru toreb pozostają sprzed cofniętej próby 1.2.06; nie uznawać ich za przekolorowane. Odrzucone i zastąpione próby pozostają poza obowiązującym stanem: turkusowy panel własnych dodatków, pierwsza poprawka górnego panelu, nieudane przyciemnienie litery i, szeroka próba ekwipunku/toreb 1.2.06 oraz czarne symbole ubioru zastąpione wariantem 1.2.12. Akceptacja raportu ich nie przywraca.
+
+Brak aktywnych zadań w trakcie. Aktualny zaakceptowany punkt odniesienia: Motyw NI 1.2.17. Obowiązująca instrukcja: Truciaczek/Motyw/main/INSTRUKCJA_V2.md. Nie zmieniano kodu ani numeru wydania przy zatwierdzeniu raportu.
