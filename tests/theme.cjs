@@ -150,3 +150,25 @@ console.log('PASS: native window border-image, title plaque/decor and shaped alp
 assert.ok(m.testing.windowWoodFilter.includes('.55 0 0 0 .025 0 .57 0 0 .028 0 0 .60 0 .032'));
 assert.ok(m.testing.windowWoodFilter.includes('in="SourceGraphic" type="matrix" values="1 0 0 0 0'));
 console.log('PASS: world wood uses final strip grain mapping while neutral ornament colors remain original');
+
+// Exercise both original tab frame and Skills banners through the real resource helper.
+(async()=>{
+  const make=(path)=>{const attrs=new Map();return {path,getAttribute:k=>attrs.get(k)??null,setAttribute:(k,v)=>attrs.set(k,v),removeAttribute:k=>attrs.delete(k),attrs};};
+  const tab=make('friend-header.png'),left=make('width-card-button.png'),right=make('width-card-button.png');
+  let loads=0;const sheet={textContent:'',remove(){}};
+  const document={head:{appendChild(){}},createElement:type=>type==='style'?sheet:{getContext:()=>({drawImage(){},getImageData:()=>({data:[255,255,255,255,128,128,128,128]})}),toDataURL:()=> 'data:image/png;base64,AAAA'},querySelectorAll:selector=>selector==='.tabs-nav'?[tab]:[left,right]};
+  const view={location:{href:'https://example.test/',origin:'https://example.test'},Image:class{naturalWidth=2;naturalHeight=1;set src(value){loads++;this.onload();}},getComputedStyle:(el,pseudo)=>{assert.equal(pseudo,el===tab?'::before':null);return {borderImageSource:'url("https://example.test/img/gui/'+el.path+'")'};}};
+  const context={URL,encodeURIComponent,console};vm.createContext(context);
+  vm.runInContext(fs.readFileSync(__dirname+'/../tools/tab-frame.js','utf8'),context);
+  const binding=context.bindTruciakTabFrame(document,view);
+  await Promise.resolve();await Promise.resolve();
+  assert.equal(loads,2);assert.equal(left.attrs.size,1);assert.equal(right.attrs.size,1);
+  const css=decodeURIComponent(sheet.textContent);
+  const redSlopes=[...css.matchAll(/<feFuncR type="linear" slope="([^"]+)"/g)].map(m=>Number(m[1]));
+  assert.ok(redSlopes.some(s=>Math.abs(s-37/255)<1e-12));
+  assert.equal(redSlopes.filter(s=>Math.abs(s-23/255)<1e-12).length,2);
+  assert.equal((css.match(/::before\{border-image-source:/g)||[]).length,1);
+  assert.ok(!css.includes('background-color:'));assert.ok(!css.includes('filter:url'));
+  binding.cleanup();for(const el of [tab,left,right])assert.equal(el.attrs.size,0);
+  console.log('PASS: existing tab frame preserved, both Skills banners darkened with shared cache, image-only tint and cleanup');
+})().catch(error=>{console.error(error);process.exitCode=1;});
