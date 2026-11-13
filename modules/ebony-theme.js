@@ -239,7 +239,8 @@
   // Keep game-driven low-HP/death state animation and sprite coordinates intact.
   rule(['.bottom-panel .hp-indicator .blood-frame'], 'background-image:url("'+hpStateSprite+'")!important;');
   const launcherExclusion=':not(.widget-truciak_addonsManager):not(.widget-gogatki_addonsManager):not(.widget-maddonz_addonsManager):not([data-truciak-native-launcher]):not([data-gogatki-native-launcher]):not(:has(.icon.truciak_addonsManager,.icon.gogatki_addonsManager,.icon.maddonz_addonsManager))';
-  const css = rules.join('\n').replaceAll('.widget-button','.widget-button'+launcherExclusion).replaceAll('.button','.button'+launcherExclusion);
+  // Match the whole .button class, never the .buttons container or .button-*.
+  const css = rules.join('\n').replaceAll('.widget-button','.widget-button'+launcherExclusion).replace(/\.button(?![\w-])/g,'.button'+launcherExclusion);
   // Keep Maddonz artwork above the native tile's decorative pseudo-elements.
   const maddonzTile = scope+' .widget-maddonz_addonsManager,'+scope+' .widget-button:has(.icon.maddonz_addonsManager)';
   const launcherLayers = maddonzTile+'{isolation:isolate!important}'+scope+' .widget-maddonz_addonsManager .icon,'+scope+' .widget-button .icon.maddonz_addonsManager{position:relative!important;z-index:2!important;visibility:visible!important;opacity:1!important}';

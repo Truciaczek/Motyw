@@ -822,3 +822,12 @@ Użytkownik odrzucił stan spoczynkowy 1.2.27: tło i wewnętrzna ramka pozosta�
 Wzmocniono selektor na podstawie potwierdzonego DOM do .friend-enemy-list .buttons.action-buttons > .button.small:not(.green):has(> .ie-icon-close) (0,7,0 przed tym samym wspólnym wykluczeniem launcherów). Dzięki temu kolorystyka spoczynku wygrywa z ogólną grafitową regułą: gradient #25494B -> #142D30 oraz turkusowe obramowanie #12C9BD z dotychczasowym wewnętrznym odstępem #171B20. Wartości deklaracji, grafika X, geometria i zaakceptowany przez użytkownika wygląd hover niezmienione. Poprawka nie obejmuje innych przycisków.
 
 Status: wdrożone do oceny po F5 przy włączonym motywie; sprawdzić przede wszystkim X bez najechania. 1.2.27 była nieudaną próbą stanu spoczynkowego, zastąpioną niniejszą poprawką. Nie uznawać częściowego potwierdzenia hover za akceptację całego wydania.
+
+
+## Faktyczna przyczyna niedziałającego stylu X Społeczności — 1.2.29, 2026-11-13
+
+Odczyt użytkownika z włączonym motywem potwierdził w spoczynku ogólny grafitowy gradient #252B31 -> #171B20, obrys #668298 i natywny czerwony cień ::before rgba(218,97,97,.65), przy przezroczystych dzieciach .background/.label. Nasze reguły 1.2.28 nie były stosowane. Przyczyną był generator CSS: replaceAll('.button',...) dopisywał wykluczenia launcherów także wewnątrz klasy .buttons. Selektor z 1.2.28 zawierający .buttons.action-buttons stawał się niepoprawny. Wcześniejsza poprawa specyficzności nie usunęła tego błędu; 1.2.28 pozostaje nieudaną próbą.
+
+Zastąpiono zamianę podciągu .button wyrażeniem dopasowującym wyłącznie pełną klasę: /\.button(?![\w-])/g. Wykluczenia dla rzeczywistych .button pozostają identyczne, a .buttons i .button-* nie są rozbijane. Potwierdzony selektor Social zachowany; stan spoczynkowy nadal ma gradient turkusowy #25494B -> #142D30, obrys #12C9BD i turkusowy cień ::before, hover nadal grafitowy. Znak X i jego działanie bez zmian.
+
+Dodano kontrolę regresji na wygenerowanym CSS, a nie tylko źródle: trzy reguły Social zachowują prawidłową klasę .buttons.action-buttons, mają odpowiednie tła i turkusowe obramowania, w tym ::before. Weryfikacja: 9/9 zestawów testów kodu, składnia paczek i git diff --check zaliczone. Status: wdrożone do oceny po F5 przy włączonym motywie; brak wizualnego testu w grze.

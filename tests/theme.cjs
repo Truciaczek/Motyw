@@ -26,6 +26,14 @@ for(const block of css.split('}').filter(Boolean)){
   for(const selector of selectors)assert.ok(selector.startsWith('html[data-truciak-theme="ebony"] '));
 }
 const mainCss=m.testing.css;
+// Launcher exclusions must not split the confirmed Social .buttons container.
+const socialBlocks=mainCss.split('}').filter(b=>b.includes('.friend-enemy-list .buttons.action-buttons > .button'));
+assert.equal(socialBlocks.length,3);
+assert.ok(socialBlocks[0].includes('background:linear-gradient(#25494b,#142d30)!important'));
+assert.ok(socialBlocks[0].includes('box-shadow:inset 0 0 0 1px #12C9BD'));
+assert.ok(socialBlocks[1].includes('background:linear-gradient(#252b31,#171b20)!important'));
+assert.ok(socialBlocks[2].includes('::before{background:none!important;box-shadow:inset 0 0 0 1px #12C9BD!important'));
+assert.ok(!mainCss.includes('))s.action-buttons'));
 const nonFrameCss=mainCss.split('}').filter(b=>!b.includes('.main-buttons-container .widget-button')&&!b.includes('.truciak-hud-background')).join('}');
 assert.equal(/(?:^|[;{])(?:width|height|position|display|transform|pointer-events|font-size)\s*:/.test(nonFrameCss),false);
 assert.ok(css.includes('z-index:2!important;visibility:visible!important;opacity:1!important'));
