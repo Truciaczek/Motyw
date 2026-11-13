@@ -45,15 +45,22 @@ console.log('PASS: white/gray luminance and alpha mapping, semantic color preser
 
 {
  const bg=node('');bg.background='rgb(0, 0, 0)';bg.opacity='1';
+ const timer=node('');timer.background='rgba(128, 128, 128, 0.48)';timer.opacity='0.6';timer.matches=()=>true;
  const sheet={sheet:{disabled:false},textContent:'',contains:()=>false,remove(){this.removed=true;}};
  const events={};let pending;
- const doc={head:{appendChild(){}},body:{},createElement:()=>sheet,querySelectorAll:()=>[bg],addEventListener:(k,f)=>events[k]=f,removeEventListener:k=>delete events[k]};
+ const doc={head:{appendChild(){}},body:{},createElement:()=>sheet,querySelectorAll:()=>[bg,timer],addEventListener:(k,f)=>events[k]=f,removeEventListener:k=>delete events[k]};
  const win={getComputedStyle:el=>({backgroundColor:el.background,opacity:el.opacity}),requestAnimationFrame:f=>(pending=f,1),cancelAnimationFrame:()=>pending=null};
  const binding=context.bindTruciakTransparentWindows(doc,win);
  assert.ok(sheet.textContent.includes('rgba(23,27,32,1)'));assert.ok(!sheet.textContent.includes('opacity:'));
+ assert.ok(sheet.textContent.includes('rgba(102,130,152,0.48)'));
+ for(const alpha of [0,0.2,0.7,1]){
+   timer.background='rgba(128, 128, 128, '+alpha+')';events.click();pending();
+   assert.ok(sheet.textContent.includes('rgba(102,130,152,'+alpha+')'));
+   assert.equal(timer.opacity,'0.6');
+ }
  bg.background='rgba(0, 0, 0, 0.7)';bg.opacity='0';events.click();pending();
  assert.ok(sheet.textContent.includes('rgba(23,27,32,0.7)'));assert.equal(bg.opacity,'0');
  bg.opacity='0.4';events.click();pending();assert.equal(bg.opacity,'0.4');assert.equal(sheet.sheet.disabled,false);
- binding.cleanup();assert.equal(bg.attrs.size,0);assert.ok(sheet.removed);assert.equal(Object.keys(events).length,0);
+ binding.cleanup();assert.equal(bg.attrs.size,0);assert.equal(timer.attrs.size,0);assert.ok(sheet.removed);assert.equal(Object.keys(events).length,0);
  console.log('PASS: native backdrop alpha tracked across clicks, game opacity preserved, cleanup restores attributes');
 }

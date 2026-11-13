@@ -753,3 +753,14 @@ Oddzielono styl przez .button.observe-toggle, bez zmiany .stats-expand ani globa
 Status: wdrożone do oceny użytkownika po F5 z włączonym motywem; sprawdzić nieaktywną/aktywną pinezkę i hover, porównać z Rozwiń. Ostatnia zaakceptowana baza 1.2.20. Nie uznawać polecenia zmiany za akceptację efektu.
 
 Weryfikacja 1.2.21: 9/9 istniejących zestawów testów kodu, kontrola składni paczek podczas budowania oraz git diff origin/main --check zaliczone. Brak testu wizualnego w zalogowanej grze; wygląd do oceny użytkownika.
+
+
+## Tło wierszy mobków minutnika — 1.2.22, 2026-11-13
+
+Użytkownik zlecił jasny szary firusiowy dla tła wiersza z nazwą mobka i timerem. Wskazano #668298 (jak suwak i obramowania). Odczyt przy wyłączonym motywie potwierdził .row.tw-list-item.do-action-cursor.long wewnątrz .list.npc-list: background-color rgba(128,128,128,0.48), background-image none, border 0. Potomkowie .col, .name.cell.min i .name-val są przezroczyści; to tło wiersza, nie komórek lub napisów.
+
+Na dodatkowe polecenie użytkownika „zachowj to dla wszystkich zmian przezroczystosci okienka” nie utrwalono alfa 0.48 na sztywno. Rozszerzono istniejący bindTruciakTransparentWindows w tools/menu-text.js o .npc-list > .row.tw-list-item: przy chwilowo wyłączonym własnym arkuszu odczytuje aktualne natywne background-color i zachowuje jego alfę, zmieniając wyłącznie RGB na [102,130,152] (#668298). Odczyt 0.48 jest tylko potwierdzonym stanem początkowym. Gra nadal steruje opacity wiersza i wszystkich rodziców; odświeżanie przy zmianach class/style, kliknięciach i nowych wierszach oraz cleanup wspólnego mechanizmu zachowane. Nie zmieniano nazwy, czasu, przycisków, plusa, ramek, grafiki ani mechanizmu odliczania. Zakres nie obejmuje wszystkich .row w grze.
+
+Status: wdrożone do oceny po F5 przy włączonym motywie. Zmiana pinezki 1.2.21 nadal oczekuje akceptacji. Ostatni zaakceptowany punkt odniesienia 1.2.20.
+
+Weryfikacja 1.2.22: rozszerzono istniejący test o wiersz minutnika, alfę 0.48 oraz dynamiczne wartości 0/0.2/0.7/1, zachowanie natywnego opacity i cleanup. 9/9 zestawów testów kodu oraz kontrola składni wygenerowanych paczek zaliczone; bez testu wizualnego w grze.

@@ -65,7 +65,8 @@ function bindTruciakMenuText(doc,view){
 // Tint only the native translucent window backdrop; game opacity remains untouched.
 function bindTruciakTransparentWindows(doc,view){
     if(typeof doc.querySelectorAll!=='function' || typeof view.getComputedStyle!=='function')return {cleanup(){}};
-    const selector='.border-window.transparent .border-image',attribute='data-truciak-window-backdrop';
+    const timerRows='.npc-list > .row.tw-list-item';
+    const selector='.border-window.transparent .border-image,'+timerRows,attribute='data-truciak-window-backdrop';
     const marked=new Map(),style=doc.createElement('style');style.id='truciak-transparent-backdrops';
     (doc.head || doc.documentElement).appendChild(style);
     let stopped=false,frame=null;
@@ -81,7 +82,8 @@ function bindTruciakTransparentWindows(doc,view){
             wanted.add(el);const id='backdrop-'+rules.length;
             if(!marked.has(el))marked.set(el,el.getAttribute(attribute));
             if(el.getAttribute(attribute)!==id)el.setAttribute(attribute,id);
-            rules.push('html[data-truciak-theme="ebony"] ['+attribute+'="'+id+'"]{background-color:rgba(23,27,32,'+alpha+')!important;}');
+            const rgb=el.matches?.(timerRows)?'102,130,152':'23,27,32';
+            rules.push('html[data-truciak-theme="ebony"] ['+attribute+'="'+id+'"]{background-color:rgba('+rgb+','+alpha+')!important;}');
         }
         for(const [el,old] of marked)if(!wanted.has(el)){
             if(old===null)el.removeAttribute(attribute);else el.setAttribute(attribute,old);marked.delete(el);
