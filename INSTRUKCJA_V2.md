@@ -3,7 +3,7 @@
 > **OBOWIĄZUJĄCA INSTRUKCJA: INSTRUKCJA_V2.md**
 > Źródło aktualne: repo Truciaczek/Motyw, gałąź main, plik INSTRUKCJA_V2.md.
 > Przed pracą pobierać aktualną wersję z GitHuba; lokalnie przechowywać kopię roboczą. Po każdej akceptacji użytkownika aktualizować ten plik w repo. W trakcie prac dokumentować zmiany i odrzucone próby, zachowując historię. INSTRUKCJA_PROJEKTU.md oraz wcześniejsze kopie w plikach ChatGPT są archiwalne. Dotychczasowe zapisy o zapisie instrukcji w plikach ChatGPT opisują stary sposób pracy.
-> Aktualny zaakceptowany stan Motywu NI: **1.2.20**.
+> Aktualny zaakceptowany stan Motywu NI: **1.2.31**.
 
 
 Data utworzenia: 2026-11-11
@@ -861,3 +861,21 @@ Nadpisano ikonę bezpośrednio w naszym atlasie, zamiast dodawać nowy filtr lub
 Status: podgląd zaakceptowany do wdrożenia, wdrożenie ukończone; efekt w grze do sprawdzenia po F5 przy włączonym motywie. Nie rozszerzać tej akceptacji na odrębne zadanie fioletowych przycisków z 1.2.30 ani pozostałe niezatwierdzone prace.
 
 Weryfikacja 1.2.31: zmieniono 149 pikseli w wycinku ikony; cała alfa i pozostały atlas identyczne. 9/9 istniejących zestawów testów kodu, składnia wygenerowanych paczek i git diff --check zaliczone.
+
+
+## Zbiorcza akceptacja końcowego stanu 1.2.21–1.2.31 — 2026-11-13
+
+Użytkownik potwierdził: „akceptuje wszystkie zmiany od ostatniej akceptacji”. Zatwierdzono wszystkie dotąd oczekujące zadania w ich końcowym stanie Motywu NI 1.2.31. Ostatnia pełna akceptacja obejmowała 1.2.20; X w Społeczności miał ponadto osobne potwierdzenie działania 1.2.29.
+
+Zadania ukończone i zaakceptowane:
+- Odwrócone stany aktywnej zielonej pinezki względem Rozwiń (1.2.21).
+- Niebieskoszare tło wierszy minutnika i pola ręcznego dodawania +, z dynamicznym zachowaniem natywnej alfa i regulacji przezroczystości (1.2.22–1.2.23).
+- Ciemny grafit #171B20 prawego panelu Umiejętności oraz turkusowe napisy listy, licznika i instrukcji (1.2.24).
+- Kamienne banery width-card-button.png w końcowej jaśniejszej skali #252B31, we wspólnym zakresie klasy we wszystkich oknach (1.2.25–1.2.26). Ciemniejszy wariant banerów z 1.2.24 jest zastąpiony, nie przywracać go w wyniku tej akceptacji.
+- Przyciski X Społeczności w działającym stanie 1.2.29: turkusowy spoczynek, grafitowa interakcja, naprawiony generator pełnej klasy .button bez uszkadzania .buttons.
+- Fioletowe przyciski w całym wspólnym zakresie w stylu Rozwiń w spoczynku, z zachowaniem dotychczasowych interakcji (1.2.30).
+- Nowa okrągła ikona i według zaakceptowanego podglądu skali biel -> #12C9BD, nadpisana bezpośrednio w assets/buttony.png (1.2.31). Zastępuje wcześniejszy ręczny wzór ikony.
+
+Nieudane próby X z 1.2.27–1.2.28 pozostają historyczne i zastąpione naprawą 1.2.29. Zbiorcza akceptacja nie przywraca odrzuconych ani zastąpionych wariantów. Wpisy oczekiwania na ocenę powyższych zadań są historyczne.
+
+**Aktualny zaakceptowany punkt odniesienia: Motyw NI 1.2.31. Brak otwartych zadań z tego pakietu.** Przy zapisie akceptacji nie zmieniano kodu ani numeru wydania.
