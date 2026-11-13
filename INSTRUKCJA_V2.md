@@ -804,3 +804,12 @@ Użytkownik polecił usunąć ograniczenie podmiany do Umiejętności. Usunięto
 Skala z 1.2.25 zachowana: najjaśniejszy widoczny piksel #252B31, pozostałe proporcjonalnie według luminancji Y/Ymax; faktura, alfa, geometria i wycinki obrazu bez zmian. Ramka zakładek friend-header.png bez zmiany zakresu. Użytkownik zatwierdził rozszerzenie zakresu, nie udzielił jeszcze formalnej akceptacji wyglądu prób 1.2.21–1.2.25.
 
 Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone. Status: wdrożone do oceny po F5 przy włączonym motywie; ostatnia zaakceptowana baza 1.2.20.
+
+
+## Przyciski X w Społeczności — 1.2.27, 2026-11-13
+
+Użytkownik zlecił przyciskom X wygląd naszego guzika w stanie do kliknięcia. Odczyt DOM potwierdził .buttons.action-buttons.btns-spacing z trzema bezpośrednimi przyciskami: zaproszenie .button.small.green z .add-bck.invite-friend, czat .button.small.green z .add-bck.chat i usuwanie .button.small (bez green) z bezpośrednim dzieckiem .ie-icon.ie-icon-close.ie-icon--no-hover. To brak klasy green powodował odmienny wygląd spoczynkowy.
+
+Dodano selektywną regułę .friend-enemy-list .action-buttons > .button:has(> .ie-icon-close). Spoczynek: gradient #25494B -> #142D30; hover/active/pressed/otwarte: #252B31 -> #171B20. Obrys #12C9BD, wewnętrzny odstęp #171B20; geometria cieni 1px/3px jak przy zwykłych naszych zielonych przyciskach. ::before bez osobnego tła, z turkusowym obrysem. Zachowano istniejące wykluczenia disabled. Zmiana dotyczy przycisku, nie podmienia grafiki SVG X ani działania usuwania. Nie zmieniano zapraszania i czatu ani innych X poza wspólnym panelem Społeczności.
+
+Weryfikacja: 9/9 istniejących zestawów testów kodu, kontrola składni wygenerowanych paczek i git diff --check zaliczone. Brak wizualnego testu w grze. Status: opublikowane do oceny po F5 przy włączonym motywie. Poprzednie wydania 1.2.21–1.2.26 nadal oczekują formalnej akceptacji, zaakceptowana baza 1.2.20.

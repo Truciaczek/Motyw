@@ -192,6 +192,14 @@
   rule([observationPin+'::before',observationPin+actionState+'::before',
     observationPin+'.green'+actionState+'::before'],
     'background:none!important;box-shadow:inset 0 0 0 1px #12C9BD!important;');
+  // Social remove buttons have no .green class; select their confirmed close glyph.
+  const socialRemove='.friend-enemy-list .action-buttons > .button:has(> .ie-icon-close)';
+  rule([socialRemove],
+    'color:#12C9BD!important;background:linear-gradient(#25494b,#142d30)!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
+  rule([socialRemove+actionState],
+    'color:#12C9BD!important;background:linear-gradient(#252b31,#171b20)!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
+  rule([socialRemove+'::before',socialRemove+actionState+'::before'],
+    'background:none!important;box-shadow:inset 0 0 0 1px #12C9BD!important;');
   // Consumable quick slots: palette only; retain native dimensions and inset shadow.
   rule(['.bottom-panel .slots .usable-slot.interface-element-one-item-slot-2'],
     'background-color:#171B20!important;border-color:#252B31!important;outline-color:#101419!important;');
