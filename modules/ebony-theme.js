@@ -41,6 +41,10 @@
     'filter:url("#truciak-menu-arrow-tint") drop-shadow(1px 1px 1px rgb(0,0,0))!important;');
   rule(['.whoishere-window .ie-icon-close:hover'],
     'filter:brightness(1.5) url("#truciak-menu-arrow-tint") drop-shadow(1px 1px 1px rgb(0,0,0))!important;');
+  // Chat channel glyphs and configuration gear switch native atlas offsets
+  // on hover. Tint the displayed original pixels in every state, not the card.
+  rule(['.chat-channel-card-icon', '.chat-config-wrapper-button'],
+    'filter:url("#truciak-menu-arrow-tint")!important;');
   // Bottom HUD sprites include transparent cutouts around the orb and labels.
   // Keep their original images/masks; wood belongs to the strip behind them.
   rule(['.bottom-panel', '.bottom-panel-pointer-bg'], 'background-color:transparent!important;');

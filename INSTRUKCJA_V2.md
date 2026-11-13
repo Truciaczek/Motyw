@@ -879,3 +879,28 @@ Zadania ukończone i zaakceptowane:
 Nieudane próby X z 1.2.27–1.2.28 pozostają historyczne i zastąpione naprawą 1.2.29. Zbiorcza akceptacja nie przywraca odrzuconych ani zastąpionych wariantów. Wpisy oczekiwania na ocenę powyższych zadań są historyczne.
 
 **Aktualny zaakceptowany punkt odniesienia: Motyw NI 1.2.31. Brak otwartych zadań z tego pakietu.** Przy zapisie akceptacji nie zmieniano kodu ani numeru wydania.
+
+
+
+## Osiem ikon kanałów czatu i dolna zębatka — 1.2.32, 2026-11-13
+
+Użytkownik zlecił znalezienie wszystkich ikon nad czatem, stanów hover i dolnej zębatki oraz przekolorowanie jak przycisku przezroczystości. Pełny odczyt Wklejony tekst(7).txt przy wyłączonym motywie potwierdził 8 elementów .chat-channel-card-icon, każdy 24x20, oraz 1 .chat-config-wrapper-button 24x24. Wszystkie korzystają z wersjonowanego /img/gui/buttony.png, filter none, opacity 1; pseudoelementy nie mają grafik.
+
+Potwierdzone background-position normalny -> hover:
+| Nr | Normalny | Hover |
+|---|---|---|
+| 1 | -425px -1039px | -425px -1039px |
+| 2 | -457px -1073px | -457px -1040px |
+| 3 | -491px -1073px | -491px -1040px |
+| 4 | -522px -1073px | -522px -1040px |
+| 5 | -557px -1073px | -557px -1040px |
+| 6 | -590px -1073px | -590px -1040px |
+| 7 | -623px -1074px | -623px -1041px |
+| 8 | -656px -1074px | -656px -1041px |
+| Zębatka | -523px -1009px | -548px -1009px |
+
+To 9 elementów i 17 różnych wycinków potwierdzonych w odczycie; dla pierwszej ikony odczyt nie potwierdza osobnego wycinka hover, nie wymyślać go.
+
+Dodano wspólną regułę filter:url(#truciak-menu-arrow-tint)!important dla .chat-channel-card-icon i .chat-config-wrapper-button. Identyczne mapowanie jak ikon przezroczystości w 1.2.19: sRGB, Y=0.2126R+0.7152G+0.0722B; RGBwynik=[18,201,189]*Y/255, alfa bez zmian. Biel -> #12C9BD, ciemniejsze piksele proporcjonalnie ciemniejsze. Filtr obejmuje samą warstwę ikony, nie tło kart ani cały czat. Gra nadal wybiera natywne background-position, więc wszystkie stany normalne/hover/aktywne korzystają z tej samej skali. Nie podmieniano źródła atlasu ani nie edytowano buttony.png, wymiarów, kliknięć i logiki czatu.
+
+Status: wdrożone do oceny po F5 przy włączonym motywie; sprawdzić 8 ikon nad czatem i zębatkę, normalnie i po najechaniu. Ostatnia zaakceptowana baza 1.2.31. Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone; bez testu wizualnego w grze.
