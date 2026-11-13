@@ -850,3 +850,14 @@ Osobno użytkownik poprosił o oryginalną okrągłą ikonę i przekolorowaną j
 NOWA IKONA NIE WDROŻONA. assets/buttony.png oraz obecna ikona pozostają identyczne; propozycja czeka na decyzję użytkownika. Nie uznawać zlecenia podglądu za zgodę na zmianę ikony w grze.
 
 Weryfikacja 1.2.30: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone; alfa podglądu pikselowo zachowana. Brak wizualnego testu przycisków w grze. Ostatnia pełna zaakceptowana baza 1.2.20 z osobno zaakceptowanym zadaniem X Społeczności w stanie 1.2.29.
+
+
+## Wdrożenie zaakceptowanego podglądu ikony i do atlasu — 1.2.31, 2026-11-13
+
+Użytkownik polecił „wdrazaj ikone, tylko pamietaj ja nadpisac w naszych buttonach”. Akceptacja dotyczy propozycji pokazanej w info-icon-comparison.png: oryginalna ikona z commitu f034339, pikselowa skala biel -> #12C9BD, Y=0.2126R+0.7152G+0.0722B i RGB=round([18,201,189]*Y/255), alfa oryginalna. Wstawiono dokładne piksele pliku podglądowego /tmp/info-icon-proposed.png do assets/buttony.png, prostokąt x=497..513, y=199..215 (17x17). Nie wykonywano nowej interpretacji ani kolejnego przeliczania kolorów.
+
+Nadpisano ikonę bezpośrednio w naszym atlasie, zamiast dodawać nowy filtr lub nakładkę CSS. Istniejąca wspólna .info-icon nadal korzysta z hudSprite i natywnych przesunięć; nowa grafika obejmuje wszystkie jej instancje. Przebudowano runtime i fallback instalatora. Wszystkie wartości alfa i piksele poza ikoną zachowane identycznie. Poprzednia kolorystyka według ręcznego wzoru 1.2.05 pozostaje historyczna i jest zastąpiona nową zaakceptowaną propozycją.
+
+Status: podgląd zaakceptowany do wdrożenia, wdrożenie ukończone; efekt w grze do sprawdzenia po F5 przy włączonym motywie. Nie rozszerzać tej akceptacji na odrębne zadanie fioletowych przycisków z 1.2.30 ani pozostałe niezatwierdzone prace.
+
+Weryfikacja 1.2.31: zmieniono 149 pikseli w wycinku ikony; cała alfa i pozostały atlas identyczne. 9/9 istniejących zestawów testów kodu, składnia wygenerowanych paczek i git diff --check zaliczone.
