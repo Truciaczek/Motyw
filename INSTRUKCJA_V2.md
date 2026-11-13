@@ -813,3 +813,12 @@ Użytkownik zlecił przyciskom X wygląd naszego guzika w stanie do kliknięcia.
 Dodano selektywną regułę .friend-enemy-list .action-buttons > .button:has(> .ie-icon-close). Spoczynek: gradient #25494B -> #142D30; hover/active/pressed/otwarte: #252B31 -> #171B20. Obrys #12C9BD, wewnętrzny odstęp #171B20; geometria cieni 1px/3px jak przy zwykłych naszych zielonych przyciskach. ::before bez osobnego tła, z turkusowym obrysem. Zachowano istniejące wykluczenia disabled. Zmiana dotyczy przycisku, nie podmienia grafiki SVG X ani działania usuwania. Nie zmieniano zapraszania i czatu ani innych X poza wspólnym panelem Społeczności.
 
 Weryfikacja: 9/9 istniejących zestawów testów kodu, kontrola składni wygenerowanych paczek i git diff --check zaliczone. Brak wizualnego testu w grze. Status: opublikowane do oceny po F5 przy włączonym motywie. Poprzednie wydania 1.2.21–1.2.26 nadal oczekują formalnej akceptacji, zaakceptowana baza 1.2.20.
+
+
+## Poprawa priorytetu spoczynkowego X Społeczności — 1.2.28, 2026-11-13
+
+Użytkownik odrzucił stan spoczynkowy 1.2.27: tło i wewnętrzna ramka pozostały grafitowe, natomiast hover był poprawny. Analiza kaskady potwierdziła przyczynę: ogólna .button:not(.green):not(.red):not(.violet):not(.purple):not(.blink-violet) ma specyficzność 0,6,0 przed wspólnym wykluczeniem launcherów, a reguła Social z 1.2.27 miała tylko 0,4,0. Wszystkie deklaracje są important, więc ogólne background-image i box-shadow wygrywały mimo późniejszego położenia reguły Social. Hover miał dodatkową specyficzność i działał.
+
+Wzmocniono selektor na podstawie potwierdzonego DOM do .friend-enemy-list .buttons.action-buttons > .button.small:not(.green):has(> .ie-icon-close) (0,7,0 przed tym samym wspólnym wykluczeniem launcherów). Dzięki temu kolorystyka spoczynku wygrywa z ogólną grafitową regułą: gradient #25494B -> #142D30 oraz turkusowe obramowanie #12C9BD z dotychczasowym wewnętrznym odstępem #171B20. Wartości deklaracji, grafika X, geometria i zaakceptowany przez użytkownika wygląd hover niezmienione. Poprawka nie obejmuje innych przycisków.
+
+Status: wdrożone do oceny po F5 przy włączonym motywie; sprawdzić przede wszystkim X bez najechania. 1.2.27 była nieudaną próbą stanu spoczynkowego, zastąpioną niniejszą poprawką. Nie uznawać częściowego potwierdzenia hover za akceptację całego wydania.

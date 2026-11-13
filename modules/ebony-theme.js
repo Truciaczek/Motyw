@@ -193,7 +193,8 @@
     observationPin+'.green'+actionState+'::before'],
     'background:none!important;box-shadow:inset 0 0 0 1px #12C9BD!important;');
   // Social remove buttons have no .green class; select their confirmed close glyph.
-  const socialRemove='.friend-enemy-list .action-buttons > .button:has(> .ie-icon-close)';
+  // Outrank the generic .button:not(.green):not(.red)... idle selector.
+  const socialRemove='.friend-enemy-list .buttons.action-buttons > .button.small:not(.green):has(> .ie-icon-close)';
   rule([socialRemove],
     'color:#12C9BD!important;background:linear-gradient(#25494b,#142d30)!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
   rule([socialRemove+actionState],
