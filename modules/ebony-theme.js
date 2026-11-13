@@ -169,6 +169,19 @@
     'color:#12C9BD!important;background:linear-gradient(#252b31,#171b20)!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
   rule(['.button'+actionState+'::before','.btn-min'+actionState+'::before'],
     'background:none!important;box-shadow:inset 0 0 0 1px #12C9BD!important;');
+  // Observation pins are toggles: green means already observed. Give only
+  // that selected state the reverse of the ordinary Expand button palette.
+  const observationPin='.button.observe-toggle';
+  const pinFrame='color:#12C9BD!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;';
+  rule([observationPin],
+    'background:linear-gradient(#25494b,#142d30)!important;'+pinFrame);
+  rule([observationPin+'.green',observationPin+actionState],
+    'background:linear-gradient(#252b31,#171b20)!important;'+pinFrame);
+  rule([observationPin+'.green'+actionState],
+    'background:linear-gradient(#25494b,#142d30)!important;'+pinFrame);
+  rule([observationPin+'::before',observationPin+actionState+'::before',
+    observationPin+'.green'+actionState+'::before'],
+    'background:none!important;box-shadow:inset 0 0 0 1px #12C9BD!important;');
   // Consumable quick slots: palette only; retain native dimensions and inset shadow.
   rule(['.bottom-panel .slots .usable-slot.interface-element-one-item-slot-2'],
     'background-color:#171B20!important;border-color:#252B31!important;outline-color:#101419!important;');

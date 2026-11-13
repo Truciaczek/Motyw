@@ -742,3 +742,14 @@ Użytkownik potwierdził: „akceptuję wszystkie zmiany”. Ostatnia wcześniej
 - 1.2.20: napis Szukaj w tym oknie w tej samej skali, z zachowaniem natywnej przezroczystości.
 
 Wcześniejsze wpisy o oczekiwaniu na ocenę tych wydań są historyczne i zastępuje je niniejsza akceptacja. Odrzucone próby pozostają odrzucone. **Aktualny zaakceptowany punkt odniesienia: Motyw NI 1.2.20. Brak otwartych zadań z tego pakietu.** Przy zapisie akceptacji nie zmieniano kodu ani numeru wydania.
+
+
+## Odwrócone stany aktywnej pinezki — 1.2.21, 2026-11-13
+
+Odczyt użytkownika potwierdził wspólną bazę .button.small.green: pinezka .button.small.green.observe-toggle z .label .add-bck.observed (buttony.png, -516px -398px); Rozwiń .button.stats-expand.small.green z tekstową .label. Identyczne natywne tło i cień obu przycisków. Użytkownik wyjaśnił: zielona pinezka oznacza już włączone obserwowanie, czerwona oznacza możliwość włączenia. Zlecił dla pinezki paletę Rozwiń z odwróceniem stanów dla włączonej zielonej pinezki.
+
+Oddzielono styl przez .button.observe-toggle, bez zmiany .stats-expand ani globalnych przycisków. Nieaktywna pinezka: jak Rozwiń — gradient turkusowy #25494B -> #142D30 w spoczynku, grafitowy #252B31 -> #171B20 podczas interakcji. Zielona .observe-toggle.green: odwrotnie — grafit w spoczynku, turkus przy hover/active/pressed/open. W obu wariantach obrys #12C9BD, wewnętrzny odstęp #171B20, zachowana geometria cieni 1px/3px. Reguły przedniej warstwy ::before zachowują turkusowy obrys bez natywnej nakładki tła. Wspólne wykluczenia disabled pozostają. Znak pinezki, atlas buttony.png, rozmiary, tooltipy i mechanizm obserwowania bez zmian. Nie modyfikowano grafiki symbolu pinezki.
+
+Status: wdrożone do oceny użytkownika po F5 z włączonym motywem; sprawdzić nieaktywną/aktywną pinezkę i hover, porównać z Rozwiń. Ostatnia zaakceptowana baza 1.2.20. Nie uznawać polecenia zmiany za akceptację efektu.
+
+Weryfikacja 1.2.21: 9/9 istniejących zestawów testów kodu, kontrola składni paczek podczas budowania oraz git diff origin/main --check zaliczone. Brak testu wizualnego w zalogowanej grze; wygląd do oceny użytkownika.
