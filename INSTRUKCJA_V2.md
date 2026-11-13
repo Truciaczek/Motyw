@@ -831,3 +831,10 @@ Odczyt użytkownika z włączonym motywem potwierdził w spoczynku ogólny grafi
 Zastąpiono zamianę podciągu .button wyrażeniem dopasowującym wyłącznie pełną klasę: /\.button(?![\w-])/g. Wykluczenia dla rzeczywistych .button pozostają identyczne, a .buttons i .button-* nie są rozbijane. Potwierdzony selektor Social zachowany; stan spoczynkowy nadal ma gradient turkusowy #25494B -> #142D30, obrys #12C9BD i turkusowy cień ::before, hover nadal grafitowy. Znak X i jego działanie bez zmian.
 
 Dodano kontrolę regresji na wygenerowanym CSS, a nie tylko źródle: trzy reguły Social zachowują prawidłową klasę .buttons.action-buttons, mają odpowiednie tła i turkusowe obramowania, w tym ::before. Weryfikacja: 9/9 zestawów testów kodu, składnia paczek i git diff --check zaliczone. Status: wdrożone do oceny po F5 przy włączonym motywie; brak wizualnego testu w grze.
+
+
+## Akceptacja przycisków X w Społeczności — 1.2.29, 2026-11-13
+
+Użytkownik potwierdził: „klasa, dziala”. Zadanie przycisków X w Społeczności ukończone i zaakceptowane w końcowej wersji 1.2.29: turkusowy gradient #25494B -> #142D30 i turkusowe ramki w spoczynku, grafitowy gradient #252B31 -> #171B20 podczas interakcji. Zachować naprawę generatora CSS dopasowującą pełną klasę .button bez uszkadzania .buttons oraz test regresji wygenerowanych selektorów.
+
+Próby 1.2.27–1.2.28 pozostają historycznie nieudane, zastąpione działającą 1.2.29; nie przywracać ich błędów. Niniejsze potwierdzenie dotyczy zadania X w Społeczności, nie stanowi zbiorczej akceptacji wcześniejszych odrębnych prac 1.2.21–1.2.26. Ostatnia całościowo zaakceptowana baza pozostaje 1.2.20, z osobno zaakceptowanym zadaniem X w stanie 1.2.29. Przy zapisie akceptacji nie zmieniano kodu ani numeru wydania.
