@@ -838,3 +838,15 @@ Dodano kontrolę regresji na wygenerowanym CSS, a nie tylko źródle: trzy regu�
 Użytkownik potwierdził: „klasa, dziala”. Zadanie przycisków X w Społeczności ukończone i zaakceptowane w końcowej wersji 1.2.29: turkusowy gradient #25494B -> #142D30 i turkusowe ramki w spoczynku, grafitowy gradient #252B31 -> #171B20 podczas interakcji. Zachować naprawę generatora CSS dopasowującą pełną klasę .button bez uszkadzania .buttons oraz test regresji wygenerowanych selektorów.
 
 Próby 1.2.27–1.2.28 pozostają historycznie nieudane, zastąpione działającą 1.2.29; nie przywracać ich błędów. Niniejsze potwierdzenie dotyczy zadania X w Społeczności, nie stanowi zbiorczej akceptacji wcześniejszych odrębnych prac 1.2.21–1.2.26. Ostatnia całościowo zaakceptowana baza pozostaje 1.2.20, z osobno zaakceptowanym zadaniem X w stanie 1.2.29. Przy zapisie akceptacji nie zmieniano kodu ani numeru wydania.
+
+
+
+## Fioletowe przyciski w spoczynku i podgląd oryginalnej ikony i — 1.2.30, 2026-11-13
+
+Użytkownik zlecił wszystkim fioletowym przyciskom (Umiejętności, Premium i inne wspólne użycia) wygląd Rozwiń w spoczynku, z zachowaniem prawidłowego hover. Dodano reguły .button oraz .widget-button dla .violet/.purple/.blink-violet, wyłącznie gdy nie są :hover/:active/.pressed/.active/.window-is-open ani aria-expanded/pressed=true. Spoczynek: gradient #25494B -> #142D30, tekst i obrys #12C9BD, wewnętrzny odstęp #171B20, cienie 1px/3px; ::before bez osobnego tła, turkusowy obrys. Interakcje są jawnie wyłączone z nowej reguły, pozostają pod dotychczasowymi stylami. Bez zmian działania płatności/resetowania, cen i ikon waluty. Status przycisków: wdrożone do oceny po F5 przy włączonym motywie.
+
+Osobno użytkownik poprosił o oryginalną okrągłą ikonę i przekolorowaną jak ikonki przezroczystości, z obowiązkowym podglądem przed wdrożeniem. Oryginał pobrano z historycznego assets/buttony.png commitu f034339, sprzed naszych zmian; wycinek (497,199), 17x17. Pixelowe mapowanie Y=0.2126R+0.7152G+0.0722B; RGB=round([18,201,189]*Y/255); alfa każdego piksela identyczna z oryginałem. To skala biel -> #12C9BD bez normalizowania do szczytu samej ikony. Przygotowano info-icon-comparison.png: oryginał / obecna zaakceptowana ikona według wzoru użytkownika / nowa propozycja, każda 6x nearest-neighbor oraz 1x na #171B20. Historycznie użytkownik dostarczył powiększony 5x wzór image(20261111-190533).png, wdrożony w 1.2.05 i zaakceptowany.
+
+NOWA IKONA NIE WDROŻONA. assets/buttony.png oraz obecna ikona pozostają identyczne; propozycja czeka na decyzję użytkownika. Nie uznawać zlecenia podglądu za zgodę na zmianę ikony w grze.
+
+Weryfikacja 1.2.30: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone; alfa podglądu pikselowo zachowana. Brak wizualnego testu przycisków w grze. Ostatnia pełna zaakceptowana baza 1.2.20 z osobno zaakceptowanym zadaniem X Społeczności w stanie 1.2.29.

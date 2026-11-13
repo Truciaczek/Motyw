@@ -120,6 +120,13 @@
     'color:#12C9BD!important;background-image:linear-gradient(#25494b,#142d30)!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
   rule(['.button.green::before', '.widget-button.green::before'],
     'background-image:none!important;box-shadow:inset 0 0 0 1px #12C9BD!important;');
+  // Purple purchase/reset buttons: normal action palette only while idle.
+  // Leave every existing hover/pressed/open rule in control of interaction.
+  const purpleIdle=':is(.violet,.purple,.blink-violet):not(:hover):not(:active):not(.pressed):not(.active):not(.window-is-open):not([aria-expanded="true"]):not([aria-pressed="true"])';
+  rule(['.button'+purpleIdle,'.widget-button'+purpleIdle],
+    'color:#12C9BD!important;background:linear-gradient(#25494b,#142d30)!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
+  rule(['.button'+purpleIdle+'::before','.widget-button'+purpleIdle+'::before'],
+    'background:none!important;box-shadow:inset 0 0 0 1px #12C9BD!important;');
   rule(['.button.green.pressed', '.widget-button.green.window-is-open::before',
     '.button.green:not(.disabled):hover', '.widget-button.green:not(.disabled):hover'],
     'background:#12C9BD!important;color:#101b20!important;box-shadow:inset 0 0 0 1px #64e5dc!important;');
