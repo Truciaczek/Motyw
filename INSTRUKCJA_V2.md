@@ -795,3 +795,12 @@ Użytkownik zlecił próbnie oprzeć oba kamienne banery na jaśniejszym bazowym
 Sprawdzenie zakresu: podmiana źródła ma jawny selektor .skills-window .interface-element-active-card-background-stretch i warunek ścieżki /img/gui/width-card-button.png. Obejmuje tylko instancje tej klasy wewnątrz okna umiejętności; inne użycia tego samego oryginalnego pliku w innych oknach nie zmieniły się ani w 1.2.24, ani w 1.2.25. Nie modyfikowano oryginalnego pliku gry. Kod repo i wyszukiwanie GitHub nie ujawniły dodatkowych odbiorców; brak pełnego aktualnego CSS/DOM gry nie pozwala stwierdzić, że ich nie ma, ani podać kompletnej listy.
 
 Weryfikacja: 9/9 zestawów testów kodu, składnia paczek i git diff --check zaliczone. Test banerów dostosowany do nowego celu; wspólny cache i cleanup zachowane. Status: opublikowane do oceny po F5 przy włączonym motywie. Brak testu wizualnego w grze. Ostatnia zaakceptowana baza 1.2.20, wydania 1.2.21–1.2.24 nie mają jeszcze formalnej akceptacji.
+
+
+## Wspólny zakres kamiennych banerów — 1.2.26, 2026-11-13
+
+Użytkownik polecił usunąć ograniczenie podmiany do Umiejętności. Usunięto prefiks .skills-window z selektora width-card-button.png w tools/tab-frame.js. Podmiana obejmuje teraz wspólną .interface-element-active-card-background-stretch we wszystkich oknach, również otwieranych później, nadal z kontrolą rzeczywistej ścieżki /img/gui/width-card-button.png. Nie deklarować niepotwierdzonej listy nazw okien.
+
+Skala z 1.2.25 zachowana: najjaśniejszy widoczny piksel #252B31, pozostałe proporcjonalnie według luminancji Y/Ymax; faktura, alfa, geometria i wycinki obrazu bez zmian. Ramka zakładek friend-header.png bez zmiany zakresu. Użytkownik zatwierdził rozszerzenie zakresu, nie udzielił jeszcze formalnej akceptacji wyglądu prób 1.2.21–1.2.25.
+
+Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone. Status: wdrożone do oceny po F5 przy włączonym motywie; ostatnia zaakceptowana baza 1.2.20.
