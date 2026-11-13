@@ -165,8 +165,8 @@ console.log('PASS: world wood uses final strip grain mapping while neutral ornam
   assert.equal(loads,2);assert.equal(left.attrs.size,1);assert.equal(right.attrs.size,1);
   const css=decodeURIComponent(sheet.textContent);
   const redSlopes=[...css.matchAll(/<feFuncR type="linear" slope="([^"]+)"/g)].map(m=>Number(m[1]));
-  assert.ok(redSlopes.some(s=>Math.abs(s-37/255)<1e-12));
-  assert.equal(redSlopes.filter(s=>Math.abs(s-23/255)<1e-12).length,2);
+  assert.equal(redSlopes.length,3);
+  assert.ok(redSlopes.every(s=>Math.abs(s-37/255)<1e-12));
   assert.equal((css.match(/::before\{border-image-source:/g)||[]).length,1);
   assert.ok(!css.includes('background-color:'));assert.ok(!css.includes('filter:url'));
   binding.cleanup();for(const el of [tab,left,right])assert.equal(el.attrs.size,0);

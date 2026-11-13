@@ -786,3 +786,12 @@ Rozszerzono tools/tab-frame.js o .skills-window .interface-element-active-card-b
 Status: wdrożone do oceny po F5 z włączonym motywem. Sprawdzić oba banery, tło, Lista umiejętności, licznik i tekst wprowadzający. Nie deklarować sprawdzenia wszystkich opisów po wybraniu umiejętności — nie dostarczono ich aktualnego DOM. Wydania 1.2.21–1.2.23 nadal bez formalnej akceptacji, ostatnia zaakceptowana baza 1.2.20.
 
 Weryfikacja 1.2.24: 9/9 zestawów testów kodu zaliczone. Rozszerzony test istniejącego mechanizmu sprawdza oba banery, ich wspólne pobieranie/cache, skalę docelową #171B20, zachowanie dotychczasowego #252B31 dla ramki zakładek i cleanup. Składnia paczek sprawdzona podczas budowania, git diff --check poprawny; brak wizualnego testu w zalogowanej grze.
+
+
+## Jaśniejsze banery umiejętności — próba 1.2.25, 2026-11-13
+
+Użytkownik zlecił próbnie oprzeć oba kamienne banery na jaśniejszym bazowym graficie. Zmieniono wyłącznie cel width-card-button.png w tools/tab-frame.js z [23,27,32] (#171B20) na [37,43,49] (#252B31). Formuła RGBwynik=[37,43,49]*Y/Ymax; najjaśniejszy widoczny piksel #252B31, reszta proporcjonalnie ciemniejsza. Faktura, alfa, wycinki i geometria zachowane. Tło prawego panelu #171B20 i turkusowe napisy z 1.2.24 bez zmian. To próba do oceny, nie akceptacja poprzedniego wydania.
+
+Sprawdzenie zakresu: podmiana źródła ma jawny selektor .skills-window .interface-element-active-card-background-stretch i warunek ścieżki /img/gui/width-card-button.png. Obejmuje tylko instancje tej klasy wewnątrz okna umiejętności; inne użycia tego samego oryginalnego pliku w innych oknach nie zmieniły się ani w 1.2.24, ani w 1.2.25. Nie modyfikowano oryginalnego pliku gry. Kod repo i wyszukiwanie GitHub nie ujawniły dodatkowych odbiorców; brak pełnego aktualnego CSS/DOM gry nie pozwala stwierdzić, że ich nie ma, ani podać kompletnej listy.
+
+Weryfikacja: 9/9 zestawów testów kodu, składnia paczek i git diff --check zaliczone. Test banerów dostosowany do nowego celu; wspólny cache i cleanup zachowane. Status: opublikowane do oceny po F5 przy włączonym motywie. Brak testu wizualnego w grze. Ostatnia zaakceptowana baza 1.2.20, wydania 1.2.21–1.2.24 nie mają jeszcze formalnej akceptacji.

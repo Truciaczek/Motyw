@@ -33,7 +33,7 @@ function bindTruciakTabFrame(doc,view){
     function scan(){
         const consumers=[
             {selector:'.tabs-nav',pseudo:'::before',path:'/img/gui/friend-header.png',target:[37,43,49]},
-            {selector:'.skills-window .interface-element-active-card-background-stretch',pseudo:'',path:'/img/gui/width-card-button.png',target:[23,27,32]}
+            {selector:'.skills-window .interface-element-active-card-background-stretch',pseudo:'',path:'/img/gui/width-card-button.png',target:[37,43,49]}
         ];
         for(const consumer of consumers)for(const el of doc.querySelectorAll(consumer.selector)){
             if(marked.has(el))continue;
