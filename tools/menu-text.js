@@ -65,7 +65,7 @@ function bindTruciakMenuText(doc,view){
 // Tint only the native translucent window backdrop; game opacity remains untouched.
 function bindTruciakTransparentWindows(doc,view){
     if(typeof doc.querySelectorAll!=='function' || typeof view.getComputedStyle!=='function')return {cleanup(){}};
-    const timerRows='.npc-list > .row.tw-list-item';
+    const timerRows='.npc-list > .row.tw-list-item,.elite-timer .window-controlls > .row.row-add.tw-list-item';
     const selector='.border-window.transparent .border-image,'+timerRows,attribute='data-truciak-window-backdrop';
     const marked=new Map(),style=doc.createElement('style');style.id='truciak-transparent-backdrops';
     (doc.head || doc.documentElement).appendChild(style);

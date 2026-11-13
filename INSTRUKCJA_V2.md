@@ -764,3 +764,12 @@ Na dodatkowe polecenie użytkownika „zachowj to dla wszystkich zmian przezrocz
 Status: wdrożone do oceny po F5 przy włączonym motywie. Zmiana pinezki 1.2.21 nadal oczekuje akceptacji. Ostatni zaakceptowany punkt odniesienia 1.2.20.
 
 Weryfikacja 1.2.22: rozszerzono istniejący test o wiersz minutnika, alfę 0.48 oraz dynamiczne wartości 0/0.2/0.7/1, zachowanie natywnego opacity i cleanup. 9/9 zestawów testów kodu oraz kontrola składni wygenerowanych paczek zaliczone; bez testu wizualnego w grze.
+
+
+## Tło pola dodawania + w minutniku — 1.2.23, 2026-11-13
+
+Użytkownik wskazał pominięte pole + ręcznego dodawania. Odczyt z Wklejony tekst(6).txt potwierdził .row.row-add.tw-list-item jako bezpośrednie dziecko .window-controlls w oknie .elite-timer, poza .npc-list. Natywne tło rgba(128,128,128,0.48), background-image none. Znak + znajduje się w .add.do-action-cursor > .btn-add. To wyjaśnia, dlaczego zakres 1.2.22 obejmujący jedynie wiersze .npc-list go pomijał.
+
+Do timerRows w bindTruciakTransparentWindows dodano .elite-timer .window-controlls > .row.row-add.tw-list-item. Używa dokładnie tego samego mechanizmu co wiersze mobków: RGB tła #668298=[102,130,152], dynamiczna natywna alfa odczytywana bez własnego arkusza, nieutrwalona na 0.48; opacity elementu i rodziców bez zmian, wraz ze zmianami przezroczystości okna. Zachowane wymiary, plus, kliknięcie otwierające ręczne dodawanie oraz pozostałe kontrolki. Nie obejmuje osobnego .row-input ani innych okien.
+
+Weryfikacja: przebudowano runtime i instalator; 9/9 istniejących zestawów testów kodu zaliczone, w tym dynamiczna alfa i cleanup wspólnego mechanizmu; składnia paczek poprawna. Brak testu wizualnego w zalogowanej grze. Status: wdrożone do oceny po F5 z włączonym motywem i przełączaniu przezroczystości minutnika. Wydania 1.2.21–1.2.22 nadal oczekują formalnej akceptacji. Ostatnia zaakceptowana baza 1.2.20.
