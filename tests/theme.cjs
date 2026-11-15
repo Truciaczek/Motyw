@@ -173,21 +173,23 @@ console.log('PASS: world wood uses final strip grain mapping while neutral ornam
 // Exercise both original tab frame and Skills banners through the real resource helper.
 (async()=>{
   const make=(path)=>{const attrs=new Map();return {path,getAttribute:k=>attrs.get(k)??null,setAttribute:(k,v)=>attrs.set(k,v),removeAttribute:k=>attrs.delete(k),attrs};};
-  const tab=make('friend-header.png'),left=make('width-card-button.png'),right=make('width-card-button.png');
+  const tab=make('friend-header.png'),left=make('width-card-button.png'),right=make('width-card-button.png'),premium=make('premium-panel-pl.png');
   let loads=0;const sheet={textContent:'',remove(){}};
-  const document={head:{appendChild(){}},createElement:type=>type==='style'?sheet:{getContext:()=>({drawImage(){},getImageData:()=>({data:[255,255,255,255,128,128,128,128]})}),toDataURL:()=> 'data:image/png;base64,AAAA'},querySelectorAll:selector=>selector==='.tabs-nav'?[tab]:[left,right]};
-  const view={location:{href:'https://example.test/',origin:'https://example.test'},Image:class{naturalWidth=2;naturalHeight=1;set src(value){loads++;this.onload();}},getComputedStyle:(el,pseudo)=>{assert.equal(pseudo,el===tab?'::before':null);return {borderImageSource:'url("https://example.test/img/gui/'+el.path+'")'};}};
+  const document={head:{appendChild(){}},createElement:type=>type==='style'?sheet:{getContext:()=>({drawImage(){},getImageData:()=>({data:[255,255,255,255,128,128,128,128]})}),toDataURL:()=> 'data:image/png;base64,AAAA'},querySelectorAll:selector=>selector==='.tabs-nav'?[tab]:selector.includes('premium-item')?[premium]:[left,right]};
+  const view={location:{href:'https://example.test/',origin:'https://example.test'},Image:class{naturalWidth=2;naturalHeight=1;set src(value){loads++;this.onload();}},getComputedStyle:(el,pseudo)=>{assert.equal(pseudo,el===tab?'::before':null);return {[el===premium?'backgroundImage':'borderImageSource']:'url("https://example.test/img/gui/'+el.path+'")'};}};
   const context={URL,encodeURIComponent,console};vm.createContext(context);
   vm.runInContext(fs.readFileSync(__dirname+'/../tools/tab-frame.js','utf8'),context);
   const binding=context.bindTruciakTabFrame(document,view);
   await Promise.resolve();await Promise.resolve();
-  assert.equal(loads,2);assert.equal(left.attrs.size,1);assert.equal(right.attrs.size,1);
+  assert.equal(loads,3);assert.equal(left.attrs.size,1);assert.equal(right.attrs.size,1);assert.equal(premium.attrs.size,1);
   const css=decodeURIComponent(sheet.textContent);
   const redSlopes=[...css.matchAll(/<feFuncR type="linear" slope="([^"]+)"/g)].map(m=>Number(m[1]));
-  assert.equal(redSlopes.length,3);
-  assert.ok(redSlopes.every(s=>Math.abs(s-37/255)<1e-12));
+  assert.equal(redSlopes.length,4);
+  assert.equal(redSlopes.filter(s=>Math.abs(s-37/255)<1e-12).length,3);
+  assert.equal(redSlopes.filter(s=>Math.abs(s-18/255)<1e-12).length,1);
+  assert.ok(css.includes('{background-image:url('));
   assert.equal((css.match(/::before\{border-image-source:/g)||[]).length,1);
   assert.ok(!css.includes('background-color:'));assert.ok(!css.includes('filter:url'));
-  binding.cleanup();for(const el of [tab,left,right])assert.equal(el.attrs.size,0);
+  binding.cleanup();for(const el of [tab,left,right,premium])assert.equal(el.attrs.size,0);
   console.log('PASS: existing tab frame preserved, both Skills banners darkened with shared cache, image-only tint and cleanup');
 })().catch(error=>{console.error(error);process.exitCode=1;});

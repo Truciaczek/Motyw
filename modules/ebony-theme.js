@@ -47,6 +47,10 @@
     'filter:url("#truciak-menu-arrow-tint")!important;');
   // Shared carousel arrows, including news: keep native sprite states and layout.
   rule(['.swiper-arrow'], 'filter:url("#truciak-menu-arrow-tint")!important;');
+  // Premium category tiles: tint only the image through the resource helper.
+  // The tile surface and border must retain their own independent colors.
+  rule(['.product-kind .premium-item-wrapper > .premium-item'],
+    'background-color:#252B31!important;border-color:#668298!important;');
   // Native battle availability classes cover resource/target restrictions and cooldown.
   // Dim only the picture; retain the game's opacity and readable cost labels.
   rule(['.battle-skill.disabled > .icon.skill-icon',
