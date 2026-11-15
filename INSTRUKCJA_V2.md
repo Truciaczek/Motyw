@@ -1012,3 +1012,18 @@ Skala bez zmian: sRGB, Y=0.2126R+0.7152G+0.0722B, RGB=[18,201,189]*Y/255, alfa z
 Wspólne klasy obejmują bieżące i nowo otwierane okna bez dodatkowego skanowania DOM; nie deklarować pełnej listy ekranów ani liczby instancji bez odczytu całej gry. Czerwony panel własnych dodatków w Shadow DOM poza zasięgiem tych reguł dokumentu.
 
 Weryfikacja: 9/9 zestawów testów kodu, składnia paczek i git diff --check zaliczone. Test wygenerowanego CSS sprawdza globalne klasy, usunięcie ograniczenia whoishere i zachowanie no-hover. Brak wizualnego testu w grze. Status: wdrożone do oceny po F5 przy włączonym motywie, m.in. Grupa i Gracze na mapie. Ostatnia zaakceptowana baza 1.2.31.
+
+
+## Ikony pod poziomem i dolny zakres poziomów Grupy — 1.2.43, 2026-11-15
+
+Użytkownik zlecił przekolorowanie korony, X i przekreślonego kółka pod poziomem graczy oraz dolnego Min lvl / Max lvl. Odczyt Wklejony tekst(20261115-195429).txt przy włączonym motywie potwierdził root .party-window i .info-icons:
+- .kick-out-party.kick-out: buttony.png, -624px -117px (X wyrzucenia).
+- .party__disband: buttony.png, -686px -146px (przekreślone kółko).
+- .give-lead-party.give-lead: buttony.png, -641px -117px w jednej instancji i -591px -117px w drugiej (warianty przekazania przywództwa).
+- .party__crown: buttony.png, -591px -117px (korona lidera).
+
+Dodano filter:url(#truciak-menu-arrow-tint)!important na powyższych czterech klasach wewnątrz .party-window .info-icons. Ta sama skala sRGB biel -> #12C9BD: Y=0.2126R+0.7152G+0.0722B, RGB=[18,201,189]*Y/255; alfa zachowana. Źródła i przesunięcia, ich zmiany hover/stanów, natywna widoczność i działanie wyrzucania, rozwiązania grupy oraz przekazywania lidera pozostają pod kontrolą gry. Nie filtrowano avatarów, całych wierszy, paska HP, pozostałych statusów i ikony łupów. assets/buttony.png bez zmian.
+
+Dolny napis jest dodatkiem Gargonem, a nie natywną etykietą: .gargonem-partyStats-min-lvl i .gargonem-partyStats-max-lvl w center. Ustawiono color #12C9BD!important na obu spanach oraz .party-window center:has(> .gargonem-partyStats-min-lvl), żeby również ukośnik miał ten sam kolor. Odczyt bieli 255 uzasadnia dokładny podstawowy turkus. Nie modyfikowano kodu dodatku, obliczeń zakresu ani innych liczników Gargonem.
+
+Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone. Status: wdrożone do oceny po F5 przy włączonym motywie i otwarciu Grupy. Bez testu wizualnego w grze; ostatnia zaakceptowana baza 1.2.31.

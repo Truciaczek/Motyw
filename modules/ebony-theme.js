@@ -47,6 +47,17 @@
     'filter:url("#truciak-menu-arrow-tint")!important;');
   // Shared carousel arrows, including news: keep native sprite states and layout.
   rule(['.swiper-arrow'], 'filter:url("#truciak-menu-arrow-tint")!important;');
+  // Party member controls use atlas sprites, including both crown variants.
+  rule(['.party-window .info-icons .kick-out-party',
+    '.party-window .info-icons .party__disband',
+    '.party-window .info-icons .give-lead-party',
+    '.party-window .info-icons .party__crown'],
+    'filter:url("#truciak-menu-arrow-tint")!important;');
+  // The optional Gargonem level summary is outside the native content layer.
+  rule(['.party-window .gargonem-partyStats-min-lvl',
+    '.party-window .gargonem-partyStats-max-lvl',
+    '.party-window center:has(> .gargonem-partyStats-min-lvl)'],
+    'color:#12C9BD!important;');
   // Premium category tiles: tint only the image through the resource helper.
   // The tile surface and border must retain their own independent colors.
   rule(['.product-kind .premium-item-wrapper > .premium-item'],
