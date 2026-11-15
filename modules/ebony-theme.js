@@ -45,6 +45,11 @@
   // on hover. Tint the displayed original pixels in every state, not the card.
   rule(['.chat-channel-card-icon', '.chat-config-wrapper-button'],
     'filter:url("#truciak-menu-arrow-tint")!important;');
+  // Native battle availability classes cover resource/target restrictions and cooldown.
+  // Dim only the picture; retain the game's opacity and readable cost labels.
+  rule(['.battle-skill.disabled > .icon.skill-icon',
+    '.battle-skill.cooldown-disabled > .icon.skill-icon'],
+    'filter:grayscale(1) brightness(.45)!important;');
   // Bottom HUD sprites include transparent cutouts around the orb and labels.
   // Keep their original images/masks; wood belongs to the strip behind them.
   rule(['.bottom-panel', '.bottom-panel-pointer-bg'], 'background-color:transparent!important;');

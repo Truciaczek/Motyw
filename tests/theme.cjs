@@ -26,6 +26,12 @@ for(const block of css.split('}').filter(Boolean)){
   for(const selector of selectors)assert.ok(selector.startsWith('html[data-truciak-theme="ebony"] '));
 }
 const mainCss=m.testing.css;
+const unavailableSkill=mainCss.split('}').find(b=>b.includes('.battle-skill.disabled > .icon.skill-icon'));
+assert.ok(unavailableSkill.includes('.battle-skill.cooldown-disabled > .icon.skill-icon'));
+assert.ok(unavailableSkill.includes('filter:grayscale(1) brightness(.45)!important;'));
+assert.ok(!unavailableSkill.includes('opacity:'));
+assert.ok(!unavailableSkill.includes('pointer-events:'));
+assert.ok(unavailableSkill.split('{')[0].trim().split(',\n').every(s=>/\.battle-skill\.(disabled|cooldown-disabled) > \.icon\.skill-icon$/.test(s)));
 // Launcher exclusions must not split the confirmed Social .buttons container.
 const socialBlocks=mainCss.split('}').filter(b=>b.includes('.friend-enemy-list .buttons.action-buttons > .button'));
 assert.equal(socialBlocks.length,3);
