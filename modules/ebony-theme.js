@@ -83,6 +83,8 @@
     'background-color:#252B31!important;');
   rule(['.quest-window .left-scroll', '.quest-window .left-scroll .one-item-on-divide-list'],
     'border-color:#668298!important;');
+  rule(['.quest-window .left-scroll .one-item-on-divide-list:hover'],
+    'background:#171B20!important;');
   rule(['.quest-window .divide-list-group .group-header .direction'],
     'filter:url("#truciak-menu-arrow-tint")!important;');
   // Confirmed Skills parchment layer; preserve its native border image.

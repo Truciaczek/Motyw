@@ -990,3 +990,12 @@ Wdrożenie ograniczone do .quest-window (poza współdzieloną grafiką banerów
 Banery grup .card-graphic.interface-element-active-card-border-image używają /img/gui/width-card-button.png. Rozszerzono istniejącą podmianę zasobu o wspólną .interface-element-active-card-border-image, obok wcześniejszej .interface-element-active-card-background-stretch. Globalny zakres tych klas z kontrolą ścieżki pliku, również w innych oknach; najjaśniejszy widoczny piksel #252B31, pozostałe RGB=[37,43,49]*Y/Ymax, zachowane faktura, alfa, border-image-slice/width/repeat i wymiary. Teksty i strzałki nie są filtrowane razem z obrazem banera.
 
 Nie zmieniano górnych zakładek, semantycznych kolorów zadań, przycisków obserwowania, przebiegu zadań ani filtracji. Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone; bez testu wizualnego w grze. Status: wdrożone do oceny po F5 przy włączonym motywie w Aktywne/Dostępne. Ostatnia zaakceptowana baza 1.2.31, późniejsze prace nadal oczekują formalnej akceptacji.
+
+
+## Ciemny hover wiersza zadania — 1.2.41, 2026-11-15
+
+Użytkownik wskazał pozostałe stare tło po najechaniu na wiersz listy zadań i zlecił ciemny szary firusiowy. Dodano .quest-window .left-scroll .one-item-on-divide-list:hover z background:#171B20!important. Skrót background zastępuje także ewentualny natywny obraz/gradient warstwy hover, bez pozostawiania starego koloru pod spodem. Zakres oparty na klasie wiersza potwierdzonej w odczycie Dostępne.
+
+Spoczynek nadal pokazuje jaśniejsze tło #252B31 warstwy listy. Nie zmieniano tekstu, siatki #668298, wymiarów, banerów, zwijania i klikania zadań. Nie rozszerzano zmiany na wszystkie listy gry ani stan zaznaczenia niezależny od hover.
+
+Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone; brak testu wizualnego w grze. Status: wdrożone do oceny po F5 przy włączonym motywie, po najechaniu i odsunięciu kursora od wiersza. Ostatnia zaakceptowana baza 1.2.31.
