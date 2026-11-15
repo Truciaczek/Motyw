@@ -999,3 +999,16 @@ Użytkownik wskazał pozostałe stare tło po najechaniu na wiersz listy zadań 
 Spoczynek nadal pokazuje jaśniejsze tło #252B31 warstwy listy. Nie zmieniano tekstu, siatki #668298, wymiarów, banerów, zwijania i klikania zadań. Nie rozszerzano zmiany na wszystkie listy gry ani stan zaznaczenia niezależny od hover.
 
 Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone; brak testu wizualnego w grze. Status: wdrożone do oceny po F5 przy włączonym motywie, po najechaniu i odsunięciu kursora od wiersza. Ostatnia zaakceptowana baza 1.2.31.
+
+
+## Wspólny zakres ikon ustawień, krycia i X — 1.2.42, 2026-11-15
+
+Użytkownik wskazał niepokolorowane ustawienia, przezroczystość i X w Grupie oraz zlecił zmianę wszędzie, gdzie są używane. Przyczyną było ograniczenie reguł 1.2.19 do .whoishere-window, pomimo współdzielonych klas.
+
+Usunięto ograniczenie okna dla .increase-opacity i ustawień .settings-button. X jest współdzielonym .ie-icon-close z grafiką SVG, a nie wycinkiem buttony.png; dlatego wspólny filtr stosuje się bezpośrednio do tej klasy zamiast polegać wyłącznie na zmianie atlasu. Obejmuje również inne miejsca z tym samym glyph-em X.
+
+Skala bez zmian: sRGB, Y=0.2126R+0.7152G+0.0722B, RGB=[18,201,189]*Y/255, alfa zachowana; biel -> #12C9BD. Dla X zachowano czarny drop-shadow 1px 1px 1px, a na hover kolejność brightness(1.5) oryginału -> tint -> czarny cień. Hover wyklucza .ie-icon--no-hover, żeby usuwanie z list i inne świadomie niepodświetlane glyphy nie zyskały nowego rozjaśniania. Nie zmieniano natywnych wycinków atlasu, kliknięć, geometrii ani opacity. assets/buttony.png bez zmian. Lupka .whoishere-window .search-wrapper::before zachowuje dotychczasowy zakres; nie rozszerzano wszystkich wyszukiwarek tym zleceniem.
+
+Wspólne klasy obejmują bieżące i nowo otwierane okna bez dodatkowego skanowania DOM; nie deklarować pełnej listy ekranów ani liczby instancji bez odczytu całej gry. Czerwony panel własnych dodatków w Shadow DOM poza zasięgiem tych reguł dokumentu.
+
+Weryfikacja: 9/9 zestawów testów kodu, składnia paczek i git diff --check zaliczone. Test wygenerowanego CSS sprawdza globalne klasy, usunięcie ograniczenia whoishere i zachowanie no-hover. Brak wizualnego testu w grze. Status: wdrożone do oceny po F5 przy włączonym motywie, m.in. Grupa i Gracze na mapie. Ostatnia zaakceptowana baza 1.2.31.

@@ -26,6 +26,12 @@ for(const block of css.split('}').filter(Boolean)){
   for(const selector of selectors)assert.ok(selector.startsWith('html[data-truciak-theme="ebony"] '));
 }
 const mainCss=m.testing.css;
+assert.ok(mainCss.includes('html[data-truciak-theme="ebony"] .increase-opacity,'));
+assert.ok(mainCss.includes('html[data-truciak-theme="ebony"] .settings-button,'));
+assert.ok(mainCss.includes('html[data-truciak-theme="ebony"] .ie-icon-close{filter:url("#truciak-menu-arrow-tint") drop-shadow'));
+assert.ok(mainCss.includes('.ie-icon-close:not(.ie-icon--no-hover):hover{filter:brightness(1.5) url("#truciak-menu-arrow-tint")'));
+assert.ok(!mainCss.includes('.whoishere-window .increase-opacity'));
+assert.ok(!mainCss.includes('.whoishere-window .ie-icon-close'));
 const premiumGlow=mainCss.split('}').filter(b=>b.includes('.product-kind .premium-item-wrapper > .premium-item')&&b.split('{')[0].includes('::after'));
 assert.equal(premiumGlow.length,2);
 assert.ok(premiumGlow.find(b=>!b.split('{')[0].includes(':hover')).includes('background-image:none!important;'));
