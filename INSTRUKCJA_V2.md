@@ -3,7 +3,7 @@
 > **OBOWIĄZUJĄCA INSTRUKCJA: INSTRUKCJA_V2.md**
 > Źródło aktualne: repo Truciaczek/Motyw, gałąź main, plik INSTRUKCJA_V2.md.
 > Przed pracą pobierać aktualną wersję z GitHuba; lokalnie przechowywać kopię roboczą. Po każdej akceptacji użytkownika aktualizować ten plik w repo. W trakcie prac dokumentować zmiany i odrzucone próby, zachowując historię. INSTRUKCJA_PROJEKTU.md oraz wcześniejsze kopie w plikach ChatGPT są archiwalne. Dotychczasowe zapisy o zapisie instrukcji w plikach ChatGPT opisują stary sposób pracy.
-> Aktualny zaakceptowany stan Motywu NI: **1.2.31**.
+> Aktualny zaakceptowany stan Motywu NI: **1.2.44**.
 
 
 Data utworzenia: 2026-11-11
@@ -1036,3 +1036,11 @@ Użytkownik zgłosił odsłonięte brązowe drewno po ustawieniu dwóch rzędów
 Rozszerzono tę samą regułę filter:url(#truciak-ebony-bar-tint)!important o .layer.interface-layer .positioner.bottom > .bg-additional-widget-left oraz analogiczny prawy element. Bez podmiany grafiki ani geometrii: natywne wycinki, faktura, maska alfa, rzeźbiona krawędź, położenie i widoczność pozostają zachowane. Dokładnie ten sam istniejący filtr barPrimitives i seamPrimitives co główna belka; bez nowej palety. Reguły CSS obejmują również elementy dodane po uruchomieniu i przełączanie układu bez dodatkowego obserwatora. Nie filtrowano kontenerów, ikon ani szarych pól konfiguracji.
 
 Weryfikacja: build, 9/9 zestawów testów i git diff --check. Test CSS sprawdza oba nowe selektory oraz zachowanie natywnych obrazów. Bez testu wizualnego w zalogowanej grze. Status: wdrożone do oceny w układzie jednego/dwóch rzędów i konfiguracji ikon; ostatnia zaakceptowana baza 1.2.31.
+
+## Zbiorcza akceptacja zmian 1.2.32–1.2.44 — 2026-11-15
+
+Użytkownik potwierdził: „Akceptuje wszystkie zmiany od ostatniej akceptacji”. Obejmuje to wszystkie końcowe wdrożenia po zaakceptowanej bazie 1.2.31 do aktualnej 1.2.44 włącznie, także poprawkę dodatkowych warstw drewna dolnej belki w układzie dwóch rzędów i konfiguracji ikon.
+
+Status tych wdrożeń: **ukończony, zaakceptowany przez użytkownika**. Nowa obowiązująca zaakceptowana baza: **1.2.44**, kod w commicie 052416ebed381d99fee4e6706db8aba7602596dd. Wcześniejsze zapisy „do oceny” i „oczekuje akceptacji” dla tego zakresu są historyczne i zostały zamknięte niniejszym potwierdzeniem. Odrzucone lub zastąpione próby pozostają historią; akceptacja dotyczy końcowego stanu kodu, bez przywracania tych prób.
+
+Zmieniono wyłącznie dokumentację akceptacji. Wersja dodatku i jego kod pozostają 1.2.44; bez nowej publikacji pakietu ani potrzeby ponownego F5 z powodu tego wpisu.
