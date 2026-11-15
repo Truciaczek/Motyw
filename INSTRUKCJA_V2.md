@@ -948,3 +948,12 @@ Rozszerzono istniejący mechanizm zasobów tools/tab-frame.js o podmianę wyłą
 Nie nałożono filtra na cały kafelek: filtrowany jest wyłącznie obraz tła, dzięki czemu ramka #668298, powierzchnia #252B31 i napisy nie ulegają ponownemu przeliczeniu. Gra zachowuje oryginalne pozycje wycinków atlasu, więc wszystkie kategorie korzystają z jednego przeliczonego zasobu. Cache kluczuje URL/kolor/sposób kalibracji; dotychczasowe ramki i kamienne banery zachowują swoje mapowanie według natywnej maksymalnej luminancji. Obsługa nowo otwartych okien, cleanup i fallback oryginału przy błędzie pobrania zachowane. assets/buttony.png bez zmian.
 
 Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone. Rozszerzony test zasobów sprawdza rozdzielenie background-image od border-image-source, stałą białą referencję dla ikon, dotychczasowe skale banerów/cache i cleanup. Brak wizualnego testu w grze. Status: wdrożone do oceny po F5 przy włączonym motywie w Premium. Ostatnia zaakceptowana baza 1.2.31; późniejsze prace czekają na formalną akceptację.
+
+
+## Turkusowa poświata kafelków Premium — 1.2.37, 2026-11-15
+
+Użytkownik zgłosił żółte podświetlenie pozostałe po 1.2.36. Odczyt z włączonym motywem potwierdził poprawne tło #252B31 i przeliczony obraz SVG na .premium-item.gloves. Żółty efekt jest osobnym pseudoelementem ::after: radial-gradient(circle, rgba(239,192,47,0.6) 0%, rgba(0,0,0,0) 45%), opacity 1, filter none. ::before i dziecko .premium-text nie zawierają tej poświaty.
+
+Dodano wyłącznie background-image:radial-gradient(circle,rgba(18,201,189,.6) 0%,rgba(0,0,0,0) 45%)!important dla .product-kind .premium-item-wrapper > .premium-item::after. Zamiana koloru poświaty na podstawowy #12C9BD, alfa 0.6, przezroczysty koniec i stopnie 0%/45% oraz kształt circle zachowane. Content/display/opacity, geometria i natywna kontrola pojawiania się pseudoelementu bez zmian. Wspólny zakres wszystkich kategorii Premium. Nie filtrowano całego kafelka; grafika ikon, tło, ramki i tekst z 1.2.36 zachowane.
+
+Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone. Status: wdrożone do oceny po F5 przy włączonym motywie i najechaniu na kafelki Premium. Bez wizualnego testu w grze; ostatnia zaakceptowana baza 1.2.31.

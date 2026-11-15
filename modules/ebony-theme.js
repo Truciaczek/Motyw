@@ -51,6 +51,8 @@
   // The tile surface and border must retain their own independent colors.
   rule(['.product-kind .premium-item-wrapper > .premium-item'],
     'background-color:#252B31!important;border-color:#668298!important;');
+  rule(['.product-kind .premium-item-wrapper > .premium-item::after'],
+    'background-image:radial-gradient(circle,rgba(18,201,189,.6) 0%,rgba(0,0,0,0) 45%)!important;');
   // Native battle availability classes cover resource/target restrictions and cooldown.
   // Dim only the picture; retain the game's opacity and readable cost labels.
   rule(['.battle-skill.disabled > .icon.skill-icon',
