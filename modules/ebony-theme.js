@@ -51,6 +51,7 @@
   // The tile surface and border must retain their own independent colors.
   rule(['.product-kind .premium-item-wrapper > .premium-item'],
     'background-color:#252B31!important;border-color:#668298!important;');
+  rule(['.premium-footer .premium-footer__label'], 'color:#12C9BD!important;');
   rule(['.product-kind .premium-item-wrapper > .premium-item::after'],
     'background-image:none!important;');
   rule(['.product-kind .premium-item-wrapper > .premium-item:hover::after'],

@@ -966,3 +966,10 @@ Użytkownik zgłosił, że 1.2.37 ustawiła podświetlenie na stałe. Przyczyną
 Dla .product-kind .premium-item-wrapper > .premium-item::after ustawiono background-image:none!important. Turkusowy radial-gradient(circle,rgba(18,201,189,.6) 0%,rgba(0,0,0,0) 45%)!important występuje wyłącznie w .premium-item:hover::after w tym samym zakresie. Po opuszczeniu kafelka poświata znika; kolory powierzchni/ramek, ikony i napisy zachowane. Nie zmieniano rozmiarów, opacity ani działania kafelków.
 
 Weryfikacja: 9/9 zestawów testów kodu, składnia paczek i git diff --check zaliczone. Dodano kontrolę regresji wygenerowanego CSS: spoczynek bez grafiki ::after, gradient wyłącznie przy :hover. Status: wdrożone do oceny po F5 z włączonym motywem; sprawdzić wejście i wyjście kursora z kafelka. Brak wizualnego testu w grze, ostatnia zaakceptowana baza 1.2.31.
+
+
+## Napis Brakuje Ci SŁ? w Premium — 1.2.39, 2026-11-15
+
+Użytkownik wskazał pozostały jasny napis Brakuje Ci SŁ?. Odczyt DOM potwierdził div.premium-footer__label wewnątrz .premium-footer. Dodano wyłącznie color:#12C9BD!important dla .premium-footer .premium-footer__label. To bezpośrednia podmiana na podstawowy turkus napisów, bez przeliczania luminancji. Nie zmieniano przycisków doładowania, ikon waluty, treści, geometrii ani funkcji stopki.
+
+Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone. Status: wdrożone do oceny po F5 przy włączonym motywie i otwarciu Premium. Brak wizualnego testu w grze; ostatnia zaakceptowana baza 1.2.31, późniejsze zadania nadal oczekują formalnej akceptacji.
