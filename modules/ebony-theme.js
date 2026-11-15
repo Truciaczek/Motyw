@@ -227,6 +227,11 @@
   rule([contextItem+':not(.disabled):not(.cooldown-disabled):not([aria-disabled="true"]):is(:hover,:active,.active,.selected,.pressed)'],
     'color:#12C9BD!important;background:linear-gradient(#252b31,#171b20)!important;border-color:#12C9BD!important;');
   rule([contextItem+'::before'], 'background:none!important;');
+  // Battle popup entries are separate from the skill-bar icons. Keep their
+  // native unavailable classes, and dim the whole entry including cost/turns.
+  rule(['.popup-menu__list > .menu-item-skill.cooldown-disabled',
+    '.popup-menu__list > .menu-item-skill.disabled'],
+    'filter:grayscale(1) brightness(.45)!important;');
   // Native tab fills only: preserve shadows, glow, geometry and pseudo-elements.
   const niTabCard='.tabs-nav > .card';
   rule([niTabCard],

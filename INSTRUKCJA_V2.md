@@ -915,3 +915,14 @@ Dodano regułę dla .battle-skill.disabled > .icon.skill-icon oraz .battle-skill
 Reguła reaguje automatycznie na klasy nadawane/usuwane przez grę; po odzyskaniu dostępności nowy filtr przestaje pasować, bez obserwatorów i ingerencji w logikę. Zakres obejmuje wszystkie powody natywnego .disabled, także zły cel — poinformowano użytkownika o tym przed wdrożeniem. Brak zasobów energii objęty, jeśli gra oznacza go tym samym .disabled; nie zgadywano nieodczytanej nazwy klasy not-enough-e. Nie przyciemnia się wszystkich umiejętności globalnie.
 
 Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia wygenerowanych paczek i git diff --check zaliczone. Dodano kontrolę zakresu wygenerowanego CSS: oba niedostępne stany, tylko warstwa ikony, bez opacity i pointer-events. Brak testu wizualnego w grze. Status: wdrożone do oceny po F5 z włączonym motywem; sprawdzić cooldown, brak zasobów i powrót dostępności. Ostatnia zaakceptowana baza 1.2.31, ikony czatu 1.2.32 nadal bez formalnej akceptacji.
+
+
+## Wyszarzenie niedostępnych ataków w menu przeciwnika — 1.2.34, 2026-11-15
+
+Użytkownik zgłosił brak efektu 1.2.33 i przesłał screen menu ataków. Poprzednia zmiana dotyczyła ikon paska .battle-skill, a screen przedstawiał osobny komponent .menu-item-skill. Pierwszy odczyt [] wykonano bez otwartego menu; kolejny odczyt zawierał wyłącznie pozycje bez klas niedostępności. Ostateczny odczyt po użyciu Podwójnego trafienia potwierdził .menu-item.menu-item-skill.menu-item-skill-id-239.cooldown-disabled w rodzicu .popup-menu__list oraz tekst kosztu (25e) i 3t; odpowiadająca ikona .battle-skill.e.cooldown-disabled miała ID 239. Pozostałe dostępne pozycje menu nie miały klasy cooldown-disabled. Menu samo oznacza cooldown, więc nie dodano synchronizacji przez ID ani ingerencji w silnik.
+
+Dodano filter grayscale(1) brightness(.45)!important na .popup-menu__list > .menu-item-skill.cooldown-disabled oraz .popup-menu__list > .menu-item-skill.disabled. Obejmuje całe niedostępne pole, tło, ramki, nazwę, koszt i tury; zachowuje treść, układ i działanie kontrolek. Po usunięciu klasy przez grę filtr przestaje pasować. Dostępne Atakuj i pozostałe umiejętności bez tych klas nie są przyciemniane. Istniejąca reguła paska 1.2.33 pozostaje.
+
+Cooldown potwierdzono bezpośrednio. Wsparcie .disabled obejmie brak zasobów, jeśli gra używa tej klasy również w menu; konkretnego odczytu menu przy braku many/energii jeszcze nie dostarczono i nie deklarować jego osobnego testu.
+
+Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone. Kontrola wygenerowanego CSS wymaga obu selektorów ograniczonych do niedostępnych umiejętności menu, bez pointer-events. Brak wizualnego testu w zalogowanej grze. Status: wdrożone do oceny po F5 przy włączonym motywie i ponownym otwarciu menu podczas cooldownu. Ostatnia zaakceptowana baza 1.2.31; 1.2.32–1.2.33 nadal bez formalnej akceptacji.

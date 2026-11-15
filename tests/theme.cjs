@@ -32,6 +32,11 @@ assert.ok(unavailableSkill.includes('filter:grayscale(1) brightness(.45)!importa
 assert.ok(!unavailableSkill.includes('opacity:'));
 assert.ok(!unavailableSkill.includes('pointer-events:'));
 assert.ok(unavailableSkill.split('{')[0].trim().split(',\n').every(s=>/\.battle-skill\.(disabled|cooldown-disabled) > \.icon\.skill-icon$/.test(s)));
+const unavailableMenu=mainCss.split('}').find(b=>b.includes('.popup-menu__list > .menu-item-skill.cooldown-disabled'));
+assert.ok(unavailableMenu.includes('.popup-menu__list > .menu-item-skill.disabled'));
+assert.ok(unavailableMenu.includes('filter:grayscale(1) brightness(.45)!important;'));
+assert.ok(unavailableMenu.split('{')[0].trim().split(',\n').every(s=>/\.popup-menu__list > \.menu-item-skill\.(disabled|cooldown-disabled)$/.test(s)));
+assert.ok(!unavailableMenu.includes('pointer-events:'));
 // Launcher exclusions must not split the confirmed Social .buttons container.
 const socialBlocks=mainCss.split('}').filter(b=>b.includes('.friend-enemy-list .buttons.action-buttons > .button'));
 assert.equal(socialBlocks.length,3);
