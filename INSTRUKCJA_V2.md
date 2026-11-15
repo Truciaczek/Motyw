@@ -957,3 +957,12 @@ Użytkownik zgłosił żółte podświetlenie pozostałe po 1.2.36. Odczyt z wł
 Dodano wyłącznie background-image:radial-gradient(circle,rgba(18,201,189,.6) 0%,rgba(0,0,0,0) 45%)!important dla .product-kind .premium-item-wrapper > .premium-item::after. Zamiana koloru poświaty na podstawowy #12C9BD, alfa 0.6, przezroczysty koniec i stopnie 0%/45% oraz kształt circle zachowane. Content/display/opacity, geometria i natywna kontrola pojawiania się pseudoelementu bez zmian. Wspólny zakres wszystkich kategorii Premium. Nie filtrowano całego kafelka; grafika ikon, tło, ramki i tekst z 1.2.36 zachowane.
 
 Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone. Status: wdrożone do oceny po F5 przy włączonym motywie i najechaniu na kafelki Premium. Bez wizualnego testu w grze; ostatnia zaakceptowana baza 1.2.31.
+
+
+## Poświata Premium wyłącznie przy hover — 1.2.38, 2026-11-15
+
+Użytkownik zgłosił, że 1.2.37 ustawiła podświetlenie na stałe. Przyczyną była important reguła gradientu na bazowym ::after, bez warunku hover. Poprzednie założenie zachowania natywnego momentu pojawienia się efektu okazało się błędne; stan 1.2.37 zastąpiony tą poprawką.
+
+Dla .product-kind .premium-item-wrapper > .premium-item::after ustawiono background-image:none!important. Turkusowy radial-gradient(circle,rgba(18,201,189,.6) 0%,rgba(0,0,0,0) 45%)!important występuje wyłącznie w .premium-item:hover::after w tym samym zakresie. Po opuszczeniu kafelka poświata znika; kolory powierzchni/ramek, ikony i napisy zachowane. Nie zmieniano rozmiarów, opacity ani działania kafelków.
+
+Weryfikacja: 9/9 zestawów testów kodu, składnia paczek i git diff --check zaliczone. Dodano kontrolę regresji wygenerowanego CSS: spoczynek bez grafiki ::after, gradient wyłącznie przy :hover. Status: wdrożone do oceny po F5 z włączonym motywem; sprawdzić wejście i wyjście kursora z kafelka. Brak wizualnego testu w grze, ostatnia zaakceptowana baza 1.2.31.

@@ -26,6 +26,10 @@ for(const block of css.split('}').filter(Boolean)){
   for(const selector of selectors)assert.ok(selector.startsWith('html[data-truciak-theme="ebony"] '));
 }
 const mainCss=m.testing.css;
+const premiumGlow=mainCss.split('}').filter(b=>b.includes('.product-kind .premium-item-wrapper > .premium-item')&&b.split('{')[0].includes('::after'));
+assert.equal(premiumGlow.length,2);
+assert.ok(premiumGlow.find(b=>!b.split('{')[0].includes(':hover')).includes('background-image:none!important;'));
+assert.ok(premiumGlow.find(b=>b.split('{')[0].includes(':hover::after')).includes('rgba(18,201,189,.6)'));
 const unavailableSkill=mainCss.split('}').find(b=>b.includes('.battle-skill.disabled > .icon.skill-icon'));
 assert.ok(unavailableSkill.includes('.battle-skill.cooldown-disabled > .icon.skill-icon'));
 assert.ok(unavailableSkill.includes('filter:grayscale(1) brightness(.45)!important;'));
