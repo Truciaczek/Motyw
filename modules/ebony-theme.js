@@ -77,6 +77,14 @@
     'background-color:#252b31!important;background-image:none!important;');
   // World data strip: match the scrollbar handle without changing border geometry.
   rule(['.world-window__info'], 'border-color:#668298!important;');
+  // Quest journal: confirmed separate background layers and existing list borders.
+  rule(['.quest-window .right-column-background'], 'background-color:#171B20!important;');
+  rule(['.quest-window .left-column > .interface-element-middle-3-background-stretch'],
+    'background-color:#252B31!important;');
+  rule(['.quest-window .left-scroll', '.quest-window .left-scroll .one-item-on-divide-list'],
+    'border-color:#668298!important;');
+  rule(['.quest-window .divide-list-group .group-header .direction'],
+    'filter:url("#truciak-menu-arrow-tint")!important;');
   // Confirmed Skills parchment layer; preserve its native border image.
   rule(['.skills-window .right-column .middle-graphic.interface-element-middle-2-background'],
     'background-color:#171B20!important;');
@@ -88,8 +96,8 @@
     '.skills-window .right-column .info1', '.skills-window .right-column .info2'],
     'color:#12C9BD!important;');
   // Explicit muted labels and placeholders; neutral text scaling does not cover these.
-  rule(['.world-window .filter-label', '.world-window .legend'], 'color:#0B756E!important;');
-  rule(['.world-window .start-lvl input::placeholder', '.world-window .stop-lvl input::placeholder', '.friend-enemy-list .bottom-friend-panel input::placeholder'],
+  rule(['.world-window .filter-label', '.world-window .legend', '.quest-window .filter-label-component'], 'color:#0B756E!important;');
+  rule(['.world-window .start-lvl input::placeholder', '.world-window .stop-lvl input::placeholder', '.friend-enemy-list .bottom-friend-panel input::placeholder', '.quest-window .level-filter-component input::placeholder'],
     'color:#085E58!important;opacity:1!important;');
   // Typed values and caret belong to the shared native input, not its placeholder.
   rule(['.world-window .ni-input input.default', '.border-window .ni-input input.default'],

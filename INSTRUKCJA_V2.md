@@ -973,3 +973,20 @@ Weryfikacja: 9/9 zestawów testów kodu, składnia paczek i git diff --check zal
 Użytkownik wskazał pozostały jasny napis Brakuje Ci SŁ?. Odczyt DOM potwierdził div.premium-footer__label wewnątrz .premium-footer. Dodano wyłącznie color:#12C9BD!important dla .premium-footer .premium-footer__label. To bezpośrednia podmiana na podstawowy turkus napisów, bez przeliczania luminancji. Nie zmieniano przycisków doładowania, ikon waluty, treści, geometrii ani funkcji stopki.
 
 Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone. Status: wdrożone do oceny po F5 przy włączonym motywie i otwarciu Premium. Brak wizualnego testu w grze; ostatnia zaakceptowana baza 1.2.31, późniejsze zadania nadal oczekują formalnej akceptacji.
+
+
+## Dziennik zadań: tła, ramki, siatka, banery i dolny filtr — 1.2.40, 2026-11-15
+
+Użytkownik zlecił ciemny grafit po prawej, jaśniejszy po lewej, ramkę i linie listy w kolorze suwaka, banery ze strzałkami jak ostatnio oraz dolne napisy. Historyczne .quest-log nie występuje w aktualnym DOM. Pierwszy plik Wklejony tekst(10).txt był ucięty po 5000 znaków na nagłówku. Pełny Wklejony tekst(20261115-194238).txt potwierdził root .quest-window, warstwy tła i dolne kontrolki, ale lista Aktywne była pusta. Uzupełnienie Wklejony tekst(20261115-194427).txt z Dostępne potwierdziło wiersze, banery i strzałki.
+
+Wdrożenie ograniczone do .quest-window (poza współdzieloną grafiką banerów):
+- .right-column-background.interface-element-middle-1-background-stretch: tło z RGB(29,18,16) na #171B20.
+- .left-column > .interface-element-middle-3-background-stretch: tło z RGB(40,41,41) na #252B31. Zachowane border-image middle_graphics.png i natywne wycinki.
+- .left-scroll: border-color #668298 zamiast RGB(128,128,128), zachowane 0.8px i geometria.
+- .left-scroll .one-item-on-divide-list (w odczycie także crafting-recipe-in-list): border-color #668298 zamiast dolnej linii RGB(75,73,73); szerokości/styl poszczególnych boków bez zmian, nie dodawano brakujących linii.
+- .divide-list-group .group-header .direction: ten sam filtr sRGB jak przycisk przezroczystości (Y=0.2126R+0.7152G+0.0722B; RGB=[18,201,189]*Y/255; alfa bez zmian). Nie zmieniano obrazka, offsetu, obrotów ani zwijania grup.
+- .filter-label-component: #0B756E jak etykieta Filtruj poziom w Świecie. Placeholdery input wewnątrz .level-filter-component: #085E58, opacity 1 jak Od/Do w Świecie. Istniejące reguły wspólnych .ni-input obejmują wpisywane wartości, kursor i clear-cross; bez nowej zmiany ich wyglądu.
+
+Banery grup .card-graphic.interface-element-active-card-border-image używają /img/gui/width-card-button.png. Rozszerzono istniejącą podmianę zasobu o wspólną .interface-element-active-card-border-image, obok wcześniejszej .interface-element-active-card-background-stretch. Globalny zakres tych klas z kontrolą ścieżki pliku, również w innych oknach; najjaśniejszy widoczny piksel #252B31, pozostałe RGB=[37,43,49]*Y/Ymax, zachowane faktura, alfa, border-image-slice/width/repeat i wymiary. Teksty i strzałki nie są filtrowane razem z obrazem banera.
+
+Nie zmieniano górnych zakładek, semantycznych kolorów zadań, przycisków obserwowania, przebiegu zadań ani filtracji. Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone; bez testu wizualnego w grze. Status: wdrożone do oceny po F5 przy włączonym motywie w Aktywne/Dostępne. Ostatnia zaakceptowana baza 1.2.31, późniejsze prace nadal oczekują formalnej akceptacji.
