@@ -129,7 +129,9 @@
   // Keep the game's original image, sprite offsets, alpha mask and carved edge.
   // Only empty decorative background nodes get the filter, never their parent panels.
   rule(['.layer.interface-layer .positioner.top .bg',
-    '.layer.interface-layer .positioner.bottom .bg'],
+    '.layer.interface-layer .positioner.bottom .bg',
+    '.layer.interface-layer .positioner.bottom > .bg-additional-widget-left',
+    '.layer.interface-layer .positioner.bottom > .bg-additional-widget-right'],
     'filter:url("#truciak-ebony-bar-tint")!important;');
   rule(['.layer.interface-layer .main-column.right-column .border'],
     'filter:url("#truciak-ebony-ornament-tint")!important;');

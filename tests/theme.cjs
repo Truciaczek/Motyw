@@ -79,9 +79,11 @@ const ornamentBlocks=css.split('}').filter(block=>block.includes('filter:url("#t
 assert.equal(ornamentBlocks.length,2);
 const ornamentSelectors=ornamentBlocks.map(b=>b.split('{')[0]).join(',\n');
 const ornamentDeclarations=ornamentBlocks.map(b=>b.split('{')[1]).join('');
-assert.equal(ornamentSelectors.trim().split(',\n').length,3);
+assert.equal(ornamentSelectors.trim().split(',\n').length,5);
 assert.ok(ornamentSelectors.includes('.positioner.top .bg'));
 assert.ok(ornamentSelectors.includes('.positioner.bottom .bg'));
+assert.ok(ornamentSelectors.includes('.positioner.bottom > .bg-additional-widget-left'));
+assert.ok(ornamentSelectors.includes('.positioner.bottom > .bg-additional-widget-right'));
 assert.ok(ornamentSelectors.includes('.main-column.right-column .border'));
 assert.equal(ornamentDeclarations.includes('background'),false);
 assert.ok(m.testing.filterMarkup.includes('0 0 0 1 0')); // Alpha unchanged.

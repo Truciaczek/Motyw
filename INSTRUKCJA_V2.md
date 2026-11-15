@@ -1027,3 +1027,12 @@ Dodano filter:url(#truciak-menu-arrow-tint)!important na powyższych czterech kl
 Dolny napis jest dodatkiem Gargonem, a nie natywną etykietą: .gargonem-partyStats-min-lvl i .gargonem-partyStats-max-lvl w center. Ustawiono color #12C9BD!important na obu spanach oraz .party-window center:has(> .gargonem-partyStats-min-lvl), żeby również ukośnik miał ten sam kolor. Odczyt bieli 255 uzasadnia dokładny podstawowy turkus. Nie modyfikowano kodu dodatku, obliczeń zakresu ani innych liczników Gargonem.
 
 Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone. Status: wdrożone do oceny po F5 przy włączonym motywie i otwarciu Grupy. Bez testu wizualnego w grze; ostatnia zaakceptowana baza 1.2.31.
+
+
+## Dodatkowy rząd ikon i konfiguracja dolnej belki — 1.2.44, 2026-11-15
+
+Użytkownik zgłosił odsłonięte brązowe drewno po ustawieniu dwóch rzędów ikon lub wejściu w konfigurację. Odczyt Wklejony tekst(20261115-200146).txt przy wyłączonym motywie potwierdził osobne dzieci .bottom.positioner: .bg (belka-gora-dol.png, 1566x60) oraz .bg-additional-widget-left i .bg-additional-widget-right (buttony.png, background-position -177px -598px, 428x109). Dotychczasowy filtr obejmował wyłącznie .bg; dodatkowe warstwy są poza zakresem podmiany atlasu dolnego panelu.
+
+Rozszerzono tę samą regułę filter:url(#truciak-ebony-bar-tint)!important o .layer.interface-layer .positioner.bottom > .bg-additional-widget-left oraz analogiczny prawy element. Bez podmiany grafiki ani geometrii: natywne wycinki, faktura, maska alfa, rzeźbiona krawędź, położenie i widoczność pozostają zachowane. Dokładnie ten sam istniejący filtr barPrimitives i seamPrimitives co główna belka; bez nowej palety. Reguły CSS obejmują również elementy dodane po uruchomieniu i przełączanie układu bez dodatkowego obserwatora. Nie filtrowano kontenerów, ikon ani szarych pól konfiguracji.
+
+Weryfikacja: build, 9/9 zestawów testów i git diff --check. Test CSS sprawdza oba nowe selektory oraz zachowanie natywnych obrazów. Bez testu wizualnego w zalogowanej grze. Status: wdrożone do oceny w układzie jednego/dwóch rzędów i konfiguracji ikon; ostatnia zaakceptowana baza 1.2.31.
