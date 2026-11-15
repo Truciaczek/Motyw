@@ -45,6 +45,8 @@
   // on hover. Tint the displayed original pixels in every state, not the card.
   rule(['.chat-channel-card-icon', '.chat-config-wrapper-button'],
     'filter:url("#truciak-menu-arrow-tint")!important;');
+  // Shared carousel arrows, including news: keep native sprite states and layout.
+  rule(['.swiper-arrow'], 'filter:url("#truciak-menu-arrow-tint")!important;');
   // Native battle availability classes cover resource/target restrictions and cooldown.
   // Dim only the picture; retain the game's opacity and readable cost labels.
   rule(['.battle-skill.disabled > .icon.skill-icon',

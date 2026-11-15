@@ -926,3 +926,12 @@ Dodano filter grayscale(1) brightness(.45)!important na .popup-menu__list > .men
 Cooldown potwierdzono bezpośrednio. Wsparcie .disabled obejmie brak zasobów, jeśli gra używa tej klasy również w menu; konkretnego odczytu menu przy braku many/energii jeszcze nie dostarczono i nie deklarować jego osobnego testu.
 
 Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone. Kontrola wygenerowanego CSS wymaga obu selektorów ograniczonych do niedostępnych umiejętności menu, bez pointer-events. Brak wizualnego testu w zalogowanej grze. Status: wdrożone do oceny po F5 przy włączonym motywie i ponownym otwarciu menu podczas cooldownu. Ostatnia zaakceptowana baza 1.2.31; 1.2.32–1.2.33 nadal bez formalnej akceptacji.
+
+
+## Wspólne strzałki karuzeli Aktualności — 1.2.35, 2026-11-15
+
+Użytkownik zlecił kolorowanie bocznych strzałek Aktualności jak przycisku przezroczystości, również w innych ich wspólnych użyciach. Historyczna referencja .news-arrow-element nie występuje w obecnym DOM (odczyty []). Odczyt po kliknięciu z Wklejony tekst(8).txt potwierdził button.swiper-arrow.swiper-arrow--next w .news-swiper.c-swiper, background-image /img/gui/buttony.png, pozycja -668px -313px, rozmiar 22x76, filter none, brak grafik pseudoelementów. Nie przypisywać nieodczytanych pozycji atlasu lewej strzałce ani hover.
+
+Dodano regułę filter:url(#truciak-menu-arrow-tint)!important na wspólnej .swiper-arrow, bez ograniczenia do .news-swiper lub Aktualności. Obejmuje wszystkie elementy tej klasy, także kierunek poprzedni i kolejne otwierane karuzele; nie deklarować kompletnej listy nazw okien bez DOM. Ta sama skala co przycisk przezroczystości: sRGB, Y=0.2126R+0.7152G+0.0722B; RGB=[18,201,189]*Y/255, alfa bez zmian, biel -> #12C9BD. Zachowano źródło grafiki, pozycje wycinków i ich natywne przełączanie, rozmiary, kliknięcia, animację karuzeli i kontrolę opacity/disabled przez grę. Nie filtrowano banerów ani rodzica karuzeli. buttony.png bez zmian.
+
+Weryfikacja: 9/9 istniejących zestawów testów kodu, składnia paczek i git diff --check zaliczone. Brak wizualnego testu w grze. Status: wdrożone do oceny po F5 przy włączonym motywie. Ostatnia zaakceptowana baza 1.2.31; późniejsze prace nadal oczekują formalnej akceptacji.
