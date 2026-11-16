@@ -213,6 +213,13 @@
   rule(['.scroll-wrapper .scrollbar-wrapper .track .handle'],
     'background:rgba(102,130,152,.52)!important;border-color:#252b31!important;');
   rule(['.scroll-wrapper .scrollbar-wrapper .track .handle:hover'], 'background:rgba(18,201,189,.52)!important;');
+  // Native range inputs retain their inline gradient stops and browser thumb.
+  // Tint green pixels only; neutral track, shadows and blue-gray frames survive.
+  rule(['.c-slider__input'], 'filter:url("#truciak-range-green-tint")!important;border-color:#668298!important;box-shadow:inset 0 0 1px 1px #668298,inset 0 0 0 2px #0C0D0D!important;');
+  rule(['.c-slider__input::-webkit-slider-thumb'],
+    'border-color:#668298!important;box-shadow:inset 0 0 1px 1px #668298,inset 0 0 0 2px #0C0D0D!important;');
+  rule(['.c-slider__input::-moz-range-thumb'],
+    'border-color:#668298!important;box-shadow:inset 0 0 1px 1px #668298,inset 0 0 0 2px #0C0D0D!important;');
   // Keep text transitions disabled while the tone helper measures native colors.
   // This guard lives outside its temporarily disabled stylesheet.
   rule(['[data-truciak-menu-tone]', '[data-truciak-menu-tone]::placeholder',
@@ -364,6 +371,18 @@
   // Calibrated from original krew-klatki.png (411x110): visible peak RGB 246,86,43.
   // Alpha-weighted measurement ignores invisible RGB noise at antialiased edges.
   const filterMarkup=`<defs>
+    <filter id="truciak-range-green-tint" color-interpolation-filters="sRGB">
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -255 255 0 0 -.001" result="range-gr"/>
+      <feComponentTransfer in="range-gr" result="range-gr-mask"><feFuncA type="discrete" tableValues="0 1"/></feComponentTransfer>
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 -255 0 -.001" result="range-gb"/>
+      <feComponentTransfer in="range-gb" result="range-gb-mask"><feFuncA type="discrete" tableValues="0 1"/></feComponentTransfer>
+      <feComposite in="range-gr-mask" in2="range-gb-mask" operator="in" result="range-green-mask"/>
+      <feColorMatrix in="SourceGraphic" type="matrix" values=".2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 0 0 0 1 0" result="range-luminance"/>
+      <feColorMatrix in="range-luminance" type="matrix" values=".070588235294 0 0 0 0 0 .788235294118 0 0 0 0 0 .741176470588 0 0 0 0 0 1 0" result="range-tint"/>
+      <feComposite in="range-tint" in2="range-green-mask" operator="in" result="range-colored"/>
+      <feComposite in="SourceGraphic" in2="range-green-mask" operator="out" result="range-neutral"/>
+      <feMerge><feMergeNode in="range-neutral"/><feMergeNode in="range-colored"/></feMerge>
+    </filter>
     <filter id="truciak-menu-arrow-tint" color-interpolation-filters="sRGB">
       <feColorMatrix type="matrix" values=".2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 0 0 0 1 0"/>
       <feColorMatrix type="matrix" values=".070588235294 0 0 0 0 0 .788235294118 0 0 0 0 0 .741176470588 0 0 0 0 0 1 0"/>
