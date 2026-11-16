@@ -378,7 +378,8 @@
       <feComponentTransfer in="range-gb" result="range-gb-mask"><feFuncA type="discrete" tableValues="0 1"/></feComponentTransfer>
       <feComposite in="range-gr-mask" in2="range-gb-mask" operator="in" result="range-green-mask"/>
       <feColorMatrix in="SourceGraphic" type="matrix" values=".2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 .2126 .7152 .0722 0 0 0 0 0 1 0" result="range-luminance"/>
-      <feColorMatrix in="range-luminance" type="matrix" values=".070588235294 0 0 0 0 0 .788235294118 0 0 0 0 0 .741176470588 0 0 0 0 0 1 0" result="range-tint"/>
+      <feComponentTransfer in="range-luminance" result="range-brighter"><feFuncR type="linear" slope="2"/><feFuncG type="linear" slope="2"/><feFuncB type="linear" slope="2"/></feComponentTransfer>
+      <feColorMatrix in="range-brighter" type="matrix" values=".070588235294 0 0 0 0 0 .788235294118 0 0 0 0 0 .741176470588 0 0 0 0 0 1 0" result="range-tint"/>
       <feComposite in="range-tint" in2="range-green-mask" operator="in" result="range-colored"/>
       <feComposite in="SourceGraphic" in2="range-green-mask" operator="out" result="range-neutral"/>
       <feMerge><feMergeNode in="range-neutral"/><feMergeNode in="range-colored"/></feMerge>
