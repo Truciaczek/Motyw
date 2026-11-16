@@ -3,7 +3,7 @@
 > **OBOWIĄZUJĄCA INSTRUKCJA: INSTRUKCJA_V2.md**
 > Źródło aktualne: repo Truciaczek/Motyw, gałąź main, plik INSTRUKCJA_V2.md.
 > Przed pracą pobierać aktualną wersję z GitHuba; lokalnie przechowywać kopię roboczą. Po każdej akceptacji użytkownika aktualizować ten plik w repo. W trakcie prac dokumentować zmiany i odrzucone próby, zachowując historię. INSTRUKCJA_PROJEKTU.md oraz wcześniejsze kopie w plikach ChatGPT są archiwalne. Dotychczasowe zapisy o zapisie instrukcji w plikach ChatGPT opisują stary sposób pracy.
-> Aktualny zaakceptowany stan Motywu NI: **1.2.44**.
+> Aktualny zaakceptowany stan Motywu NI: **1.2.48**.
 
 
 Data utworzenia: 2026-11-11
@@ -1077,3 +1077,11 @@ Dla globalnej .c-checkbox__label::before w zakresie aktywnego motywu: background
 W tools/menu-text.js znaleziono cykliczne wyłączanie arkusza odcieni podczas odczytu kolorów natywnych. W obecności natywnych transition może to uruchamiać przejścia biały/turkus i sprawiać, że pośredni kolor nie zostaje zakwalifikowany jako neutralny. Poprawka: transition:none!important na [data-truciak-menu-tone], jego ::placeholder i .c-checkbox__label w stałym głównym arkuszu, który pozostaje aktywny podczas pomiarów. Nie dodano stałego koloru wszystkich labeli — dotychczasowa skala luminancji i odróżnianie kolorów semantycznych zachowane. Nie zmieniono helpera, zakresu skanowania ani obserwatorów. Diagnoza mrugania i poprawka wymagają potwierdzenia wizualnego przez użytkownika.
 
 Weryfikacja bez executora: składnia źródła i obu paczek JS; zgodność osadzonego runtime z paczką runtime; wykonanie istniejących testów tests/menu-text.cjs w hostowanym JavaScript z adapterami fs/vm/assert (3 grupy PASS: kolory/stan/cleanup, placeholdery, alfa tła); wygenerowany CSS sprawdzony przez rejestrację rzeczywistego modułu, pola mają paletę slotów, SVG poprawny stroke, brak nadpisania widoczności ptaszka. Pełnego zestawu Node/build.py i gry nie uruchomiono z powodu niedostępnego executora. Status: wdrożone do oceny po F5 przy włączonym motywie; sprawdzić ruch kursora, zmianę zakładek, odznaczanie/zaznaczanie i ponowne otwieranie okien. Zaakceptowana baza 1.2.44.
+
+## Zbiorcza akceptacja zmian 1.2.45–1.2.48 — 2026-11-16
+
+Użytkownik potwierdził: „akceptuje wszystko od ostatniej akceptacji”. Wszystkie końcowe zmiany po zaakceptowanej bazie 1.2.44 do aktualnej wersji 1.2.48 włącznie mają status **ukończony, zaakceptowany przez użytkownika**. Nowa obowiązująca zaakceptowana baza: **1.2.48**, kod w commicie 4e92a46c661c5fd6c3ed32a47a46c2bfa20596f1.
+
+Zakres: napisy górnego HUD i dolnej belki oraz numery slotów 1–8 (1.2.45), plusiki walut (1.2.46), wspólne listy/tła/ramki/siatka/zaznaczenie/strzałki (1.2.47), stabilizacja kolorów napisów i wspólne checkboxy (1.2.48). Wcześniejsze statusy oczekiwania na ocenę dla tego zakresu są historyczne i zostały zamknięte tym potwierdzeniem. Akceptacja dotyczy końcowego wdrożenia, bez przywracania odrzuconych lub zastąpionych prób.
+
+Zmieniono wyłącznie dokumentację akceptacji; wersja i kod pozostają 1.2.48. Potwierdzenie użytkownika nie zmienia opisanych historycznych ograniczeń testów wykonanych bez executora.
