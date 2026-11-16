@@ -213,7 +213,17 @@
   rule(['.scroll-wrapper .scrollbar-wrapper .track .handle'],
     'background:rgba(102,130,152,.52)!important;border-color:#252b31!important;');
   rule(['.scroll-wrapper .scrollbar-wrapper .track .handle:hover'], 'background:rgba(18,201,189,.52)!important;');
-  rule(['.border-window input[type="checkbox"]', '.border-window input[type="radio"]'],
+  // Keep text transitions disabled while the tone helper measures native colors.
+  // This guard lives outside its temporarily disabled stylesheet.
+  rule(['[data-truciak-menu-tone]', '[data-truciak-menu-tone]::placeholder',
+    '.c-checkbox__label'], 'transition:none!important;');
+  // Shared checkbox layers: graphite field, turquoise native SVG checkmark.
+  // Native checked/disabled visibility and layout remain under game control.
+  rule(['.c-checkbox__label::before'],
+    'background-color:#171B20!important;border-color:#252B31!important;outline-color:#101419!important;');
+  rule(['.c-checkbox__label::after'],
+    'background-image:url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\'%3e%3cpath fill=\'none\' stroke=\'%2312C9BD\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'3\' d=\'m6 10 3 3 6-6\'/%3e%3c/svg%3e")!important;');
+  rule(['input[type="checkbox"]', '.border-window input[type="radio"]'],
     'accent-color:#12C9BD!important;');
   // One shared frame for every native bar tile. Notification overlays must
   // not paint another border on top of it (the source of the thicker top edge).
