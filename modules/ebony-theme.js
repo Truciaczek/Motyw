@@ -88,15 +88,20 @@
     'background-color:#252b31!important;background-image:none!important;');
   // World data strip: match the scrollbar handle without changing border geometry.
   rule(['.world-window__info'], 'border-color:#668298!important;');
-  // Quest journal: confirmed separate background layers and existing list borders.
-  rule(['.quest-window .right-column-background'], 'background-color:#171B20!important;');
-  rule(['.quest-window .left-column > .interface-element-middle-3-background-stretch'],
+  // Shared grouped-list windows (configuration, quests and other consumers).
+  // Preserve native border images, geometry and all original list behavior.
+  rule(['.left-grouped-list-and-right-description-window .right-column-background'],
+    'background-color:#171B20!important;');
+  rule(['.left-grouped-list-and-right-description-window .left-column > .interface-element-middle-3-background-stretch'],
     'background-color:#252B31!important;');
-  rule(['.quest-window .left-scroll', '.quest-window .left-scroll .one-item-on-divide-list'],
+  rule(['.left-grouped-list-and-right-description-window .left-scroll',
+    '.left-grouped-list-and-right-description-window .left-scroll .one-item-on-divide-list',
+    '.normal-tr > div'],
     'border-color:#668298!important;');
-  rule(['.quest-window .left-scroll .one-item-on-divide-list:hover'],
+  rule(['.left-grouped-list-and-right-description-window .left-scroll .one-item-on-divide-list:hover',
+    '.left-grouped-list-and-right-description-window .left-scroll .one-item-on-divide-list.active'],
     'background:#171B20!important;');
-  rule(['.quest-window .divide-list-group .group-header .direction'],
+  rule(['.divide-list-group .group-header .direction'],
     'filter:url("#truciak-menu-arrow-tint")!important;');
   // Confirmed Skills parchment layer; preserve its native border image.
   rule(['.skills-window .right-column .middle-graphic.interface-element-middle-2-background'],
