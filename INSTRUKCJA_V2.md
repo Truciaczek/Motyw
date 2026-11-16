@@ -3,7 +3,7 @@
 > **OBOWIĄZUJĄCA INSTRUKCJA: INSTRUKCJA_V2.md**
 > Źródło aktualne: repo Truciaczek/Motyw, gałąź main, plik INSTRUKCJA_V2.md.
 > Przed pracą pobierać aktualną wersję z GitHuba; lokalnie przechowywać kopię roboczą. Po każdej akceptacji użytkownika aktualizować ten plik w repo. W trakcie prac dokumentować zmiany i odrzucone próby, zachowując historię. INSTRUKCJA_PROJEKTU.md oraz wcześniejsze kopie w plikach ChatGPT są archiwalne. Dotychczasowe zapisy o zapisie instrukcji w plikach ChatGPT opisują stary sposób pracy.
-> Aktualny zaakceptowany stan Motywu NI: **1.2.48**.
+> Aktualny zaakceptowany stan Motywu NI: **1.2.54**.
 
 
 Data utworzenia: 2026-11-11
@@ -1143,3 +1143,19 @@ Odczyt .salvage__label potwierdził tło RGB44,41,42 i cień tego samego koloru 
 Przyczyna ramki: .salvage__receives ma dziecko .interface-element-item-slot-grid-stretch i trzy obrysy 1/2/3px identyczne z poprzednim odczytem składników, ale nie ma .items-grid. Zastąpiono selektor .items-grid:has(> .interface-element-item-slot-grid-stretch) wspólnym :has(> .interface-element-item-slot-grid-stretch), bez ograniczenia nazwą okna lub kontenera. Wszystkie bezpośrednie kontenery tej samej dekoracyjnej siatki otrzymują istniejący potrójny obrys #101419 / #668298 / #101419 przy 1/2/3px. Sama siatka i jej tekstura, przedmioty oraz geometria bez zmian. Nie dodano filtrowania rodziców. Nie modyfikowano zgłaszanych w logu problemów CORS/8upload ani timeoutu Ulepy — poza zakresem.
 
 Weryfikacja bez executora: kompilacja składni źródła i obu paczek, zgodność runtime osadzonego, rejestracja rzeczywistego modułu i kontrola wygenerowanych reguł. Pełnego zestawu Node/build.py i testu w grze nie uruchomiono z powodu niedostępnego środowiska. Status: wdrożone do oceny po F5 z włączonym motywem; sprawdzić Wskazane/Wynik, oba strzałkowe glyphy i inne miejsca wspólnej siatki. Ostatnia zaakceptowana baza 1.2.48.
+
+## Zbiorcza akceptacja zmian 1.2.49–1.2.54 i raportu dziennego — 2026-11-16
+
+Użytkownik potwierdził raport dzienny słowami: „akceptuje wszystko”. Wszystkie końcowe zmiany od poprzedniej zaakceptowanej bazy 1.2.48 do wersji 1.2.54 włącznie mają status **ukończony, zaakceptowany przez użytkownika**. Nowa obowiązująca zaakceptowana baza: **1.2.54**.
+
+| Zadanie | Wersja | Status |
+|---|---|---|
+| Wspólne suwaki zakresu i ich rozjaśnienie | 1.2.49–1.2.50 | ukończony, zaakceptowany; końcowy jaśniejszy wariant 1.2.50 |
+| Ulepszanie: wspólna siatka, pasek i zębatka | 1.2.51 | ukończony, zaakceptowany |
+| Prostokąty opisów, ozdobne sloty i strzałki | 1.2.52 | ukończony, zaakceptowany |
+| Ekran nieprzytomności | 1.2.53 | ukończony, zaakceptowany |
+| Rozkładanie: strzałki, etykiety i ramka wyniku | 1.2.54 | ukończony, zaakceptowany |
+
+Wcześniej zaakceptowane zadania 1.2.45–1.2.48 pozostają ukończone. Wszystkie aktywne zadania przedstawionego raportu dziennego są zamknięte. Wcześniejsze wpisy o oczekiwaniu na ocenę dla 1.2.49–1.2.54 są historyczne i zostały zastąpione niniejszym potwierdzeniem. Akceptacja dotyczy końcowego wdrożenia; nie przywraca ciemniejszej próby suwaków 1.2.49 ani innych odrzuconych lub zastąpionych wariantów.
+
+Zmieniono wyłącznie dokumentację akceptacji i statusów. Kod oraz numer wydania pozostają 1.2.54. Zachowano historyczne opisy wykonanych testów i ich ograniczeń.
