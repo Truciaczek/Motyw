@@ -138,7 +138,14 @@
   rule(['.layer.interface-layer .heroname',
     '.layer.interface-layer .world-name', '.layer.interface-layer .location',
     '.layer.interface-layer .coords', '.layer.interface-layer .herogold', '.layer.interface-layer .herocredits'],
-    'color:#edf3f7!important;text-shadow:0 1px 2px #000!important;');
+    'color:#12C9BD!important;text-shadow:0 1px 2px #000!important;');
+  // Confirmed HUD text nodes and native quick-slot number pseudo-elements.
+  rule(['.layer.interface-layer .positioner.top .location-id',
+    '.layer.interface-layer .hero-exp-top-progress-bar-light-mode .value',
+    '.bottom-panel-pointer-bg .pointer-exp',
+    '.bottom-panel-pointer-bg .pointer-ttl',
+    '.bottom-panel .usable-slot::before'],
+    'color:#12C9BD!important;');
   rule(['.border-window .content', '.dialogue-window .content', '.popup-menu .menu-item'],
     'color:#c7d0d9!important;');
   rule(['.chat-input-wrapper .control-wrapper', '.chat-input-wrapper .magic-input-wrapper',

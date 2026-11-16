@@ -1044,3 +1044,12 @@ Użytkownik potwierdził: „Akceptuje wszystkie zmiany od ostatniej akceptacji�
 Status tych wdrożeń: **ukończony, zaakceptowany przez użytkownika**. Nowa obowiązująca zaakceptowana baza: **1.2.44**, kod w commicie 052416ebed381d99fee4e6706db8aba7602596dd. Wcześniejsze zapisy „do oceny” i „oczekuje akceptacji” dla tego zakresu są historyczne i zostały zamknięte niniejszym potwierdzeniem. Odrzucone lub zastąpione próby pozostają historią; akceptacja dotyczy końcowego stanu kodu, bez przywracania tych prób.
 
 Zmieniono wyłącznie dokumentację akceptacji. Wersja dodatku i jego kod pozostają 1.2.44; bez nowej publikacji pakietu ani potrzeby ponownego F5 z powodu tego wpisu.
+
+
+## Napisy górnego HUD i dolnej belki — 1.2.45, 2026-11-16
+
+Użytkownik zlecił podstawowy firusiowy niebieski #12C9BD dla nicku i poziomu, mapy, koordynatów, świata, złota, Smoczych Łusek, procentu EXP, wyczerpania i numerków 1–8. Dwa odczyty DOM z włączonym motywem potwierdziły klasy tekstowe oraz numerki jako ::before na .usable-slot (warianty usable-slot-1 do usable-slot-8, rodzic .slots.left/.right).
+
+Dotychczasowa reguła .layer.interface-layer dla .heroname, .world-name, .location, .coords, .herogold i .herocredits zmienia kolor #edf3f7 na #12C9BD; zachowano cień 0 1px 2px #000. Dodano color:#12C9BD!important dla .layer.interface-layer .positioner.top .location-id, .layer.interface-layer .hero-exp-top-progress-bar-light-mode .value (EXP w trybie jasnym), .bottom-panel-pointer-bg .pointer-exp, .bottom-panel-pointer-bg .pointer-ttl oraz .bottom-panel .usable-slot::before. ID mapy w górnym HUD objęte jako dodatkowy napis mapy. Numerów nie zastępowano ani nie tworzono ponownie: content i natywne przypisania klawiszy pozostają bez zmian.
+
+Bez zmian grafiki, ikon walut, ramek, pasków, liczbowych wartości i funkcji kontrolek. Procent HP oraz wartości many/energii nie są objęte nowymi regułami. Reguły tekstowe działają także po aktualizacji wartości i po przełączeniu układu bez obserwatora. Weryfikacja: build, 9/9 istniejących zestawów testów i git diff --check. Bez testu wizualnego w grze. Status: wdrożone do oceny po F5 z włączonym motywem. Ostatnia zaakceptowana baza pozostaje 1.2.44.
