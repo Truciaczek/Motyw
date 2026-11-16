@@ -164,6 +164,15 @@
   rule(['.chat-channel-card-wrapper', '.new-chat-window .chat-message-wrapper'],
     'border-color:#668298!important;');
   // Approved pixel-for-pixel recolor; retain native tiling, dimensions and icons.
+  // Shared enhancement progress layers are siblings of the labels and item icons.
+  rule(['.enhance__progress', '.enhance__progress-bg'],
+    'filter:url("#truciak-range-green-tint")!important;');
+  rule(['.add-bck.config'], 'filter:url("#truciak-menu-arrow-tint")!important;');
+  // Reuse the approved slot texture, brightening its grid to the scrollbar frame.
+  rule(['.interface-element-item-slot-grid-stretch'],
+    'background-image:url("'+equipmentSlotSprite+'")!important;filter:url("#truciak-grid-slot-tint")!important;');
+  rule(['.items-grid:has(> .interface-element-item-slot-grid-stretch)'],
+    'box-shadow:0 0 0 1px #101419,0 0 0 2px #668298,0 0 0 3px #101419!important;');
   rule(['.equipment-wrapper .eq-slot.interface-element-one-item-slot-background-to-repeat'],
     'background-image:url("'+equipmentSlotSprite+'")!important;');
   // Test: original equipment placeholder glyphs darkened by 60%; native offsets retained.
@@ -371,6 +380,9 @@
   // Calibrated from original krew-klatki.png (411x110): visible peak RGB 246,86,43.
   // Alpha-weighted measurement ignores invisible RGB noise at antialiased edges.
   const filterMarkup=`<defs>
+    <filter id="truciak-grid-slot-tint" color-interpolation-filters="sRGB">
+      <feComponentTransfer><feFuncR type="linear" slope="1.324675324675"/><feFuncG type="linear" slope="1.444444444444"/><feFuncB type="linear" slope="1.490196078431"/></feComponentTransfer>
+    </filter>
     <filter id="truciak-range-green-tint" color-interpolation-filters="sRGB">
       <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -255 255 0 0 -.001" result="range-gr"/>
       <feComponentTransfer in="range-gr" result="range-gr-mask"><feFuncA type="discrete" tableValues="0 1"/></feComponentTransfer>

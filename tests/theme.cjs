@@ -19,7 +19,9 @@ assert.equal(app.html.getAttribute('data-truciak-theme'),'ebony');
 const css=app.nodes.find(n=>n.textContent).textContent;
 assert.ok(css.includes('#12C9BD'));assert.ok(!css.includes('#ef5350'));
 assert.ok(m.testing.filterMarkup.includes('truciak-ebony-bar-tint'));
-assert.equal(/https?:|@import|\bbackdrop-filter\s*:/.test(css),false);
+// Embedded SVG namespace URLs are not external requests (checkbox checkmark).
+const cssWithoutEmbeddedImages=css.replace(/url\("data:image\/[^"]*"\)/g,'url("embedded-image")');
+assert.equal(/https?:|@import|\bbackdrop-filter\s*:/.test(cssWithoutEmbeddedImages),false);
 // Only chrome/control selectors, never map/canvas/character/item sprites or semantic HP bars.
 for(const block of css.split('}').filter(Boolean)){
   const selectors=block.split('{')[0].trim().split(',\n');
