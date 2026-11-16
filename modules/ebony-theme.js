@@ -35,7 +35,8 @@
     'background-color:rgba(18,201,189,.3)!important;border-color:#668298!important;');
   // Shared information glyph uses the edited atlas while native offsets stay intact.
   rule(['.info-box'], 'background-color:#252B31!important;border-color:#668298!important;');
-  rule(['.extraction__arrows::before', '.extraction__arrows::after'],
+  rule(['.extraction__arrows::before', '.extraction__arrows::after',
+    '.salvage__arrows::before', '.salvage__arrows::after'],
     'filter:url("#truciak-menu-arrow-tint")!important;');
   rule(['.info-icon'], 'background-image:url("'+hudSprite+'")!important;');
   // Shared native controls: map every original pixel's luminance to #12C9BD.
@@ -177,10 +178,12 @@
   rule(['.enhance__progress', '.enhance__progress-bg'],
     'filter:url("#truciak-range-green-tint")!important;');
   rule(['.add-bck.config'], 'filter:url("#truciak-menu-arrow-tint")!important;');
+  rule(['.salvage__label', '.enhance__label'],
+    'background-color:#252B31!important;border-color:#668298!important;box-shadow:0 2px 0 -1px #252B31!important;');
   // Reuse the approved slot texture, brightening its grid to the scrollbar frame.
   rule(['.interface-element-item-slot-grid-stretch'],
     'background-image:url("'+equipmentSlotSprite+'")!important;filter:url("#truciak-grid-slot-tint")!important;');
-  rule(['.items-grid:has(> .interface-element-item-slot-grid-stretch)'],
+  rule([':has(> .interface-element-item-slot-grid-stretch)'],
     'box-shadow:0 0 0 1px #101419,0 0 0 2px #668298,0 0 0 3px #101419!important;');
   rule(['.equipment-wrapper .eq-slot.interface-element-one-item-slot-background-to-repeat'],
     'background-image:url("'+equipmentSlotSprite+'")!important;');
