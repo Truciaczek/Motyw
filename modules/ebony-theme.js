@@ -194,7 +194,7 @@
   rule(['.game-window-positioner .inventory_wrapper .inventory-grid-bg'],
     'background-color:#252b31!important;background-blend-mode:luminosity!important;');
   rule(['.button:not(.green):not(.red):not(.violet):not(.purple):not(.blink-violet)',
-    '.widget-button:not(.green):not(.red):not(.violet):not(.purple):not(.blink-violet)', '.btn-min'],
+    '.widget-button:not(.green):not(.red):not(.violet):not(.purple):not(.blink-violet):not(.widget-party)', '.btn-min'],
     'background-image:linear-gradient(#252b31,#171b20)!important;box-shadow:inset 0 0 0 1px #668298,inset 0 0 0 3px #171b20!important;');
   rule(['.button.green', '.widget-button.green'],
     'color:#12C9BD!important;background-image:linear-gradient(#25494b,#142d30)!important;box-shadow:inset 0 0 0 1px #12C9BD,inset 0 0 0 3px #171b20!important;');
