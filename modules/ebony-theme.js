@@ -28,6 +28,9 @@
   // Map-color beads have their own atlas background; keep native state offsets.
   rule(['.layer.interface-layer .positioner.top .hud-container .map_ball'], 'background-image:url("'+hudSprite+'")!important;');
   // Shared information glyph uses the edited atlas while native offsets stay intact.
+  rule(['.info-box'], 'background-color:#252B31!important;border-color:#668298!important;');
+  rule(['.extraction__arrows::before', '.extraction__arrows::after'],
+    'filter:url("#truciak-menu-arrow-tint")!important;');
   rule(['.info-icon'], 'background-image:url("'+hudSprite+'")!important;');
   // Shared native controls: map every original pixel's luminance to #12C9BD.
   // Keep original atlas/SVG, offsets, alpha and any native parent hover effects.
