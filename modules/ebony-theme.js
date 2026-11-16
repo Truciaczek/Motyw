@@ -27,6 +27,12 @@
   rule(['.layer.interface-layer .positioner.top .hud-container'], 'background-image:url("'+hudSprite+'")!important;');
   // Map-color beads have their own atlas background; keep native state offsets.
   rule(['.layer.interface-layer .positioner.top .hud-container .map_ball'], 'background-image:url("'+hudSprite+'")!important;');
+  // Unconsciousness overlay: preserve native alpha, visibility and countdown.
+  rule(['.dead-overlay.map-overlay'], 'background-color:rgba(1,16,15,.9)!important;');
+  rule(['.dead-overlay .positioner', '.dead-overlay .positioner *'],
+    'color:#12C9BD!important;');
+  rule(['.dead-overlay .dazed-time'],
+    'background-color:rgba(18,201,189,.3)!important;border-color:#668298!important;');
   // Shared information glyph uses the edited atlas while native offsets stay intact.
   rule(['.info-box'], 'background-color:#252B31!important;border-color:#668298!important;');
   rule(['.extraction__arrows::before', '.extraction__arrows::after'],
